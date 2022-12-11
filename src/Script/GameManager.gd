@@ -12,15 +12,15 @@ var score = 0
 func _ready():
 	enemy_spawner = get_node("../EnemySpawner")
 	tower_manager = get_node("../TowerManager")
-	camera = get_node("/root").find_node("Camera", true, false)
+	camera = get_node("/root").find_child("Camera3D", true, false)
 	
-	enemy_spawner.connect("on_game_end", self, "on_game_end")
-	enemy_spawner.connect("on_enemy_death", self, "update_score")
-	enemy_spawner.connect("on_enemy_death", self, "shake_camera")
+	enemy_spawner.connect("on_game_end",Callable(self,"on_game_end"))
+	enemy_spawner.connect("on_enemy_death",Callable(self,"update_score"))
+	enemy_spawner.connect("on_enemy_death",Callable(self,"shake_camera"))
 
 
 func on_game_end():
-	var finish_ui = level_finish_ui.instance()
+	var finish_ui = level_finish_ui.instantiate()
 
 	if tower_manager.towers_placed < 3:
 		finish_ui.set_score(score + 1000)

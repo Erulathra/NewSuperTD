@@ -1,19 +1,14 @@
-[gd_resource type="ParticlesMaterial" load_steps=3 format=2]
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://buw17sy23ubgm"]
 
-[sub_resource type="Curve" id=5]
-_data = [ Vector2( 0.00561798, 0.0113636 ), 0.0, 0.0, 0, 0, Vector2( 0.483146, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.988764, 0.0386363 ), 0.0, 0.0, 0, 0 ]
+[sub_resource type="Curve" id="5"]
+_data = [Vector2(0.00561798, 0.0113636), 0.0, 0.0, 0, 0, Vector2(0.483146, 1), 0.0, 0.0, 0, 0, Vector2(0.988764, 0.0386363), 0.0, 0.0, 0, 0]
+point_count = 3
 
-[sub_resource type="CurveTexture" id=6]
-curve = SubResource( 5 )
+[sub_resource type="CurveTexture" id="6"]
+curve = SubResource("5")
 
 [resource]
-direction = Vector3( 0, 0, 0 )
+direction = Vector3(0, 0, 0)
 spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 4.38
-initial_velocity_random = 0.33
-linear_accel = -15.66
-tangential_accel = 17.3
-angle = 79.2
-angle_random = 1.0
-scale_curve = SubResource( 6 )
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("6")

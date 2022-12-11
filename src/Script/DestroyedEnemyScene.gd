@@ -1,7 +1,7 @@
-extends Spatial
+extends Node3D
 
 func _ready():
-	$Particles.emitting = true
+	$GPUParticles3D.emitting = true
 	$Particles2.emitting = true
 
 func _on_Timer_timeout():

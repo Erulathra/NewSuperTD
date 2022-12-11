@@ -6,104 +6,99 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
+config_version=5
 
-_global_script_classes=[ {
+_global_script_classes=[{
 "base": "TileModifier",
-"class": "ElectricModifier",
-"language": "GDScript",
+"class": &"ElectricModifier",
+"language": &"GDScript",
 "path": "res://src/Script/Tile/ElectricModifier.gd"
 }, {
 "base": "Tower",
-"class": "ElectricTower",
-"language": "GDScript",
+"class": &"ElectricTower",
+"language": &"GDScript",
 "path": "res://src/Script/Towers/ElectricTower.gd"
 }, {
 "base": "PathTile",
-"class": "EndTile",
-"language": "GDScript",
+"class": &"EndTile",
+"language": &"GDScript",
 "path": "res://src/Script/Tile/EndTile.gd"
 }, {
-"base": "Spatial",
-"class": "Enemy",
-"language": "GDScript",
+"base": "Node3D",
+"class": &"Enemy",
+"language": &"GDScript",
 "path": "res://src/Script/Enemy.gd"
 }, {
 "base": "Node",
-"class": "EnemySpawner",
-"language": "GDScript",
+"class": &"EnemySpawner",
+"language": &"GDScript",
 "path": "res://src/Script/EnemySpawner.gd"
 }, {
 "base": "TileModifier",
-"class": "FireModifier",
-"language": "GDScript",
+"class": &"FireModifier",
+"language": &"GDScript",
 "path": "res://src/Script/Tile/FireModifier.gd"
 }, {
-"base": "",
-"class": "GitAPI",
-"language": "NativeScript",
-"path": "res://addons/godot-git-plugin/git_api.gdns"
-}, {
 "base": "Control",
-"class": "LevelFinish",
-"language": "GDScript",
+"class": &"LevelFinish",
+"language": &"GDScript",
 "path": "res://src/Script/UI/LevelFinish.gd"
 }, {
 "base": "Node",
-"class": "ModifierHandler",
-"language": "GDScript",
+"class": &"ModifierHandler",
+"language": &"GDScript",
 "path": "res://src/Script/ModifierHandler.gd"
 }, {
 "base": "Tile",
-"class": "PathTile",
-"language": "GDScript",
+"class": &"PathTile",
+"language": &"GDScript",
 "path": "res://src/Script/Tile/PathTile.gd"
 }, {
 "base": "PathTile",
-"class": "StartTile",
-"language": "GDScript",
+"class": &"StartTile",
+"language": &"GDScript",
 "path": "res://src/Script/Tile/StartTile.gd"
 }, {
-"base": "Camera",
-"class": "SuperCamera",
-"language": "GDScript",
+"base": "Camera3D",
+"class": &"SuperCamera",
+"language": &"GDScript",
 "path": "res://src/Script/Camera.gd"
 }, {
-"base": "Spatial",
-"class": "Tile",
-"language": "GDScript",
+"base": "Node3D",
+"class": &"Tile",
+"language": &"GDScript",
 "path": "res://src/Script/Tile/Tile.gd"
 }, {
-"base": "Spatial",
-"class": "TileGrid",
-"language": "GDScript",
+"base": "Node3D",
+"class": &"TileGrid",
+"language": &"GDScript",
 "path": "res://src/Script/TileGrid.gd"
 }, {
-"base": "Reference",
-"class": "TileModifier",
-"language": "GDScript",
+"base": "RefCounted",
+"class": &"TileModifier",
+"language": &"GDScript",
 "path": "res://src/Script/Tile/TileModifier.gd"
 }, {
-"base": "Spatial",
-"class": "Tower",
-"language": "GDScript",
+"base": "Node3D",
+"class": &"Tower",
+"language": &"GDScript",
 "path": "res://src/Script/Towers/Tower.gd"
 }, {
 "base": "Node",
-"class": "TowerManager",
-"language": "GDScript",
+"class": &"TowerManager",
+"language": &"GDScript",
 "path": "res://src/Script/TowerManager.gd"
 }, {
 "base": "TileModifier",
-"class": "WaterModifier",
-"language": "GDScript",
+"class": &"WaterModifier",
+"language": &"GDScript",
 "path": "res://src/Script/Tile/WaterModifier.gd"
 }, {
 "base": "Tower",
-"class": "WaterTower",
-"language": "GDScript",
+"class": &"WaterTower",
+"language": &"GDScript",
 "path": "res://src/Script/Towers/WaterTower.gd"
-} ]
+}]
 _global_script_class_icons={
 "ElectricModifier": "",
 "ElectricTower": "",
@@ -111,7 +106,6 @@ _global_script_class_icons={
 "Enemy": "",
 "EnemySpawner": "",
 "FireModifier": "",
-"GitAPI": "",
 "LevelFinish": "",
 "ModifierHandler": "",
 "PathTile": "",
@@ -130,13 +124,13 @@ _global_script_class_icons={
 
 config/name="SuperTD"
 run/main_scene="res://src/Scenes/maps/main_scene.tscn"
+config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
 
 [display]
 
 window/size/width=1280
 window/size/height=720
-window/stretch/aspect="keep"
 
 [editor]
 
@@ -145,7 +139,7 @@ version_control_plugin_name="GitAPI"
 
 [gdnative]
 
-singletons=[ "res://addons/godot-git-plugin/git_api.gdnlib" ]
+singletons=["res://addons/godot-git-plugin/git_api.gdnlib"]
 
 [gui]
 
@@ -155,13 +149,13 @@ common/drop_mouse_on_gui_input_disabled=true
 
 move_up={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
 }
 move_down={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
 }
 
 [physics]

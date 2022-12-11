@@ -5,7 +5,7 @@ var enemies = []
 
 
 func _ready():
-	._ready()
+	super._ready()
 
 
 func on_left_click():
@@ -20,4 +20,4 @@ func register_enemy(enemy):
 func unregister_entity(enemy):
 	if enemy in enemies:
 		var index = enemies.find(enemy)
-		enemies.remove(index)
+		enemies.remove_at(index)

@@ -3,7 +3,7 @@ class_name ElectricModifier
 
 
 func _init():
-	color_modifier = Color.yellow
+	color_modifier = Color.YELLOW
 	color_modifier.a = 0.7
 
 
@@ -14,7 +14,7 @@ func register_callback(_tile: Tile, _tile_grid):
 		if neighbor.get_node("ModifierHandler").has(WaterModifier):
 			neighbor.get_node("ModifierHandler").register_modifier(self)
 
-	yield(_tile.get_tree().create_timer(0.2), "timeout")
+	await _tile.get_tree().create_timer(0.2).timeout
 	_tile.get_node("ModifierHandler").unregister_modifier(self)
 
 

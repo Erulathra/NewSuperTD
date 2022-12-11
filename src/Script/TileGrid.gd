@@ -1,14 +1,14 @@
-extends Spatial
-
 class_name TileGrid
+
+extends Node3D
 
 signal click_tile(tile)
 
-export var grid_size: int = 10
-export var grid_spacing: float = 1.2
-export var update_in_editor: bool = false
+@export var grid_size: int = 10
+@export var grid_spacing: float = 1.2
+@export var update_in_editor: bool = false
 
-export(String, MULTILINE) var generator_text = """###e######
+@export var generator_text = """###e###### # (String, MULTILINE)
 ###p#ppp##
 ###p#p#p##
 ###p#p#p##
@@ -50,13 +50,13 @@ func generate_tiles() -> void:
 				grid_y += 1
 				continue
 
-			var new_tile = tiles_dict[character].instance()
+			var new_tile = tiles_dict[character].instantiate()
 			var new_tile_position = Vector3(grid_x * grid_spacing, 0, grid_y * grid_spacing)
 			new_tile_position -= Vector3(
 				((grid_size - 1) * grid_spacing) / 2, 0, ((grid_size - 1) * grid_spacing) / 2
 			)
 
-			new_tile.translation = new_tile_position
+			new_tile.position = new_tile_position
 			new_tile.grid_location = Vector2(grid_x, grid_y)
 			add_child(new_tile)
 			row.append(new_tile)
@@ -78,7 +78,7 @@ func get_neighbour_tiles(grid_location: Vector2):
 	var result = get_tiles_in_radius_manhatan(grid_location, 1)
 	for i in result.size():
 		if result[i].grid_location == grid_location:
-			result.remove(i)
+			result.remove_at(i)
 			break
 
 	return result
@@ -111,5 +111,5 @@ func is_grid_location_valid(grid_location: Vector2) -> bool:
 	return true
 
 
-func click_tile(tile):
+func on_click_tile(tile):
 	emit_signal("click_tile", tile)

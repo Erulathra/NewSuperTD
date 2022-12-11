@@ -1,9 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/fonts/Fira Code Regular Nerd Font Complete.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/fonts/Fira Code Regular Nerd Font Complete.ttf" type="FontFile" id=1]
 [ext_resource path="res://src/Script/UI/LevelFinish.gd" type="Script" id=2]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="FontFile" id=1]
 size = 46
 font_data = ExtResource( 1 )
 
@@ -19,40 +19,40 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -300.0
-margin_top = -100.0
-margin_right = 300.0
-margin_bottom = 60.0
+offset_left = -300.0
+offset_top = -100.0
+offset_right = 300.0
+offset_bottom = 60.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -184.0
-margin_top = -89.0
-margin_right = 184.0
-margin_bottom = 48.0
+offset_left = -184.0
+offset_top = -89.0
+offset_right = 184.0
+offset_bottom = 48.0
 
 [node name="YouWonLabel" type="RichTextLabel" parent="CanvasLayer/VBoxContainer"]
-margin_right = 368.0
-margin_bottom = 66.0
-rect_pivot_offset = Vector2( 0.5, 0.5 )
+offset_right = 368.0
+offset_bottom = 66.0
+pivot_offset = Vector2( 0.5, 0.5 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
-bbcode_text = "[center]You won[/center]"
+text = "[center]You won[/center]"
 text = "You won"
 
 [node name="StarLabel" type="RichTextLabel" parent="CanvasLayer/VBoxContainer"]
-margin_top = 70.0
-margin_right = 368.0
-margin_bottom = 137.0
-rect_pivot_offset = Vector2( 0.5, 0.5 )
+offset_top = 70.0
+offset_right = 368.0
+offset_bottom = 137.0
+pivot_offset = Vector2( 0.5, 0.5 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
-bbcode_text = "[center][color=#ffff00][wave]  [/wave][/color][/center]"
+text = "[center][color=#ffff00][wave]  [/wave][/color][/center]"
 text = "  "

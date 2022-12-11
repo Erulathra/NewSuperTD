@@ -3,7 +3,7 @@ class_name WaterModifier
 
 
 func _init():
-	color_modifier = Color.cyan
+	color_modifier = Color.CYAN
 	color_modifier.a = 0.7
 
 

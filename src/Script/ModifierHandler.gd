@@ -36,7 +36,7 @@ func remove_modifiers(modifier_type):
 			remove_indexes.append(i)
 
 	for index in remove_indexes:
-		modifiers.remove(index)
+		modifiers.remove_at(index)
 
 	get_parent().update_color()
 
@@ -44,13 +44,13 @@ func remove_modifiers(modifier_type):
 func unregister_modifier(modifier: TileModifier):
 	if modifier in modifiers:
 		var index = modifiers.find(modifier)
-		modifiers.remove(index)
+		modifiers.remove_at(index)
 
 	get_parent().update_color()
 
 
 func get_color():
-	var result: Color = Color.transparent
+	var result: Color = Color.TRANSPARENT
 	for modifier in modifiers:
 		result = result.blend(modifier.color_modifier)
 

@@ -10,7 +10,7 @@ func think():
 	for tile in tiles_in_range_array:
 		if not tile is PathTile:
 			continue
-		if tile.enemies.empty():
+		if tile.enemies.is_empty():
 			continue
 
 		animate();

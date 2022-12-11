@@ -28,7 +28,7 @@ func _ready():
 		push_error("Parent is not a TileGrid")
 		return
 
-	var _result = tile_grid.connect("click_tile", self, "spawn_tower")
+	var _result = tile_grid.connect("click_tile",Callable(self,"spawn_tower"))
 
 
 func spawn_tower(tile: Tile):
@@ -38,10 +38,10 @@ func spawn_tower(tile: Tile):
 	if placed_towers_dict[active_tower] >= towers_dict[active_tower][1]:
 		return
 		
-	var new_tower: Spatial = towers_dict[active_tower][0].instance()
+	var new_tower: Node3D = towers_dict[active_tower][0].instantiate()
 	new_tower.tile_grid = tile.get_parent()
 	tile.add_child(new_tower)
-	new_tower.translation = tile.get_node("TopHandle").translation
+	new_tower.position = tile.get_node("TopHandle").position
 	towers_placed += 1
 	placed_towers_dict[active_tower] += 1
 	

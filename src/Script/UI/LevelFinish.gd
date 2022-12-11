@@ -13,4 +13,4 @@ func set_score(score):
 	elif score > 0:
 		stars_string = ""
 
-	$CanvasLayer/VBoxContainer/StarLabel.bbcode_text = text.format({"stars": stars_string})
+	$CanvasLayer/VBoxContainer/StarLabel.text = text.format({"stars": stars_string})

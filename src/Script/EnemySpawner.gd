@@ -5,7 +5,7 @@ signal on_spawn_enemy(enemy)
 signal on_enemy_death(enemy)
 signal on_game_end
 
-export var enemy_count = 10
+@export var enemy_count = 10
 var spawned_enemy_count = 0
 var enemy_death_count = 0
 
@@ -44,13 +44,13 @@ func _on_SpawnTimer_timeout():
 	if enemy_count <= spawned_enemy_count:
 		return
 
-	var new_enemy: Enemy = enemy_scene.instance()
+	var new_enemy: Enemy = enemy_scene.instantiate()
 	add_child(new_enemy)
 	
-	new_enemy.translation = start_tile.translation
+	new_enemy.position = start_tile.position
 	new_enemy.actual_tile = start_tile
 	new_enemy.tile_grid = tile_grid
-	var _result = new_enemy.connect("on_death", self, "_on_enemy_death")
+	var _result = new_enemy.connect("on_death",Callable(self,"_on_enemy_death"))
 
 	emit_signal("on_spawn_enemy", new_enemy)
 

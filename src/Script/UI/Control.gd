@@ -9,8 +9,8 @@ var score := 0
 func _ready():
 	tower_manager = get_node("../TileGrid/TowerManager")
 	enemy_spawner = get_node("../TileGrid/EnemySpawner")
-	var _result = tower_manager.connect("tower_type_change", self, "tower_type_change")
-	_result = enemy_spawner.connect("on_enemy_death", self, "update_score")
+	var _result = tower_manager.connect("tower_type_change",Callable(self,"tower_type_change"))
+	_result = enemy_spawner.connect("on_enemy_death",Callable(self,"update_score"))
 
 
 func update_score(_enemy):
