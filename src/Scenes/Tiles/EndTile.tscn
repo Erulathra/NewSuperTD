@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Script/Tile/EndTile.gd" type="Script" id=1]
+[ext_resource path="res://src/Scenes/Tiles/Tile.tscn" type="PackedScene" id=2]
+
+[node name="EndTile" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+color_normal = Color( 0.988235, 0.8, 0.454902, 1 )

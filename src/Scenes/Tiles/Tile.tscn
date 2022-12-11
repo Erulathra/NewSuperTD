@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/Script/Tile/Tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/models/Tile.tres" type="CubeMesh" id=2]
+[ext_resource path="res://src/Script/ModifierHandler.gd" type="Script" id=3]
+
+[sub_resource type="SpatialMaterial" id=4]
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.65, 0.2, 0.65 )
+
+[node name="Tile" type="Spatial"]
+script = ExtResource( 1 )
+color_normal = Color( 0.862745, 0.827451, 0.917647, 1 )
+color_hover = Color( 0.70375, 0.675, 0.75, 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = ExtResource( 2 )
+material/0 = SubResource( 4 )
+
+[node name="Area" type="Area" parent="MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0337358, 0 )
+shape = SubResource( 3 )
+
+[node name="TopHandle" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0968155, 0 )
+
+[node name="ModifierHandler" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[connection signal="input_event" from="MeshInstance/Area" to="." method="_on_Area_input_event"]
+[connection signal="mouse_entered" from="MeshInstance/Area" to="." method="_on_Area_mouse_entered"]
+[connection signal="mouse_exited" from="MeshInstance/Area" to="." method="_on_Area_mouse_exited"]

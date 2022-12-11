@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Pawn.obj-d979d1856036ff7b2368cca815274bfd.mesh"
+
+[deps]
+
+files=[ "res://.import/Pawn.obj-d979d1856036ff7b2368cca815274bfd.mesh" ]
+
+source_file="res://assets/models/Pawn.obj"
+dest_files=[ "res://.import/Pawn.obj-d979d1856036ff7b2368cca815274bfd.mesh", "res://.import/Pawn.obj-d979d1856036ff7b2368cca815274bfd.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
