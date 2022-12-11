@@ -16,6 +16,7 @@ var target_translation
 
 onready var health_progress_bar: ProgressBar = $HealthBar/Viewport/ProgressBar
 
+var DestroyedEnemyScene = preload("res://src/Scenes/DestroyedEnemyScene.tscn")
 
 func set_actual_tile(new_tile: PathTile):
 	previous_tile = actual_tile
@@ -97,5 +98,12 @@ func get_damage(amount: float):
 	health_points -= amount
 
 	if health_points <= 0:
+		var particles = DestroyedEnemyScene.instance()
+		get_parent().add_child(particles)
+		particles.global_transform = self.global_transform
+		
 		emit_signal("on_death", self)
 		queue_free()
+	if amount > 0:
+		$Particles.emitting = true
+

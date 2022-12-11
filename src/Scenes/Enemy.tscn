@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/Script/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/models/Pawn.obj" type="ArrayMesh" id=2]
@@ -15,6 +15,25 @@ bg_color = Color( 0, 0, 0, 1 )
 [sub_resource type="ViewportTexture" id=6]
 flags = 1
 viewport_path = NodePath("HealthBar/Viewport")
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0.00561798, 0.0113636 ), 0.0, 0.0, 0, 0, Vector2( 0.483146, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.988764, 0.0386363 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=11]
+curve = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, -5, 0 )
+initial_velocity = 2.0
+initial_velocity_random = 0.33
+angular_velocity = 5.0
+scale_curve = SubResource( 11 )
+
+[sub_resource type="CubeMesh" id=10]
+material = ExtResource( 3 )
+size = Vector3( 0.1, 0.1, 0.1 )
 
 [node name="Enemy" type="Spatial"]
 script = ExtResource( 1 )
@@ -52,3 +71,14 @@ billboard = 1
 no_depth_test = true
 fixed_size = true
 texture = SubResource( 6 )
+
+[node name="Particles" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.453257, 0 )
+emitting = false
+amount = 15
+lifetime = 0.45
+one_shot = true
+explosiveness = 0.48
+randomness = 1.0
+process_material = SubResource( 9 )
+draw_pass_1 = SubResource( 10 )
