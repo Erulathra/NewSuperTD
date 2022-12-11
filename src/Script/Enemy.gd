@@ -100,7 +100,7 @@ func get_damage(amount: float):
 	if health_points <= 0:
 		var particles = DestroyedEnemyScene.instance()
 		get_parent().add_child(particles)
-		particles.global_transform = self.global_transform
+		particles.global_translation = actual_tile.get_node("TopHandle").global_translation + Vector3(0, 0.5, 0)
 		
 		emit_signal("on_death", self)
 		queue_free()

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Scenes/TileGrid.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/main_scene_enviroment.tres" type="Environment" id=2]
 [ext_resource path="res://src/Scenes/UI/Control.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Script/Camera.gd" type="Script" id=4]
 
 [node name="Root" type="Spatial"]
 
@@ -12,6 +13,8 @@ keep_aspect = 0
 environment = ExtResource( 2 )
 projection = 1
 size = 25.7824
+script = ExtResource( 4 )
+NOISE_SHAKE_STRENGTH = 0.5
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 8.28, 8.737, 0 )

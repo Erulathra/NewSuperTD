@@ -2,6 +2,7 @@ extends Node
 
 var enemy_spawner
 var tower_manager
+var camera : SuperCamera
 
 var level_finish_ui = preload("res://src/Scenes/UI/LevelFinish.tscn")
 
@@ -11,8 +12,11 @@ var score = 0
 func _ready():
 	enemy_spawner = get_node("../EnemySpawner")
 	tower_manager = get_node("../TowerManager")
+	camera = get_node("/root").find_node("Camera", true, false)
+	
 	enemy_spawner.connect("on_game_end", self, "on_game_end")
 	enemy_spawner.connect("on_enemy_death", self, "update_score")
+	enemy_spawner.connect("on_enemy_death", self, "shake_camera")
 
 
 func on_game_end():
@@ -28,3 +32,6 @@ func on_game_end():
 
 func update_score(_enemy):
 	score += 100
+	
+func shake_camera(_enemy):
+	camera.apply_noise_shake()
