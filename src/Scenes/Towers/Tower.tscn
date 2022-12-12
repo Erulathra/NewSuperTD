@@ -1,56 +1,51 @@
-[gd_scene load_steps=8 format=3 uid="uid://jdvuo6n2wjbu"]
+[gd_scene load_steps=10 format=3 uid="uid://jdvuo6n2wjbu"]
 
 [ext_resource type="Script" path="res://src/Script/Towers/Tower.gd" id="1"]
-[ext_resource type="Animation" path="res://src/Scenes/Towers/SquashAnimation.tres" id="2"]
+[ext_resource type="Animation" uid="uid://dvt2dfusu5bph" path="res://src/Scenes/Towers/SquashAnimation.tres" id="2"]
 [ext_resource type="ArrayMesh" uid="uid://cy7cfdcmefqi6" path="res://assets/models/Tower.obj" id="3"]
 [ext_resource type="Material" uid="uid://buw17sy23ubgm" path="res://assets/particles/TowerShootParticle.tres" id="4"]
 
-[sub_resource type="Animation" id="2"]
-resource_name = "Squish"
-length = 0.8
-tracks/0/type = "bezier"
+[sub_resource type="Animation" id="Animation_137fp"]
+length = 0.001
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale:x")
+tracks/0/path = NodePath("../FX/GPUParticles3D:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(),
-"points": PackedFloat32Array(),
-"times": PackedFloat32Array()
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
-tracks/1/type = "bezier"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale:y")
+tracks/1/path = NodePath(".:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"handle_modes": PackedInt32Array(),
-"points": PackedFloat32Array(),
-"times": PackedFloat32Array()
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:scale:z")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(),
-"points": PackedFloat32Array(),
-"times": PackedFloat32Array()
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fcrqx"]
 _data = {
-"RESET": ExtResource("2"),
-"SquashAnimation": ExtResource("2"),
-"Squish": SubResource("2")
+"RESET": SubResource("Animation_137fp"),
+"SquashAnimation": ExtResource("2")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8wiis"]
+albedo_color = Color(0.545098, 0.545098, 0.545098, 1)
+
 [sub_resource type="BoxMesh" id="4"]
-size = Vector3(0.1, 0.1, 0.1)
+material = SubResource("StandardMaterial3D_8wiis")
+size = Vector3(0.3, 0.3, 0.3)
+
+[sub_resource type="Skin" id="Skin_fd8yg"]
 
 [node name="Tower" type="Node3D"]
 script = ExtResource("1")
@@ -65,7 +60,7 @@ skeleton = NodePath("../..")
 
 [node name="ThinkingTimer" type="Timer" parent="."]
 
-[node name="FX" type="Node" parent="."]
+[node name="FX" type="Node3D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="FX"]
 root_node = NodePath("../../Meshes")
@@ -79,9 +74,11 @@ emitting = false
 amount = 25
 lifetime = 0.64
 one_shot = true
-explosiveness = 0.46
+explosiveness = 1.0
 randomness = 1.0
+collision_base_size = 0.0
 process_material = ExtResource("4")
 draw_pass_1 = SubResource("4")
+draw_skin = SubResource("Skin_fd8yg")
 
 [connection signal="timeout" from="ThinkingTimer" to="." method="_on_thinking_timer_timeout"]
