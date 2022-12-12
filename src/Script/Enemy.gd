@@ -101,5 +101,5 @@ func get_damage(amount: float):
 		emit_signal("on_death", self)
 		queue_free()
 	if amount > 0:
-		$GPUParticles3D.emitting = true
+		$Particles.emitting = true
 

@@ -1,35 +1,36 @@
-[gd_scene load_steps=12 format=3 uid="uid://dv55hx23qme2p"]
+[gd_scene load_steps=13 format=3 uid="uid://dv55hx23qme2p"]
 
 [ext_resource type="Script" path="res://src/Script/DestroyedEnemyScene.gd" id="1"]
+[ext_resource type="AudioStream" uid="uid://cbvawdq0gnu1o" path="res://assets/sfx/death.wav" id="2_b7ibu"]
 
-[sub_resource type="Curve" id="Curve_dxfga"]
+[sub_resource type="Curve" id="Curve_i851a"]
 _data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.234211, 0.98773), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_g6imj"]
-curve = SubResource("Curve_dxfga")
+[sub_resource type="CurveTexture" id="CurveTexture_xw2wa"]
+curve = SubResource("Curve_i851a")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i0tji"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k27fl"]
 direction = Vector3(0, 1, 0)
 initial_velocity_min = 3.0
 initial_velocity_max = 4.0
-scale_curve = SubResource("CurveTexture_g6imj")
+scale_curve = SubResource("CurveTexture_xw2wa")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_heqb1"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_61rol"]
 albedo_color = Color(0.141176, 0.141176, 0.141176, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_j8wrf"]
-material = SubResource("StandardMaterial3D_heqb1")
+[sub_resource type="BoxMesh" id="BoxMesh_hx8gh"]
+material = SubResource("StandardMaterial3D_61rol")
 size = Vector3(0.1, 0.1, 0.1)
 
-[sub_resource type="Curve" id="Curve_sm3ew"]
+[sub_resource type="Curve" id="Curve_mxu78"]
 _data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.75, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_wf5ca"]
-curve = SubResource("Curve_sm3ew")
+[sub_resource type="CurveTexture" id="CurveTexture_qut0u"]
+curve = SubResource("Curve_mxu78")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pt1ex"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hv3u6"]
 lifetime_randomness = 0.5
 direction = Vector3(0, 0, 0)
 spread = 180.0
@@ -40,13 +41,13 @@ angular_velocity_max = 5.0
 damping_min = 0.5
 damping_max = 0.8
 scale_max = 1.5
-scale_curve = SubResource("CurveTexture_wf5ca")
+scale_curve = SubResource("CurveTexture_qut0u")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wdwxo"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p4b4g"]
 albedo_color = Color(0.65098, 0.65098, 0.65098, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_4bc2u"]
-material = SubResource("StandardMaterial3D_wdwxo")
+[sub_resource type="BoxMesh" id="BoxMesh_0728a"]
+material = SubResource("StandardMaterial3D_p4b4g")
 size = Vector3(0.1, 0.1, 0.1)
 
 [node name="Node3D" type="Node3D"]
@@ -61,8 +62,8 @@ one_shot = true
 explosiveness = 0.5
 fixed_fps = 60
 trail_lifetime = 1.0
-process_material = SubResource("ParticleProcessMaterial_i0tji")
-draw_pass_1 = SubResource("BoxMesh_j8wrf")
+process_material = SubResource("ParticleProcessMaterial_k27fl")
+draw_pass_1 = SubResource("BoxMesh_hx8gh")
 
 [node name="Particles2" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3141, 0)
@@ -72,11 +73,14 @@ lifetime = 0.45
 one_shot = true
 explosiveness = 0.8
 fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_pt1ex")
-draw_pass_1 = SubResource("BoxMesh_4bc2u")
+process_material = SubResource("ParticleProcessMaterial_hv3u6")
+draw_pass_1 = SubResource("BoxMesh_0728a")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_b7ibu")
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

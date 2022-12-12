@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://jdvuo6n2wjbu"]
+[gd_scene load_steps=11 format=3 uid="uid://jdvuo6n2wjbu"]
 
 [ext_resource type="Script" path="res://src/Script/Towers/Tower.gd" id="1"]
 [ext_resource type="Animation" uid="uid://dvt2dfusu5bph" path="res://src/Scenes/Towers/SquashAnimation.tres" id="2"]
 [ext_resource type="ArrayMesh" uid="uid://cy7cfdcmefqi6" path="res://assets/models/Tower.obj" id="3"]
 [ext_resource type="Material" uid="uid://buw17sy23ubgm" path="res://assets/particles/TowerShootParticle.tres" id="4"]
+[ext_resource type="AudioStream" uid="uid://b4vkc16qu30px" path="res://assets/sfx/shoot.wav" id="5_yk1lg"]
 
 [sub_resource type="Animation" id="Animation_137fp"]
 length = 0.001
@@ -31,6 +32,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(1, 1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../FX/ShootSFX:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fcrqx"]
 _data = {
@@ -54,7 +67,6 @@ script = ExtResource("1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes"]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
-visible = false
 mesh = ExtResource("3")
 skeleton = NodePath("../..")
 
@@ -80,5 +92,9 @@ collision_base_size = 0.0
 process_material = ExtResource("4")
 draw_pass_1 = SubResource("4")
 draw_skin = SubResource("Skin_fd8yg")
+
+[node name="ShootSFX" type="AudioStreamPlayer" parent="FX"]
+stream = ExtResource("5_yk1lg")
+volume_db = -10.594
 
 [connection signal="timeout" from="ThinkingTimer" to="." method="_on_thinking_timer_timeout"]
