@@ -1,9 +1,9 @@
-[gd_resource type="Environment" format=2]
+[gd_resource type="Environment" format=3 uid="uid://srtg7pa2y855"]
 
 [resource]
 background_mode = 1
-background_color = Color( 0.541176, 0.470588, 0.364706, 1 )
-ambient_light_color = Color( 1, 1, 1, 1 )
+background_color = Color(0.541176, 0.470588, 0.364706, 1)
+ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.12
 tonemap_mode = 3
 glow_enabled = true

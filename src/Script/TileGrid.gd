@@ -8,7 +8,7 @@ signal click_tile(tile)
 @export var grid_spacing: float = 1.2
 @export var update_in_editor: bool = false
 
-@export var generator_text = """###e###### # (String, MULTILINE)
+@export var generator_text = """###e######
 ###p#ppp##
 ###p#p#p##
 ###p#p#p##

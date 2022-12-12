@@ -1,29 +1,15 @@
 extends Camera3D
 class_name SuperCamera
-# How quickly to move through the noise
+
 @export var NOISE_SHAKE_SPEED: float = 30.0
-@export var NOISE_SWAY_SPEED: float = 1.0
-# Noise returns values in the range (-1, 1)
-# So this is how much to multiply the returned value by
 @export var NOISE_SHAKE_STRENGTH: float = 60.0
-@export var NOISE_SWAY_STRENGTH: float = 10.0
-# The starting range of possible offsets using random values
-@export var RANDOM_SHAKE_STRENGTH: float = 30.0
-# Multiplier for lerping the shake strength to zero
 @export var SHAKE_DECAY_RATE: float = 3.0
 
-enum ShakeType {
-	Random,
-	Noise,
-	Sway
-}
-
 @onready var noise := FastNoiseLite.new()
-# Used to keep track of where we are in the noise
-# so that we can smoothly move through it
+
 var noise_i: float = 0.0
+
 @onready var rand = RandomNumberGenerator.new()
-var shake_type: int = ShakeType.Random
 var shake_strength: float = 0.0
 
 func _ready() -> void:
@@ -34,30 +20,15 @@ func _ready() -> void:
 	# Period affects how quickly the noise changes values
 	noise.frequency = 2
 	
-func apply_random_shake() -> void:
-	shake_strength = RANDOM_SHAKE_STRENGTH
-	shake_type = ShakeType.Random
-	
 func apply_noise_shake() -> void:
 	shake_strength = NOISE_SHAKE_STRENGTH
-	shake_type = ShakeType.Noise
-	
-func apply_noise_sway() -> void:
-	shake_type = ShakeType.Sway
 	
 func _process(delta: float) -> void:
 	# Fade out the intensity over time
 	shake_strength = lerp(shake_strength, 0., SHAKE_DECAY_RATE * delta)
 	
 	var shake_offset: Vector2
-	
-	match shake_type:
-		ShakeType.Random:
-			shake_offset = get_random_offset()
-		ShakeType.Noise:
-			shake_offset = get_noise_offset(delta, NOISE_SHAKE_SPEED, shake_strength)
-		ShakeType.Sway:
-			shake_offset = get_noise_offset(delta, NOISE_SWAY_SPEED, NOISE_SWAY_STRENGTH)
+	shake_offset = get_noise_offset(delta, NOISE_SHAKE_SPEED, shake_strength)
 	
 	# Shake by adjusting camera.offset so we can move the camera around the level via it's position
 	self.h_offset = shake_offset.x
