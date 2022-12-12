@@ -2,7 +2,7 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://chc7c5ncd3tra"
+uid="uid://c56ety5kf02an"
 path="res://.godot/imported/FiraCode-Regular.ttf-e4f8ed682e3900686172fbffb0e825d3.fontdata"
 
 [deps]
@@ -14,7 +14,7 @@ dest_files=["res://.godot/imported/FiraCode-Regular.ttf-e4f8ed682e3900686172fbff
 
 Rendering=null
 antialiasing=1
-generate_mipmaps=false
+generate_mipmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48
@@ -27,7 +27,11 @@ Fallbacks=null
 fallbacks=[]
 Compress=null
 compress=true
-preload=[]
+preload=[{
+"chars": [],
+"glyphs": [],
+"name": "New Configuration"
+}]
 language_support={}
 script_support={}
 opentype_features={}

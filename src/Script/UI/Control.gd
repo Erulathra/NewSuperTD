@@ -15,7 +15,7 @@ func _ready():
 
 func update_score(_enemy):
 	score += 100
-	$CanvasLayer/Score.set_text("Score %d" % score)
+	$CanvasLayer/Score.set_text("[right]Score %d[/right]" % score)
 
 
 func tower_type_change(tower_name):

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bqs24xcnc3mec" path="res://src/Scenes/TileGrid.tscn" id="1"]
 [ext_resource type="Environment" path="res://assets/main_scene_enviroment.tres" id="2"]
-[ext_resource type="PackedScene" path="res://src/Scenes/UI/Control.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://cut0m27nme0sy" path="res://src/Scenes/UI/Control.tscn" id="3"]
 [ext_resource type="Script" path="res://src/Script/Camera.gd" id="4"]
 
 [node name="Root" type="Node3D"]
