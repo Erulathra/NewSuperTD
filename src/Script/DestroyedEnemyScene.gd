@@ -1,7 +1,7 @@
 extends Node3D
 
 func _ready():
-	$GPUParticles3D.emitting = true
+	$Particles1.emitting = true
 	$Particles2.emitting = true
 
 func _on_Timer_timeout():
