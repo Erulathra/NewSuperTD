@@ -3,6 +3,7 @@ var modifier: TileModifier = FireModifier.new()
 
 
 func _ready():
+	super._ready()
 	tiles_in_range_array = tile_grid.get_tiles_in_radius_manhatan(get_parent().grid_location, 1)
 
 

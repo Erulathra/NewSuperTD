@@ -5,6 +5,7 @@ var modifier: TileModifier = ElectricModifier.new()
 
 
 func _ready():
+	super._ready()
 	pass
 
 

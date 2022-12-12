@@ -4,7 +4,7 @@
 [ext_resource type="BoxMesh" path="res://assets/models/Tile.tres" id="2"]
 [ext_resource type="Script" path="res://src/Script/ModifierHandler.gd" id="3"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_0esud"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_663kj"]
 size = Vector3(1.3, 0.4, 1.3)
 
 [node name="Tile" type="Node3D"]
@@ -19,7 +19,7 @@ mesh = ExtResource("2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0337358, 0)
-shape = SubResource("BoxShape3D_0esud")
+shape = SubResource("BoxShape3D_663kj")
 
 [node name="TopHandle" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0968155, 0)

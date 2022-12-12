@@ -1,20 +1,70 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://cifrgelwmeb8x"]
 
-[ext_resource path="res://src/Scenes/Towers/Tower.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Script/Towers/ElectricTower.gd" type="Script" id=2]
-[ext_resource path="res://assets/models/Tower.obj" type="ArrayMesh" id=3]
-[ext_resource path="res://assets/materials/TowerMaterial.tres" type="Material" id=4]
+[ext_resource type="PackedScene" uid="uid://jdvuo6n2wjbu" path="res://src/Scenes/Towers/Tower.tscn" id="1"]
+[ext_resource type="Script" path="res://src/Script/Towers/ElectricTower.gd" id="2"]
+[ext_resource type="Material" path="res://assets/materials/TowerMaterial.tres" id="4"]
+[ext_resource type="Animation" path="res://src/Scenes/Towers/SquashAnimation.tres" id="4_t3c3u"]
 
-[sub_resource type="StandardMaterial3D" id=1]
-albedo_color = Color( 1, 1, 0, 1 )
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f02tc"]
+albedo_color = Color(1, 1, 0, 1)
+emission_enabled = true
+emission = Color(1, 1, 0, 1)
 
-[node name="Tower" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
+[sub_resource type="Animation" id="2"]
+resource_name = "Squish"
+length = 0.8
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_npc2u"]
+_data = {
+"RESET": ExtResource("4_t3c3u"),
+"SquashAnimation": ExtResource("4_t3c3u"),
+"Squish": SubResource("2")
+}
+
+[node name="Tower" instance=ExtResource("1")]
+script = ExtResource("2")
 thinking_time = 1.5
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes" index="0"]
-transform = Transform3D( 0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0 )
-mesh = ExtResource( 3 )
-skeleton = NodePath("../..")
-material/0 = ExtResource( 4 )
-material/1 = SubResource( 1 )
+[node name="MeshInstance3D" parent="Meshes" index="0"]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0)
+visible = true
+surface_material_override/0 = ExtResource("4")
+surface_material_override/1 = SubResource("StandardMaterial3D_f02tc")
+
+[node name="AnimationPlayer" parent="." index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_npc2u")
+}

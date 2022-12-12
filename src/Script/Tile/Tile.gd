@@ -21,7 +21,7 @@ func _on_Area_input_event(
 	_camera: Node, _event: InputEvent, _position: Vector3, _normal: Vector3, _shape_idx: int
 ):
 	if _event is InputEventMouseButton:
-		if _event.button_index == MOUSE_BUTTON_LEFT and _event.button_pressed == true:
+		if _event.button_index == MOUSE_BUTTON_LEFT and _event.is_pressed() == true:
 			on_left_click()
 
 

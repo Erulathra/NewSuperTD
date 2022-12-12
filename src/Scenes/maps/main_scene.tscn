@@ -27,6 +27,10 @@ environment = ExtResource("2")
 [node name="DemoUI" parent="." instance=ExtResource("3")]
 layout_mode = 3
 anchors_preset = 15
+offset_right = -1008.0
+offset_bottom = -512.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [editable path="TileGrid"]
 [editable path="TileGrid/EnemySpawner"]
