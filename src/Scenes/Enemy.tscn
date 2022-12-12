@@ -4,33 +4,33 @@
 [ext_resource type="ArrayMesh" uid="uid://cekm6cckvnxx4" path="res://assets/models/Pawn.obj" id="2"]
 [ext_resource type="Material" uid="uid://iri7t35wowhv" path="res://assets/materials/EnemyMaterial.tres" id="3"]
 
-[sub_resource type="Skin" id="Skin_af3ue"]
+[sub_resource type="Skin" id="Skin_d1s2r"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2bvlf"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a3u0n"]
 bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_puqkv"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lh6b6"]
 bg_color = Color(1, 0, 0, 1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_84qly"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_xv6sx"]
 viewport_path = NodePath("HealthBar/SubViewport")
 
-[sub_resource type="Curve" id="Curve_ws3gw"]
-_data = [Vector2(0.00561798, 0.0113636), 0.0, 0.0, 0, 0, Vector2(0.483146, 1), 0.0, 0.0, 0, 0, Vector2(0.988764, 0.0386363), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_ewl5y"]
+_data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.483146, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_uxpto"]
-curve = SubResource("Curve_ws3gw")
+[sub_resource type="CurveTexture" id="CurveTexture_66rlr"]
+curve = SubResource("Curve_ewl5y")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0anvm"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rxgwy"]
 direction = Vector3(0, 0, 0)
 spread = 180.0
 gravity = Vector3(0, -5, 0)
 initial_velocity_min = 2.03
 initial_velocity_max = 2.03
-scale_curve = SubResource("CurveTexture_uxpto")
+scale_curve = SubResource("CurveTexture_66rlr")
 
-[sub_resource type="BoxMesh" id="BoxMesh_4ykrl"]
+[sub_resource type="BoxMesh" id="BoxMesh_yevll"]
 material = ExtResource("3")
 size = Vector3(0.1, 0.1, 0.1)
 
@@ -40,7 +40,7 @@ script = ExtResource("1")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.381251, 0, 0, 0, 0.381251, 0, 0, 0, 0.381251, 0, 0.0171047, 0)
 mesh = ExtResource("2")
-skin = SubResource("Skin_af3ue")
+skin = SubResource("Skin_d1s2r")
 surface_material_override/0 = ExtResource("3")
 
 [node name="HealthBar" type="Node3D" parent="."]
@@ -57,8 +57,8 @@ render_target_update_mode = 4
 offset_right = 100.0
 offset_bottom = 30.0
 size_flags_vertical = 1
-theme_override_styles/background = SubResource("StyleBoxFlat_2bvlf")
-theme_override_styles/fill = SubResource("StyleBoxFlat_puqkv")
+theme_override_styles/background = SubResource("StyleBoxFlat_a3u0n")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lh6b6")
 value = 100.0
 
 [node name="Sprite3D" type="Sprite3D" parent="HealthBar"]
@@ -68,7 +68,7 @@ pixel_size = 0.001
 billboard = 1
 no_depth_test = true
 fixed_size = true
-texture = SubResource("ViewportTexture_84qly")
+texture = SubResource("ViewportTexture_xv6sx")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.453257, 0)
@@ -78,5 +78,5 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 0.48
 randomness = 1.0
-process_material = SubResource("ParticleProcessMaterial_0anvm")
-draw_pass_1 = SubResource("BoxMesh_4ykrl")
+process_material = SubResource("ParticleProcessMaterial_rxgwy")
+draw_pass_1 = SubResource("BoxMesh_yevll")

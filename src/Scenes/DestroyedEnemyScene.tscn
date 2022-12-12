@@ -2,76 +2,78 @@
 
 [ext_resource type="Script" path="res://src/Script/DestroyedEnemyScene.gd" id="1"]
 
-[sub_resource type="Curve" id="Curve_nulq7"]
-_data = [Vector2(0, 0.0090909), 0.0, 0.0, 0, 0, Vector2(0.747191, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0090909), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_vykw5"]
+_data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.234211, 0.98773), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_gq766"]
-curve = SubResource("Curve_nulq7")
+[sub_resource type="CurveTexture" id="CurveTexture_nq41k"]
+curve = SubResource("Curve_vykw5")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ns502"]
-lifetime_randomness = 0.44
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2chpd"]
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 4.0
+scale_curve = SubResource("CurveTexture_nq41k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4tior"]
+albedo_color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3ff0m"]
+material = SubResource("StandardMaterial3D_4tior")
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="Curve" id="Curve_mlfcj"]
+_data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.75, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_32iw5"]
+curve = SubResource("Curve_mlfcj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1c477"]
+lifetime_randomness = 0.5
 direction = Vector3(0, 0, 0)
 spread = 180.0
 gravity = Vector3(0, 0, 0)
-initial_velocity_min = 2.0
-initial_velocity_max = 3.0
-damping_min = 2.0
-damping_max = 2.0
-scale_curve = SubResource("CurveTexture_gq766")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pe0nb"]
-albedo_color = Color(0.568627, 0.568627, 0.568627, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_nnb7k"]
-material = SubResource("StandardMaterial3D_pe0nb")
-size = Vector3(0.1, 0.1, 0.1)
-
-[sub_resource type="Curve" id="Curve_msr7e"]
-_data = [Vector2(0.00561798, 0.0113636), 0.0, 0.0, 0, 0, Vector2(0.483146, 1), 0.0, 0.0, 0, 0, Vector2(0.988764, 0.0386363), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_41lwm"]
-curve = SubResource("Curve_msr7e")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0fvfo"]
-lifetime_randomness = 0.48
-direction = Vector3(0, 1, 0)
-spread = 55.25
-initial_velocity_min = 1.5
-initial_velocity_max = 2.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.5
+angular_velocity_max = 5.0
+damping_min = 0.5
+damping_max = 0.8
 scale_min = 0.5
-scale_curve = SubResource("CurveTexture_41lwm")
+scale_curve = SubResource("CurveTexture_32iw5")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fj1d5"]
-albedo_color = Color(0.105882, 0.105882, 0.105882, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wch4v"]
+albedo_color = Color(0.65098, 0.65098, 0.65098, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_676y8"]
-material = SubResource("StandardMaterial3D_fj1d5")
+[sub_resource type="BoxMesh" id="BoxMesh_moc6t"]
+material = SubResource("StandardMaterial3D_wch4v")
 size = Vector3(0.1, 0.1, 0.1)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1")
 
 [node name="Particles1" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.453257, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.317357, 0)
 emitting = false
-amount = 25
-lifetime = 0.45
-one_shot = true
-explosiveness = 0.67
-process_material = SubResource("ParticleProcessMaterial_ns502")
-draw_pass_1 = SubResource("BoxMesh_nnb7k")
-
-[node name="Particles2" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.448982, 0)
-emitting = false
-amount = 5
-lifetime = 1.5
+amount = 7
+lifetime = 0.8
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_0fvfo")
-draw_pass_1 = SubResource("BoxMesh_676y8")
+fixed_fps = 60
+trail_lifetime = 1.0
+process_material = SubResource("ParticleProcessMaterial_2chpd")
+draw_pass_1 = SubResource("BoxMesh_3ff0m")
+
+[node name="Particles2" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3141, 0)
+emitting = false
+amount = 30
+lifetime = 0.45
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_1c477")
+draw_pass_1 = SubResource("BoxMesh_moc6t")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0

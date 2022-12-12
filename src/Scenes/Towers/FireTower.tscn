@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/Script/Towers/FireTower.gd" id="2"]
 [ext_resource type="Material" path="res://assets/materials/TowerMaterial.tres" id="4"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8dfp5"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t7t7k"]
 albedo_color = Color(1, 0, 0, 1)
 emission_enabled = true
 emission = Color(1, 0, 0, 1)
@@ -17,4 +17,4 @@ transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0)
 visible = true
 skeleton = NodePath("..")
 surface_material_override/0 = ExtResource("4")
-surface_material_override/1 = SubResource("StandardMaterial3D_8dfp5")
+surface_material_override/1 = SubResource("StandardMaterial3D_t7t7k")
