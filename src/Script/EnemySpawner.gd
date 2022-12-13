@@ -4,6 +4,7 @@ class_name EnemySpawner
 signal on_spawn_enemy(enemy)
 signal on_enemy_death(enemy)
 signal on_game_end
+signal on_game_over
 
 @export var enemy_count = 10
 var spawned_enemy_count = 0
@@ -40,7 +41,7 @@ func find_start_tile() -> bool:
 var enemy_scene = preload("res://src/Scenes/Enemy.tscn")
 
 
-func _on_SpawnTimer_timeout():
+func spawn_enemy():
 	if enemy_count <= spawned_enemy_count:
 		return
 
@@ -50,7 +51,8 @@ func _on_SpawnTimer_timeout():
 	new_enemy.position = start_tile.position
 	new_enemy.actual_tile = start_tile
 	new_enemy.tile_grid = tile_grid
-	var _result = new_enemy.connect("on_death",Callable(self,"_on_enemy_death"))
+	new_enemy.connect("on_death", Callable(self,"_on_enemy_death"))
+	new_enemy.connect("on_reach_base", Callable(self, "_on_enemy_reach_end"))
 
 	emit_signal("on_spawn_enemy", new_enemy)
 
@@ -63,3 +65,10 @@ func _on_enemy_death(enemy):
 
 	if enemy_death_count >= enemy_count:
 		emit_signal("on_game_end")
+
+
+func _on_spawn_timer_timeout():
+	spawn_enemy()
+
+func _on_enemy_reach_end():
+	on_game_over.emit()

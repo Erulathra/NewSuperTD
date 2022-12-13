@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://c11njxj27hib2"]
+
+[ext_resource type="Environment" uid="uid://srtg7pa2y855" path="res://assets/main_scene_enviroment.tres" id="1_4recj"]
+[ext_resource type="Script" path="res://src/Script/Camera.gd" id="2_irbqr"]
+[ext_resource type="PackedScene" uid="uid://cut0m27nme0sy" path="res://src/Scenes/UI/Control.tscn" id="3_5bwp1"]
+[ext_resource type="PackedScene" uid="uid://bqs24xcnc3mec" path="res://src/Scenes/TileGrid.tscn" id="4_odqn7"]
+
+[node name="Root" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 10, 13.971, 10)
+keep_aspect = 0
+environment = ExtResource("1_4recj")
+projection = 1
+size = 25.7824
+script = ExtResource("2_irbqr")
+NOISE_SHAKE_SPEED = 0.2
+NOISE_SHAKE_STRENGTH = 0.5
+SHAKE_DECAY_RATE = 5.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 8.28, 8.737, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_4recj")
+
+[node name="DemoUI" parent="." instance=ExtResource("3_5bwp1")]
+offset_right = -1026.0
+offset_bottom = -532.0
+
+[node name="Map1" type="Node3D" parent="."]
+
+[node name="TileGrid" parent="Map1" instance=ExtResource("4_odqn7")]
+
+[editable path="Map1/TileGrid"]
+[editable path="Map1/TileGrid/EnemySpawner"]

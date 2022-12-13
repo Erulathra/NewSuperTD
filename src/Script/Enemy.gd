@@ -2,6 +2,7 @@ extends Node3D
 class_name Enemy
 
 signal on_death(enemy)
+signal on_reach_base()
 
 @export var thinking_time = 1.0
 @export var moving_speed = 5.0
@@ -22,10 +23,16 @@ func set_actual_tile(new_tile: PathTile):
 	previous_tile = actual_tile
 	if not previous_tile == null:
 		previous_tile.unregister_entity(self)
-		previous_tile.get_node("ModifierHandler").disconnect("on_register_modifier", Callable(self, "on_register_modifier"))
+		var modifier_handler = previous_tile.get_node("ModifierHandler")
+
+		if modifier_handler != null:
+			modifier_handler.disconnect("on_register_modifier", Callable(self, "on_register_modifier"))
 
 	actual_tile = new_tile
-	var _result = actual_tile.get_node("ModifierHandler").connect("on_register_modifier", Callable(self, "on_register_modifier"))
+	var modifier_handler = actual_tile.get_node("ModifierHandler")
+	
+	if modifier_handler != null:
+		modifier_handler.connect("on_register_modifier", Callable(self, "on_register_modifier"))
 
 	actual_tile.register_enemy(self)
 
@@ -43,11 +50,12 @@ func _on_thiniking_timeout():
 
 
 func think():
-	var next_tile = find_next_path_tile()
-
-	if next_tile is EndTile:
+	if actual_tile is EndTile:
 		queue_free()
+		on_reach_base.emit()
+		return
 
+	var next_tile = find_next_path_tile()
 	move(next_tile)
 
 

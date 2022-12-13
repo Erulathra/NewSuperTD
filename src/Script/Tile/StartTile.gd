@@ -1,4 +1,4 @@
-extends "res://src/Script/Tile/EndTile.gd"
+extends PathTile
 class_name StartTile
 
 
