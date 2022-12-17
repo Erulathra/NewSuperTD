@@ -11,10 +11,13 @@ var grid_location: Vector2
 
 
 func _ready():
-	mesh = $MeshInstance3D
+	mesh = $Mesh
 	material = StandardMaterial3D.new()
 	material.albedo_color = color_normal
 	mesh.material_override = material
+	
+func _process(delta):
+	pass
 
 
 func _on_Area_input_event(

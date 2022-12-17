@@ -61,7 +61,7 @@ func think():
 
 func _process(delta):
 	if target_position == null:
-		global_position = actual_tile.get_node("TopHandle").global_position
+		global_position = actual_tile.get_node("Mesh/TopHandle").global_position
 		target_position = global_position
 
 	global_position = lerp(global_position, target_position, delta * moving_speed)
@@ -84,7 +84,7 @@ func find_next_path_tile():
 
 func move(new_tile: PathTile):
 	set_actual_tile(new_tile)
-	target_position = new_tile.get_node("TopHandle").global_position
+	target_position = new_tile.get_node("Mesh/TopHandle").global_position
 
 	for modifier in actual_tile.get_node("ModifierHandler").modifiers:
 		get_damage(modifier.get_damage())
@@ -104,7 +104,7 @@ func get_damage(amount: float):
 	if health_points <= 0:
 		var particles = DestroyedEnemyScene.instantiate()
 		get_parent().add_child(particles)
-		particles.global_position = actual_tile.get_node("TopHandle").global_position + Vector3(0, 0.5, 0)
+		particles.global_position = actual_tile.get_node("Mesh/TopHandle").global_position + Vector3(0, 0.5, 0)
 		
 		emit_signal("on_death", self)
 		queue_free()

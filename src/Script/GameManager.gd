@@ -13,11 +13,9 @@ var score = 0
 func _ready():
 	enemy_spawner = get_node("../EnemySpawner")
 	tower_manager = get_node("../TowerManager")
-	camera = get_node("/root").find_child("Camera3D", true, false)
 
 	enemy_spawner.connect("on_game_end", Callable(self, "on_game_end"))
 	enemy_spawner.connect("on_enemy_death", Callable(self, "update_score"))
-	enemy_spawner.connect("on_enemy_death", Callable(self, "shake_camera"))
 	enemy_spawner.connect("on_game_over", Callable(self, "on_game_over"))
 
 
@@ -39,7 +37,3 @@ func on_game_over():
 
 func update_score(_enemy):
 	score += 100
-
-
-func shake_camera(_enemy):
-	camera.apply_noise_shake()

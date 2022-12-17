@@ -11,6 +11,8 @@ func _ready():
 
 
 func think():
+	super.think()
+
 	for tile in tiles_in_range_array:
 		tile.get_node("ModifierHandler").register_modifier(modifier)
 	animate()
