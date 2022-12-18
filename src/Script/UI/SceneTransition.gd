@@ -12,9 +12,9 @@ func _process(_delta):
 
 func StartEndSceneAnimation():
 	$AnimationPlayer.play("LoadScene")
-	await $AnimationPlayer.animation_finished
 
 
 func StartStartSceneAnimation():
+	$AnimationPlayer.clear_queue()
+	$AnimationPlayer.stop()
 	$AnimationPlayer.play("UnloadScene")
-	await $AnimationPlayer.animation_finished
