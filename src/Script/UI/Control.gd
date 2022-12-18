@@ -6,6 +6,7 @@ var enemy_spawner: EnemySpawner
 var score := 0
 
 
+
 func _ready():
 	tower_manager = get_tree().get_root().find_child("TowerManager", true, false)
 	enemy_spawner = get_tree().get_root().find_child("EnemySpawner", true, false)
