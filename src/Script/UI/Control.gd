@@ -32,3 +32,15 @@ func tower_type_change(tower_name):
 		$CanvasLayer/TowerName.set_text("1. Water \n> 2. Electric\n3. Fire")
 	if tower_name == "Fire":
 		$CanvasLayer/TowerName.set_text("1. Water \n2. Electric\n> 3. Fire")
+
+
+func _on_fire_button_pressed():
+	tower_manager.change_tower("Fire")
+
+
+func _on_water_button_pressed():
+	tower_manager.change_tower("Water")
+
+
+func _on_electric_button_pressed():
+	tower_manager.change_tower("Electric")
