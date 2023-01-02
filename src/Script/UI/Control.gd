@@ -2,16 +2,22 @@ extends Control
 
 var tower_manager: TowerManager
 var enemy_spawner: EnemySpawner
+var level_manager: LevelManager
 
 var score := 0
 
 
-
 func _ready():
+	level_manager = get_tree().get_root().find_child("LevelManager", true, false)
+	level_manager.on_level_loaded.connect(on_level_loaded)
+	on_level_loaded()
+
+
+func on_level_loaded():
 	tower_manager = get_tree().get_root().find_child("TowerManager", true, false)
 	enemy_spawner = get_tree().get_root().find_child("EnemySpawner", true, false)
-	var _result = tower_manager.connect("tower_type_change", Callable(self, "tower_type_change"))
-	_result = enemy_spawner.connect("on_enemy_death", Callable(self, "update_score"))
+	tower_manager.tower_type_change.connect(tower_type_change)
+	enemy_spawner.on_enemy_death.connect(update_score)
 
 
 func update_score(_enemy):

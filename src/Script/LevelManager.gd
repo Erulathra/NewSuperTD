@@ -1,13 +1,15 @@
 class_name LevelManager
 extends Node
 
+signal on_level_loaded
+
 var current_level = "levelOne"
 const levels = {"levelOne": "res://src/Scenes/Levels/LevelOne.tscn"}
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass  # Replace with function body.
+	on_level_loaded.emit()
 
 
 func restart_level():
@@ -30,3 +32,4 @@ func restart_level():
 
 	scene_transition.play("LoadScene")
 	await scene_transition.animation_finished
+	on_level_loaded.emit()
