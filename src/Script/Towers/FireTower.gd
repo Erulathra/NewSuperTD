@@ -11,11 +11,5 @@ func think():
 	super.think()
 
 	for tile in tiles_in_range_array:
-		if not tile is PathTile:
-			continue
-		if tile.enemies.is_empty():
-			continue
-
 		animate()
 		tile.get_node("ModifierHandler").register_modifier(modifier)
-		return

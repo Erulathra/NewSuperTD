@@ -101,6 +101,20 @@ func get_tiles_in_radius_manhatan(grid_location: Vector2, radius: int):
 	return result
 
 
+func get_tiles_in_radius(grid_location: Vector2, radius: int):
+	var result = []
+
+	for i in range(-radius, radius + 1):
+		for j in range(-radius, radius + 1):
+			var target_grid_location = grid_location + Vector2(i, j)
+			if not is_grid_location_valid(target_grid_location):
+				continue
+
+			result.append(tiles_array[target_grid_location.x][target_grid_location.y])
+
+	return result
+
+
 func is_grid_location_valid(grid_location: Vector2) -> bool:
 	if grid_location.x >= grid_size or grid_location.y >= grid_size:
 		return false
