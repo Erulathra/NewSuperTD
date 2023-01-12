@@ -24,6 +24,7 @@ func _ready():
 func on_level_loaded():
 	tower_manager = get_tree().get_root().find_child("TowerManager", true, false)
 	enemy_spawner = get_tree().get_root().find_child("EnemySpawner", true, false)
+	update_towers_amount()
 	enemy_spawner.on_enemy_death.connect(update_score)
 	tower_manager.on_placed_tower.connect(update_towers_amount)
 

@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bc6lbfpfytuf5"]
+[gd_scene load_steps=6 format=3 uid="uid://bc6lbfpfytuf5"]
 
 [ext_resource type="PackedScene" uid="uid://jdvuo6n2wjbu" path="res://src/Scenes/Towers/Tower.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Script/Towers/FireTower.gd" id="2"]
+[ext_resource type="ArrayMesh" uid="uid://bif6xvm8ckrbv" path="res://assets/models/TowerV2.obj" id="3_l1hw8"]
+[ext_resource type="Material" uid="uid://bualn4p1k4a5" path="res://assets/materials/TowerMaterial.tres" id="4_pexhj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ju5t6"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.184314, 0, 1)
 
 [node name="Tower" instance=ExtResource("1")]
 script = ExtResource("2")
@@ -9,5 +16,10 @@ script = ExtResource("2")
 [node name="MeshInstance3D" parent="Meshes" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 visible = true
-mesh = null
+mesh = ExtResource("3_l1hw8")
 skeleton = NodePath("..")
+surface_material_override/0 = ExtResource("4_pexhj")
+surface_material_override/1 = SubResource("StandardMaterial3D_ju5t6")
+
+[node name="ThinkingTimer" parent="." index="1"]
+wait_time = 0.5

@@ -14,8 +14,9 @@ func register_callback(_tile: Tile, _tile_grid):
 	var unregister_self = func():
 		if _tile != null:
 			_tile.get_node("ModifierHandler").unregister_modifier(self)
-
-	_tile.get_tree().create_timer(0.2).timeout.connect(unregister_self);
+	
+	if _tile != null:
+		_tile.get_tree().create_timer(0.2).timeout.connect(unregister_self);
 
 	for neighbor in neighbors:
 		if neighbor.get_node("ModifierHandler").has(WaterModifier):
