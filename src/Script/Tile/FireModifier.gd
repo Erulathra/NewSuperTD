@@ -12,7 +12,9 @@ func register_callback(_tile: Tile, _tile_grid):
 		_tile.get_node("ModifierHandler").remove_modifiers(WaterModifier)
 		_tile.get_node("ModifierHandler").unregister_modifier(self)
 
-	await _tile.get_tree().create_timer(0.5).timeout
+	animate(_tile)
+
+	await _tile.get_tree().create_timer(0.4).timeout
 	_tile.get_node("ModifierHandler").unregister_modifier(self)
 
 
