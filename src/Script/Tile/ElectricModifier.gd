@@ -15,11 +15,12 @@ func register_callback(_tile: Tile, _tile_grid):
 		if _tile != null:
 			_tile.get_node("ModifierHandler").unregister_modifier(self)
 
+	_tile.get_tree().create_timer(0.2).timeout.connect(unregister_self);
+
 	for neighbor in neighbors:
 		if neighbor.get_node("ModifierHandler").has(WaterModifier):
 			neighbor.get_node("ModifierHandler").register_modifier(self)
 			animate(_tile)
-			_tile.get_tree().create_timer(0.2).timeout.connect(unregister_self);
 
 
 func get_damage():
