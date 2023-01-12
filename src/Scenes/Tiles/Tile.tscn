@@ -4,10 +4,10 @@
 [ext_resource type="BoxMesh" path="res://assets/models/Tile.tres" id="2"]
 [ext_resource type="Script" path="res://src/Script/ModifierHandler.gd" id="3"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_xhrkl"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_iqy3i"]
 size = Vector3(1.3, 0.4, 1.3)
 
-[sub_resource type="Animation" id="Animation_1pdui"]
+[sub_resource type="Animation" id="Animation_hvvwm"]
 resource_name = "AreaInRange"
 tracks/0/type = "bezier"
 tracks/0/imported = false
@@ -32,7 +32,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.0753599, 0.592536, 0.997411)
 }
 
-[sub_resource type="Animation" id="Animation_ikank"]
+[sub_resource type="Animation" id="Animation_3kjyu"]
 length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
@@ -57,10 +57,10 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0)
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0v2ys"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a78dh"]
 _data = {
-"AreaInRange": SubResource("Animation_1pdui"),
-"RESET": SubResource("Animation_ikank")
+"AreaInRange": SubResource("Animation_hvvwm"),
+"RESET": SubResource("Animation_3kjyu")
 }
 
 [node name="Tile" type="Node3D"]
@@ -75,7 +75,7 @@ mesh = ExtResource("2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0337358, 0)
-shape = SubResource("BoxShape3D_xhrkl")
+shape = SubResource("BoxShape3D_iqy3i")
 
 [node name="TopHandle" type="Node3D" parent="Mesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0968155, 0)
@@ -85,7 +85,7 @@ script = ExtResource("3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_0v2ys")
+"": SubResource("AnimationLibrary_a78dh")
 }
 
 [connection signal="input_event" from="Mesh/Area3D" to="." method="_on_Area_input_event"]
