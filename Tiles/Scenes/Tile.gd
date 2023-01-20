@@ -40,8 +40,9 @@ func _on_area_3d_mouse_exited():
 
 func _on_area_3d_input_event(_camera, _event, _position, _normal, _shape_idx):
 	if _event is InputEventMouseButton:
-		print_debug("HEllo")
-	pass # Replace with function body.
+		if self is PathTile:
+			var self_as_path = self as PathTile
+			print(self_as_path.distance_to_king)
 
 func get_neighbors_in_range(range):
 	if range <= 1:
