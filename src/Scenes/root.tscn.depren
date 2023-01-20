@@ -1,7 +1,0 @@
-[gd_scene load_steps=6 format=3]
-
-[ext_resource type="PackedScene" uid="uid://cut0m27nme0sy" path="res://src/Scenes/UI/Control.tscn" id="1_of7ha"]
-[ext_resource type="PackedScene" uid="uid://458o8maamo6n" path="res://src/Scenes/Levels/LevelOne.tscn" id="2_vwrcq"]
-[ext_resource type="Script" path="res://src/Script/Camera.gd" id="3_6uv65"]
-[ext_resource type="PackedScene" uid="uid://dybxq1wy47teg" path="res://src/Scenes/LevelManager.tscn" id="4_5ji7i"]
-[ext_resource type="Environment" uid="uid://srtg7pa2y855" path="res://assets/main_scene_enviroment.tres" id="5_7ix25"]

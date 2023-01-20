@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://chy8senplvq03"]
-
-[ext_resource type="Script" path="res://src/Script/TowerManager.gd" id="1"]
-
-[node name="TowerManager" type="Node"]
-script = ExtResource("1")
