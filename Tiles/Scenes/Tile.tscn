@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvvfev3eauu0e"]
+[gd_scene load_steps=5 format=3 uid="uid://dvvfev3eauu0e"]
 
 [ext_resource type="Script" path="res://Tiles/Tile.gd" id="1_2kufi"]
 [ext_resource type="ArrayMesh" uid="uid://bsmwisiv78fb0" path="res://Tiles/TileModel.obj" id="1_t7jgv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_af737"]
+albedo_color = Color(0.933333, 0.929412, 0.835294, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_76uwo"]
 size = Vector3(1, 0.36702, 1)
@@ -11,6 +14,7 @@ script = ExtResource("1_2kufi")
 hover_color = Color(0.337255, 0.337255, 0.337255, 0.815686)
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_af737")
 mesh = ExtResource("1_t7jgv")
 
 [node name="Area3D" type="Area3D" parent="Mesh"]

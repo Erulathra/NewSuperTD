@@ -26,6 +26,11 @@ window/size/borderless=true
 
 export/convert_text_resources_to_binary=true
 
+[physics]
+
+2d/run_on_separate_thread=true
+3d/run_on_separate_thread=true
+
 [rendering]
 
 driver/threads/thread_model=2
