@@ -13,6 +13,15 @@ public partial class Tile : Node3D
 	private StandardMaterial3D material;
 	[Export] public Color NormalColor = Color.FromString("#eeedd5", Colors.White);
 
+	[Signal]
+	public delegate void InputEventEventHandler(Tile tile, InputEvent inputEvent);
+
+	[Signal]
+	public delegate void MouseEnterEventHandler(Tile tile);
+
+	[Signal]
+	public delegate void MouseExitEventHandler(Tile tile);
+	
 	public override void _Ready()
 	{
 		MeshInstance3D mesh = GetNode<MeshInstance3D>("Mesh");
@@ -26,32 +35,17 @@ public partial class Tile : Node3D
 
 	private void OnArea3dInputEvent(Node camera, InputEvent inputEvent, Vector3 position, Vector3 normal, int shapeIDx)
 	{
-		if (inputEvent is InputEventMouseButton)
-			GD.Print("Click!");
+		EmitSignal(SignalName.InputEvent, this, inputEvent);
 	}
 
 	public virtual void OnMouseEntered()
 	{
-		List<Tile> tiles = GetTilesInRange(2);
-		foreach (Tile tile in tiles)
-		{
-			if (tile == null)
-				continue;
-
-			tile.material.AlbedoColor = tile.NormalColor.Blend(tile.HoverColor);
-		}
+		EmitSignal(SignalName.MouseEnter, this);
 	}
 
 	private void OnMouseExited()
 	{
-		List<Tile> tiles = GetTilesInRange(2);
-		foreach (Tile tile in tiles)
-		{
-			if (tile == null)
-				continue;
-
-			tile.material.AlbedoColor = tile.NormalColor;
-		}
+		EmitSignal(SignalName.MouseExit, this);
 	}
 
 	public List<Tile> GetTilesInRange(int range)

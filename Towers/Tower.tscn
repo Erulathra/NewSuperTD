@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0t4l2prr8xeh"]
+
+[ext_resource type="ArrayMesh" uid="uid://bs1r84mj2w5vq" path="res://Towers/Models/TowerV2.obj" id="1_eodma"]
+
+[node name="Tower" type="Node3D"]
+
+[node name="MeshHandle" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshHandle"]
+mesh = ExtResource("1_eodma")

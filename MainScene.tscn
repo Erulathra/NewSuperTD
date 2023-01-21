@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0qgqcu35h73x"]
+[gd_scene load_steps=3 format=3 uid="uid://dt1ke6qujvd68"]
 
-[ext_resource type="PackedScene" uid="uid://bt1ru8pive6e6" path="res://Levels/Test_Map.tscn" id="2_l332e"]
+[ext_resource type="PackedScene" uid="uid://bt1ru8pive6e6" path="res://Levels/TestMap.tscn" id="2_l332e"]
 [ext_resource type="Environment" uid="uid://s5s07pbsd5hr" path="res://Enviroment.tres" id="3_e4oaw"]
 
 [node name="Root" type="Node3D"]

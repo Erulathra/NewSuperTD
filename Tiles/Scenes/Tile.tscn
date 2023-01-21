@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Tiles/Scenes/Tile.cs" id="1_gk4k3"]
 [ext_resource type="ArrayMesh" uid="uid://bsmwisiv78fb0" path="res://Tiles/Models/TileModel.obj" id="2_4lsdi"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xr1bq"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ueo6k"]
 albedo_color = Color(0.933333, 0.929412, 0.835294, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_76uwo"]
@@ -14,13 +14,16 @@ script = ExtResource("1_gk4k3")
 HoverColor = Color(0, 0, 0, 0.490196)
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_xr1bq")
+material_override = SubResource("StandardMaterial3D_ueo6k")
 mesh = ExtResource("2_4lsdi")
 
 [node name="Area3D" type="Area3D" parent="Mesh"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/Area3D"]
 shape = SubResource("BoxShape3D_76uwo")
+
+[node name="SurfaceHandle" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, 0)
 
 [connection signal="input_event" from="Mesh/Area3D" to="." method="OnArea3dInputEvent"]
 [connection signal="mouse_entered" from="Mesh/Area3D" to="." method="OnMouseEntered"]
