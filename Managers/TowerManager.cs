@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using Godot.Collections;
 
 namespace NewSuperTD.Tiles.Scenes;
@@ -7,11 +8,19 @@ namespace NewSuperTD.Tiles.Scenes;
 public partial class TowerManager : Node
 {
 	[Export()] public Node TilesParent;
-	[Export()] public PackedScene TowerScene;
+	[Export()] public Godot.Collections.Dictionary<String, Array<Variant>> TowerSceneDictionary;
+
+	private Godot.Collections.Dictionary<String, int> usedTowersDictionary;
+	public String ActualTower { get; set; } = "Fire";
 	public override void _Ready()
 	{
 		BindTileInputEvents();
-		
+		usedTowersDictionary = new Godot.Collections.Dictionary<string, int>();
+
+		foreach (string towerId in TowerSceneDictionary.Keys)
+		{
+			usedTowersDictionary.Add(towerId, 0);
+		}
 	}
 
 	private void BindTileInputEvents()
@@ -24,6 +33,26 @@ public partial class TowerManager : Node
 				continue;
 
 			tile.InputEvent += OnTileClick;
+			tile.MouseEnter += OnMouseEnter;
+			tile.MouseExit += OnMouseExit;
+		}
+	}
+
+	private void OnMouseEnter(Tile tile)
+	{
+		List<Tile> nearTiles = tile.GetTilesInRange(GetActualTowerRange());
+		foreach (Tile nearTile in nearTiles)
+		{
+			nearTile.SetHover(true);
+		}
+	}
+
+	private void OnMouseExit(Tile tile)
+	{
+		List<Tile> nearTiles = tile.GetTilesInRange(GetActualTowerRange());
+		foreach (Tile nearTile in nearTiles)
+		{
+			nearTile.SetHover(false);
 		}
 	}
 
@@ -40,13 +69,23 @@ public partial class TowerManager : Node
 		if (tile is PathTile)
 			return;
 		
-		if (tile.HasNode("Tower"))
+		if ((int)TowerSceneDictionary[ActualTower][1] <= usedTowersDictionary[ActualTower])
 			return;
 
-		Node3D newTower = (Node3D)TowerScene.Instantiate();
+		PackedScene towerScene = (PackedScene)TowerSceneDictionary[ActualTower][0];
+		Node3D newTower = towerScene.Instantiate<Node3D>();
 		tile.AddChild(newTower);
 		newTower.Name = "Tower";
 		newTower.Position = tile.GetNode<Node3D>("SurfaceHandle").Position;
+
+		usedTowersDictionary[ActualTower] += 1;
+	}
+
+	private int GetActualTowerRange()
+	{
+		PackedScene towerScene = (PackedScene)TowerSceneDictionary[ActualTower][0];
+		Tower tower = towerScene.Instantiate<Tower>();
+		return tower.Range;
 	}
 	
 }

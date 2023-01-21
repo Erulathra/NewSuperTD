@@ -1,10 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0t4l2prr8xeh"]
+[gd_scene load_steps=4 format=3 uid="uid://c0t4l2prr8xeh"]
 
 [ext_resource type="ArrayMesh" uid="uid://bs1r84mj2w5vq" path="res://Towers/Models/TowerV2.obj" id="1_eodma"]
+[ext_resource type="Script" path="res://Towers/Tower.cs" id="1_gx3ie"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_4ur74"]
+albedo_color = Color(0.972549, 0.972549, 0.972549, 1)
 
 [node name="Tower" type="Node3D"]
+script = ExtResource("1_gx3ie")
 
 [node name="MeshHandle" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshHandle"]
 mesh = ExtResource("1_eodma")
+surface_material_override/0 = SubResource("ORMMaterial3D_4ur74")

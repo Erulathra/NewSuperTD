@@ -51,13 +51,21 @@ public partial class Tile : Node3D
 	public List<Tile> GetTilesInRange(int range)
 	{
 		HashSet<Tile> neighbors = new(GetNeighbours());
-		if (range <= 1)
+		List<Tile> result = new();
+		
+		if (range == 0)
 		{
-			neighbors.Add(this);
-			return neighbors.ToList();
+			result.Add(this);
+			return result;
 		}
 
-		HashSet<Tile> result = new();
+		if (range == 1)
+		{
+			result = GetNeighbours();
+			result.Add(this);
+			return result;
+		}
+
 		foreach (Tile neighbor in neighbors)
 		{
 			List<Tile> distantNeighbors = neighbor.GetTilesInRange(range - 1);
@@ -90,5 +98,10 @@ public partial class Tile : Node3D
 		}
 
 		return result;
+	}
+
+	public void SetHover(bool isHovered)
+	{
+		material.AlbedoColor = isHovered ? NormalColor.Blend(HoverColor) : NormalColor;
 	}
 }

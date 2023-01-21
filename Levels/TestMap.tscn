@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bt1ru8pive6e6"]
+[gd_scene load_steps=7 format=3 uid="uid://bt1ru8pive6e6"]
 
 [ext_resource type="PackedScene" uid="uid://rgrqvghutv4r" path="res://Tiles/Scenes/Tile.tscn" id="1_7itmd"]
 [ext_resource type="PackedScene" uid="uid://rumn1evlvsoi" path="res://Tiles/Scenes/PathTile.tscn" id="2_sem6s"]
 [ext_resource type="PackedScene" uid="uid://cd6ode8tjegwl" path="res://Tiles/Scenes/KingTile.tscn" id="3_et443"]
 [ext_resource type="Script" path="res://Managers/TowerManager.cs" id="4_spjbr"]
-[ext_resource type="PackedScene" uid="uid://c0t4l2prr8xeh" path="res://Towers/Tower.tscn" id="5_64uax"]
+[ext_resource type="PackedScene" uid="uid://c2tj6156hkd7b" path="res://Towers/WaterTower.tscn" id="5_3la8y"]
+[ext_resource type="PackedScene" uid="uid://bnfue0hl64xru" path="res://Towers/FireTower.tscn" id="6_k05ou"]
 
 [node name="TestMap" type="Node3D"]
 
@@ -159,4 +160,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
 [node name="TowerManager" type="Node" parent="." node_paths=PackedStringArray("TilesParent")]
 script = ExtResource("4_spjbr")
 TilesParent = NodePath("../Tiles")
-TowerScene = ExtResource("5_64uax")
+TowerSceneDictionary = {
+"Fire": [ExtResource("6_k05ou"), 2],
+"Water": [ExtResource("5_3la8y"), 2]
+}
