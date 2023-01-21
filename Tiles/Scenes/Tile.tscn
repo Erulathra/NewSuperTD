@@ -1,20 +1,20 @@
 [gd_scene load_steps=5 format=3 uid="uid://rgrqvghutv4r"]
 
-[ext_resource type="Script" path="res://Tiles/Scenes/Tile.gd" id="1_sk7g6"]
+[ext_resource type="Script" path="res://Tiles/Scenes/Tile.cs" id="1_gk4k3"]
 [ext_resource type="ArrayMesh" uid="uid://bsmwisiv78fb0" path="res://Tiles/Models/TileModel.obj" id="2_4lsdi"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xwhf"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xr1bq"]
 albedo_color = Color(0.933333, 0.929412, 0.835294, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_76uwo"]
 size = Vector3(1, 0.36702, 1)
 
 [node name="Tile" type="Node3D"]
-script = ExtResource("1_sk7g6")
-hover_color = Color(0.337255, 0.337255, 0.337255, 0.815686)
+script = ExtResource("1_gk4k3")
+HoverColor = Color(0, 0, 0, 0.490196)
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_0xwhf")
+material_override = SubResource("StandardMaterial3D_xr1bq")
 mesh = ExtResource("2_4lsdi")
 
 [node name="Area3D" type="Area3D" parent="Mesh"]
@@ -22,6 +22,6 @@ mesh = ExtResource("2_4lsdi")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/Area3D"]
 shape = SubResource("BoxShape3D_76uwo")
 
-[connection signal="input_event" from="Mesh/Area3D" to="." method="_on_area_3d_input_event"]
-[connection signal="mouse_entered" from="Mesh/Area3D" to="." method="_on_area_3d_mouse_entered"]
-[connection signal="mouse_exited" from="Mesh/Area3D" to="." method="_on_area_3d_mouse_exited"]
+[connection signal="input_event" from="Mesh/Area3D" to="." method="OnArea3dInputEvent"]
+[connection signal="mouse_entered" from="Mesh/Area3D" to="." method="OnMouseEntered"]
+[connection signal="mouse_exited" from="Mesh/Area3D" to="." method="OnMouseExited"]
