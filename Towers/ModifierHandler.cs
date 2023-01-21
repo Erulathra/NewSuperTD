@@ -40,6 +40,11 @@ public partial class ModifierHandler : Node
 		}
 
 		actualModifiers.Add(modifierId);
+		
+		if (actualModifiers.Remove(modifierId))
+		{
+			modifiersDictionary[modifierId].OnRegister(parentTile);
+		}
 
 		EmitSignal(SignalName.OnRegisterModifier, GetCurrentModifiersArray());
 	}
@@ -51,8 +56,11 @@ public partial class ModifierHandler : Node
 			GD.PrintErr($"Modifier {modifierId}, doesnt exist.");
 			return;
 		}
-		
-		actualModifiers.Remove(modifierId);
+
+		if (actualModifiers.Remove(modifierId))
+		{
+			modifiersDictionary[modifierId].OnUnregister(parentTile);
+		}
 	}
 
 	public Array<Modifier> GetCurrentModifiersArray()
