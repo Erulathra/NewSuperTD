@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dt1ke6qujvd68"]
+[gd_scene load_steps=9 format=3 uid="uid://dt1ke6qujvd68"]
 
 [ext_resource type="PackedScene" uid="uid://bt1ru8pive6e6" path="res://Levels/TestMap.tscn" id="2_l332e"]
 [ext_resource type="Environment" uid="uid://s5s07pbsd5hr" path="res://Enviroment.tres" id="3_e4oaw"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Managers/ModifiersManager.cs" id="4_2ea15"]
 [ext_resource type="Resource" uid="uid://dc80ajcnuqbbm" path="res://Towers/Modifiers/FireModifier.tres" id="5_6prbc"]
 [ext_resource type="Resource" uid="uid://c4tvjdomlw6y8" path="res://Towers/Modifiers/WaterModifier.tres" id="6_am3r5"]
+[ext_resource type="Resource" uid="uid://b0x2l2wtq5ehh" path="res://Towers/Modifiers/ElectricModifier.tres" id="7_3afk6"]
 [ext_resource type="PackedScene" uid="uid://d12tgmv84cjji" path="res://UI/TowerPicker.tscn" id="7_cawq5"]
 
 [node name="Root" type="Node3D"]
@@ -31,6 +32,7 @@ script = ExtResource("3_x1lwi")
 [node name="ModifiersManager" type="Node" parent="."]
 script = ExtResource("4_2ea15")
 ModifiersDictionary = {
+"Electric": ExtResource("7_3afk6"),
 "Fire": ExtResource("5_6prbc"),
 "Water": ExtResource("6_am3r5")
 }

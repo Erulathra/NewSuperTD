@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://3q8ydn4i8hhp"]
+
+[ext_resource type="PackedScene" uid="uid://c0t4l2prr8xeh" path="res://Towers/Tower.tscn" id="1_ub7x0"]
+[ext_resource type="Script" path="res://Towers/ElectricTower.cs" id="2_wkd6i"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_1o272"]
+albedo_color = Color(1, 1, 0.247059, 1)
+emission_enabled = true
+emission = Color(1, 0.882353, 0, 1)
+
+[node name="ElectricTower" instance=ExtResource("1_ub7x0")]
+script = ExtResource("2_wkd6i")
+Range = 0
+ThinkingTickCount = 20
+
+[node name="MeshInstance3D" parent="MeshHandle" index="0"]
+surface_material_override/1 = SubResource("ORMMaterial3D_1o272")

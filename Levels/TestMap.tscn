@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bt1ru8pive6e6"]
+[gd_scene load_steps=8 format=3 uid="uid://bt1ru8pive6e6"]
 
 [ext_resource type="PackedScene" uid="uid://rgrqvghutv4r" path="res://Tiles/Scenes/Tile.tscn" id="1_7itmd"]
 [ext_resource type="PackedScene" uid="uid://rumn1evlvsoi" path="res://Tiles/Scenes/PathTile.tscn" id="2_sem6s"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Managers/TowerManager.cs" id="4_spjbr"]
 [ext_resource type="PackedScene" uid="uid://c2tj6156hkd7b" path="res://Towers/WaterTower.tscn" id="5_3la8y"]
 [ext_resource type="PackedScene" uid="uid://bnfue0hl64xru" path="res://Towers/FireTower.tscn" id="6_k05ou"]
+[ext_resource type="PackedScene" uid="uid://3q8ydn4i8hhp" path="res://Towers/ElectricTower.tscn" id="7_w3xru"]
 
 [node name="TestMap" type="Node3D"]
 
@@ -13,113 +14,187 @@
 
 [node name="Tile4" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile6" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile7" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile8" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile12" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile13" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile14" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -1)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile15" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile17" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile19" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile20" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile21" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -2)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile50" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile24" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -3)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile26" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile27" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile28" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -3)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile31" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile32" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile36" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile37" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile38" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile39" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 2)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile41" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile42" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile48" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile49" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile40" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile43" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile44" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile45" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 3)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile9" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile47" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile51" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile33" parent="Tiles" instance=ExtResource("1_7itmd")]
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile22" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="Tile52" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -3)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="PathTile" parent="Tiles" instance=ExtResource("2_sem6s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3)
@@ -163,6 +238,8 @@ HoverColor = Color(0, 0, 0, 0.490196)
 
 [node name="Tile3" parent="Tiles" instance=ExtResource("1_7itmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+HoverColor = Color(0, 0, 0, 0.313726)
+NormalColor = Color(0.933333, 0.929412, 0.835294, 1)
 
 [node name="KingTile" parent="Tiles" instance=ExtResource("3_et443")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
@@ -172,6 +249,7 @@ HoverColor = Color(0, 0, 0, 0.490196)
 script = ExtResource("4_spjbr")
 TilesParent = NodePath("../Tiles")
 TowerSceneDictionary = {
+"Electric": [ExtResource("7_w3xru"), 1],
 "Fire": [ExtResource("6_k05ou"), 2],
-"Water": [ExtResource("5_3la8y"), 2]
+"Water": [ExtResource("5_3la8y"), 1]
 }

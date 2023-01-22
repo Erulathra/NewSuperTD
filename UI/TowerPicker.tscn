@@ -43,5 +43,13 @@ theme_override_font_sizes/font_size = 48
 text = " 󰈸 "
 icon_alignment = 1
 
+[node name="Electric" type="Button" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_lhx6j")
+theme_override_font_sizes/font_size = 48
+text = " 󱐋 "
+icon_alignment = 1
+
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/Water" to="." method="SetTower" binds= ["Water"]]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/Fire" to="." method="SetTower" binds= ["Fire"]]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/Electric" to="." method="SetTower" binds= ["Electric"]]
