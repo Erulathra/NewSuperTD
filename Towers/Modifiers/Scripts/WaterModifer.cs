@@ -1,26 +1,22 @@
-using Godot;
 using NewSuperTD.Tiles.Scenes;
 
 namespace NewSuperTD.Towers.Modifiers;
 
-public partial class FireModifier : Modifier
+public partial class WaterModifer : Modifier
 {
-	[Export] public int Damage;
-
-	private Tile ownerTile;
-
 	public override void OnRegister(Tile tile, GlobalTickTimer globalTickTimer)
 	{
 		base.OnRegister(tile, globalTickTimer);
 		ModifierHandler modifierHandler = tile.GetNode<ModifierHandler>("ModifierHandler");
 
-		if (modifierHandler.Has("Water"))
+		if (modifierHandler.Has("Fire"))
 		{
 			modifierHandler.UnregisterModifier(ModifierId);
-			modifierHandler.UnregisterModifier("Water");
+			modifierHandler.UnregisterModifier("Fire");
 		}
 	}
 
 	public override void OnUnregister(Tile tile)
-	{ }
+	{
+	}
 }

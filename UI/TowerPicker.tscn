@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://d12tgmv84cjji"]
+
+[ext_resource type="Script" path="res://UI/TowerPicker.cs" id="1_hwu3k"]
+[ext_resource type="FontFile" uid="uid://cnscigw3sso6a" path="res://UI/Assets/Fonts/IBM 3270 Nerd Font Complete.ttf" id="1_lhx6j"]
+
+[node name="TowerPicker" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_hwu3k")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -16.5
+offset_top = -78.0
+offset_right = 16.5
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Water" type="Button" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_lhx6j")
+theme_override_font_sizes/font_size = 48
+text = " 󰖌 "
+icon_alignment = 1
+
+[node name="Fire" type="Button" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_lhx6j")
+theme_override_font_sizes/font_size = 48
+text = " 󰈸 "
+icon_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/Water" to="." method="SetTower" binds= ["Water"]]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/Fire" to="." method="SetTower" binds= ["Fire"]]

@@ -8,10 +8,10 @@ namespace NewSuperTD.Tiles.Scenes;
 [Tool]
 public partial class Tile : Node3D
 {
-	[Export] public Color HoverColor = Colors.Gray;
+	[Export] public Color HoverColor;
 
 	private StandardMaterial3D material;
-	[Export] public Color NormalColor = Color.FromString("#eeedd5", Colors.White);
+	[Export] public Color NormalColor;
 	private bool isHovered = false;
 	private Color modifiersColor = Colors.Transparent;
 

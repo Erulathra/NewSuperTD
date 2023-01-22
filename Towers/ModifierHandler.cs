@@ -33,16 +33,16 @@ public partial class ModifierHandler : Node
 		return actualModifiers.ContainsKey(modifierId);
 	}
 
-	public void RegisterModifier(string modifierId)
+	public bool RegisterModifier(string modifierId)
 	{
 		if (!modifiersManager.ModifiersDictionary.ContainsKey(modifierId))
 		{
 			GD.PrintErr($"Modifier {modifierId}, doesnt exist.");
-			return;
+			return false;
 		}
 		
 		if (actualModifiers.ContainsKey(modifierId))
-			return;
+			return false;
 
 		Modifier modifier = (Modifier)modifiersManager.ModifiersDictionary[modifierId].Clone();
 		actualModifiers.Add(modifierId, modifier);
@@ -51,6 +51,8 @@ public partial class ModifierHandler : Node
 		Array<Modifier> currentModifiersArray = GetCurrentModifiersArray();
 		EmitSignal(SignalName.OnRegisterModifier, currentModifiersArray);
 		parentTile.ModifiersColor = GetModiferColor(currentModifiersArray);
+
+		return true;
 	}
 
 	public void UnregisterModifier(string modifierId)

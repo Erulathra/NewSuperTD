@@ -1,17 +1,18 @@
-using System;
 using Godot;
-using NewSuperTD.Tiles.Scenes;
+using System;
 using NewSuperTD.Towers;
 
-public partial class FireTower : Tower
+public partial class WaterTower : Tower
 {
 	protected override void Think()
 	{
+		base.Think();
+		
 		foreach (var tile in TilesInRange)
 		{
 			ModifierHandler modifierHandler = tile.GetNode<ModifierHandler>("ModifierHandler");
-			modifierHandler.RegisterModifier("Fire");
-			AnimateThinking();
+			if (modifierHandler.RegisterModifier("Water"))
+				AnimateThinking();
 		}
 	}
 }

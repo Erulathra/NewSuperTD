@@ -20,6 +20,8 @@ public partial class Tower : Node3D
 		OwnerTile = GetNode<Tile>("..");
 		
 		TilesInRange = OwnerTile.GetTilesInRange(Range);
+		
+		Think();
 	}
 
 	private void OnGlobalTick(int tickSum, GlobalTickTimer globalTickTimer)
@@ -30,4 +32,9 @@ public partial class Tower : Node3D
 
 	protected virtual void Think()
 	{ }
+
+	public virtual void AnimateThinking()
+	{
+		
+	}
 }

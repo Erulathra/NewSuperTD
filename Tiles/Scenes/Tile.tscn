@@ -12,6 +12,8 @@ size = Vector3(1, 0.36702, 1)
 
 [node name="Tile" type="Node3D"]
 script = ExtResource("1_gk4k3")
+HoverColor = Color(0, 0, 0, 0.501961)
+NormalColor = Color(0.721569, 0.698039, 0.596078, 1)
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_ho2co")
@@ -25,7 +27,7 @@ shape = SubResource("BoxShape3D_76uwo")
 [node name="SurfaceHandle" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, 0)
 
-[node name="ModifiersHandler" type="Node" parent="."]
+[node name="ModifierHandler" type="Node" parent="."]
 script = ExtResource("3_77g4l")
 
 [connection signal="input_event" from="Mesh/Area3D" to="." method="OnArea3dInputEvent"]

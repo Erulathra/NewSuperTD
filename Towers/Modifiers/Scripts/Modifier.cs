@@ -34,7 +34,7 @@ public abstract partial class Modifier : Resource, ICloneable
 	{
 		if (tickCount > RegisterTickCount + StayTickCount)
 		{
-			ownerTile.GetNode<ModifierHandler>("ModifiersHandler").UnregisterModifier(ModifierId);
+			ownerTile.GetNode<ModifierHandler>("ModifierHandler").UnregisterModifier(ModifierId);
 			globalTickTimer.GlobalTick -= OnGlobalTick;
 		}
 	}

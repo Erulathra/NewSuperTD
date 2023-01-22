@@ -11,7 +11,23 @@ public partial class TowerManager : Node
 	[Export()] public Godot.Collections.Dictionary<String, Array<Variant>> TowerSceneDictionary;
 
 	private Godot.Collections.Dictionary<String, int> usedTowersDictionary;
-	public String ActualTower { get; set; } = "Fire";
+	private string actualTower = "Fire";
+
+	public String ActualTower
+	{
+		get => actualTower;
+		set
+		{
+			if (!TowerSceneDictionary.ContainsKey(value))
+			{
+				GD.PrintErr("Wrong Tower ID");
+				return;
+			}
+
+			actualTower = value;
+		}
+	}
+
 	public override void _Ready()
 	{
 		BindTileInputEvents();
