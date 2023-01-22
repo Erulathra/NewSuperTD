@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dt1ke6qujvd68"]
+[gd_scene load_steps=6 format=3 uid="uid://dt1ke6qujvd68"]
 
 [ext_resource type="PackedScene" uid="uid://bt1ru8pive6e6" path="res://Levels/TestMap.tscn" id="2_l332e"]
 [ext_resource type="Environment" uid="uid://s5s07pbsd5hr" path="res://Enviroment.tres" id="3_e4oaw"]
+[ext_resource type="Script" path="res://GlobalTickTimer.cs" id="3_x1lwi"]
+[ext_resource type="Script" path="res://Managers/ModifiersManager.cs" id="4_2ea15"]
+[ext_resource type="Resource" uid="uid://dc80ajcnuqbbm" path="res://Towers/Modifiers/FireModifier.tres" id="5_6prbc"]
 
 [node name="Root" type="Node3D"]
 
@@ -21,3 +24,10 @@ transform = Transform3D(0.707107, -0.612372, 0.353553, 0, 0.5, 0.866025, -0.7071
 [node name="GlobalTickTimer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+script = ExtResource("3_x1lwi")
+
+[node name="ModifiersManager" type="Node" parent="."]
+script = ExtResource("4_2ea15")
+ModifiersDictionary = {
+"Fire": ExtResource("5_6prbc")
+}

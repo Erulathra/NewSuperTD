@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dc80ajcnuqbbm"]
+
+[ext_resource type="Script" path="res://Towers/Modifiers/Scripts/FireModifier.cs" id="1_qqixj"]
+
+[resource]
+script = ExtResource("1_qqixj")
+Damage = 20
+ModifierColor = Color(1, 0.533333, 0, 0.576471)
+StayTickCount = 10
+ModifierId = "Fire"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cd6ode8tjegwl"]
+[gd_scene load_steps=4 format=3 uid="uid://d0dsyh4aeoefq"]
 
 [ext_resource type="PackedScene" uid="uid://rumn1evlvsoi" path="res://Tiles/Scenes/PathTile.tscn" id="1_m1s3b"]
 [ext_resource type="Script" path="res://Tiles/Scenes/KingTile.cs" id="2_fqoiv"]
@@ -6,12 +6,7 @@
 
 [node name="KingTile" instance=ExtResource("1_m1s3b")]
 script = ExtResource("2_fqoiv")
-NormalColor = Color(0.490196, 0.580392, 0.364706, 1)
 
-[node name="King" type="MeshInstance3D" parent="." index="1"]
+[node name="King" type="MeshInstance3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 mesh = ExtResource("2_oifax")
-
-[connection signal="input_event" from="Mesh/Area3D" to="." method="_on_area_3d_input_event" flags=18]
-[connection signal="mouse_entered" from="Mesh/Area3D" to="." method="_on_area_3d_mouse_entered" flags=18]
-[connection signal="mouse_exited" from="Mesh/Area3D" to="." method="_on_area_3d_mouse_exited" flags=18]

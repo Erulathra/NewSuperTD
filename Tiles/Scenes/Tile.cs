@@ -12,6 +12,8 @@ public partial class Tile : Node3D
 
 	private StandardMaterial3D material;
 	[Export] public Color NormalColor = Color.FromString("#eeedd5", Colors.White);
+	private bool isHovered = false;
+	private Color modifiersColor = Colors.Transparent;
 
 	[Signal]
 	public delegate void InputEventEventHandler(Tile tile, InputEvent inputEvent);
@@ -21,7 +23,27 @@ public partial class Tile : Node3D
 
 	[Signal]
 	public delegate void MouseExitEventHandler(Tile tile);
-	
+
+	public Color ModifiersColor
+	{
+		get => modifiersColor;
+		set
+		{
+			modifiersColor = value;
+			UpdateColor();
+		}
+	}
+
+	public bool IsHovered
+	{
+		get => isHovered;
+		set
+		{
+			isHovered = value;
+			UpdateColor();
+		}
+	}
+
 	public override void _Ready()
 	{
 		MeshInstance3D mesh = GetNode<MeshInstance3D>("Mesh");
@@ -31,7 +53,8 @@ public partial class Tile : Node3D
 	}
 
 	public override void _Process(double delta)
-	{ }
+	{
+	}
 
 	private void OnArea3dInputEvent(Node camera, InputEvent inputEvent, Vector3 position, Vector3 normal, int shapeIDx)
 	{
@@ -100,8 +123,17 @@ public partial class Tile : Node3D
 		return result;
 	}
 
-	public void SetHover(bool isHovered)
+	public void UpdateColor()
 	{
-		material.AlbedoColor = isHovered ? NormalColor.Blend(HoverColor) : NormalColor;
+		if (IsHovered)
+		{
+			material.AlbedoColor = NormalColor.Blend(HoverColor);
+		}
+		else
+		{
+			material.AlbedoColor = NormalColor;
+		}
+		 
+		material.AlbedoColor = material.AlbedoColor.Blend(ModifiersColor);
 	}
 }

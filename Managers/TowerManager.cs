@@ -43,7 +43,7 @@ public partial class TowerManager : Node
 		List<Tile> nearTiles = tile.GetTilesInRange(GetActualTowerRange());
 		foreach (Tile nearTile in nearTiles)
 		{
-			nearTile.SetHover(true);
+			nearTile.IsHovered = true;
 		}
 	}
 
@@ -52,7 +52,7 @@ public partial class TowerManager : Node
 		List<Tile> nearTiles = tile.GetTilesInRange(GetActualTowerRange());
 		foreach (Tile nearTile in nearTiles)
 		{
-			nearTile.SetHover(false);
+			nearTile.IsHovered = false;
 		}
 	}
 

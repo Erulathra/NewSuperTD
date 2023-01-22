@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://rgrqvghutv4r"]
+[gd_scene load_steps=6 format=3 uid="uid://rgrqvghutv4r"]
 
 [ext_resource type="Script" path="res://Tiles/Scenes/Tile.cs" id="1_gk4k3"]
 [ext_resource type="ArrayMesh" uid="uid://bsmwisiv78fb0" path="res://Tiles/Models/TileModel.obj" id="2_4lsdi"]
+[ext_resource type="Script" path="res://Towers/ModifierHandler.cs" id="3_77g4l"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ueo6k"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ho2co"]
 albedo_color = Color(0.933333, 0.929412, 0.835294, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_76uwo"]
@@ -11,10 +12,9 @@ size = Vector3(1, 0.36702, 1)
 
 [node name="Tile" type="Node3D"]
 script = ExtResource("1_gk4k3")
-HoverColor = Color(0, 0, 0, 0.490196)
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_ueo6k")
+material_override = SubResource("StandardMaterial3D_ho2co")
 mesh = ExtResource("2_4lsdi")
 
 [node name="Area3D" type="Area3D" parent="Mesh"]
@@ -24,6 +24,9 @@ shape = SubResource("BoxShape3D_76uwo")
 
 [node name="SurfaceHandle" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, 0)
+
+[node name="ModifiersHandler" type="Node" parent="."]
+script = ExtResource("3_77g4l")
 
 [connection signal="input_event" from="Mesh/Area3D" to="." method="OnArea3dInputEvent"]
 [connection signal="mouse_entered" from="Mesh/Area3D" to="." method="OnMouseEntered"]
