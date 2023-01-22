@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using Godot.Collections;
+using NewSuperTD.Towers;
 
 namespace NewSuperTD.Tiles.Scenes;
 

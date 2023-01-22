@@ -1,13 +1,12 @@
-using System;
-using Godot;
 using NewSuperTD.Tiles.Scenes;
-using NewSuperTD.Towers;
+
+namespace NewSuperTD.Towers;
 
 public partial class FireTower : Tower
 {
 	protected override void Think()
 	{
-		foreach (var tile in TilesInRange)
+		foreach (Tile tile in TilesInRange)
 		{
 			ModifierHandler modifierHandler = tile.GetNode<ModifierHandler>("ModifierHandler");
 			modifierHandler.RegisterModifier("Fire");

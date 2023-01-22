@@ -10,7 +10,6 @@ public abstract partial class Modifier : Resource, ICloneable
 	[Export] public int StayTickCount { get; private set; }
 	[Export] public string ModifierId { get; private set; }
 	protected int RegisterTickCount { get; private set; }
-	private Tile ownerTile;
 
 	protected Modifier() : this(Color.Color8(0, 255, 0, 125), 1, "NONE")
 	{ }
@@ -25,18 +24,16 @@ public abstract partial class Modifier : Resource, ICloneable
 	public virtual void OnRegister(Tile tile, GlobalTickTimer globalTickTimer)
 	{
 		RegisterTickCount = globalTickTimer.TickCount;
-		
-		globalTickTimer.GlobalTick += OnGlobalTick;
-		ownerTile = tile;
-	}
 
-	private void OnGlobalTick(int tickCount, GlobalTickTimer globalTickTimer)
-	{
-		if (tickCount > RegisterTickCount + StayTickCount)
+		void OnGlobalTick(int tickCount, GlobalTickTimer _)
 		{
-			ownerTile.GetNode<ModifierHandler>("ModifierHandler").UnregisterModifier(ModifierId);
+			if (tickCount <= RegisterTickCount + StayTickCount) return;
+
+			tile.GetNode<ModifierHandler>("ModifierHandler").UnregisterModifier(ModifierId);
 			globalTickTimer.GlobalTick -= OnGlobalTick;
 		}
+
+		globalTickTimer.GlobalTick += OnGlobalTick;
 	}
 
 	public virtual void OnUnregister(Tile tile, GlobalTickTimer globalTickTimer)

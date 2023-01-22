@@ -1,14 +1,14 @@
-using Godot;
-using System;
-using NewSuperTD.Towers;
+using NewSuperTD.Tiles.Scenes;
+
+namespace NewSuperTD.Towers;
 
 public partial class WaterTower : Tower
 {
 	protected override void Think()
 	{
 		base.Think();
-		
-		foreach (var tile in TilesInRange)
+
+		foreach (Tile tile in TilesInRange)
 		{
 			ModifierHandler modifierHandler = tile.GetNode<ModifierHandler>("ModifierHandler");
 			if (modifierHandler.RegisterModifier("Water") != null)

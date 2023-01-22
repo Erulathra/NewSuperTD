@@ -1,4 +1,4 @@
-using NewSuperTD.Towers;
+namespace NewSuperTD.Towers;
 
 public partial class ElectricTower : Tower
 {

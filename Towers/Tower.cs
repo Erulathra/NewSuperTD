@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Godot;
 using NewSuperTD.Tiles.Scenes;
 
+namespace NewSuperTD.Towers;
 public partial class Tower : Node3D
 {
 	[Export()]

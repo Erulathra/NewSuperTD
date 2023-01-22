@@ -1,17 +1,18 @@
 using Godot;
-using System;
+
+namespace NewSuperTD;
 
 public partial class GlobalTickTimer : Timer
 {
 	[Signal]
 	public delegate void GlobalTickEventHandler(int tickCount, GlobalTickTimer globalTickTimer);
 
-	public int TickCount { get; private set; }
-	
 	public GlobalTickTimer()
 	{
 		TickCount = 0;
 	}
+
+	public int TickCount { get; private set; }
 
 	public override void _Ready()
 	{
@@ -19,7 +20,7 @@ public partial class GlobalTickTimer : Timer
 		Timeout += OnTimerTimeout;
 	}
 
-	void OnTimerTimeout()
+	private void OnTimerTimeout()
 	{
 		EmitSignal(SignalName.GlobalTick, TickCount, this);
 		TickCount++;
