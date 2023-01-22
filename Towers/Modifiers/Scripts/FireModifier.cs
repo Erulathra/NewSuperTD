@@ -20,7 +20,4 @@ public partial class FireModifier : Modifier
 			modifierHandler.UnregisterModifier("Water");
 		}
 	}
-
-	public override void OnUnregister(Tile tile)
-	{ }
 }

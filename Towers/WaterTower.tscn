@@ -12,7 +12,7 @@ emission_energy_multiplier = 0.5
 [node name="WaterTower" instance=ExtResource("1_1a453")]
 script = ExtResource("2_gnd2s")
 Range = 2
-ThinkingTickCount = 50
+ThinkingTickCount = 20
 
 [node name="MeshInstance3D" parent="MeshHandle" index="0"]
 surface_material_override/1 = SubResource("ORMMaterial3D_a0k5s")

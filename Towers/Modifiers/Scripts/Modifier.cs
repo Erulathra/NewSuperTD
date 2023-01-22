@@ -39,7 +39,10 @@ public abstract partial class Modifier : Resource, ICloneable
 		}
 	}
 
-	public abstract void OnUnregister(Tile tile);
+	public virtual void OnUnregister(Tile tile, GlobalTickTimer globalTickTimer)
+	{
+		
+	}
 
 	public object Clone()
 	{
