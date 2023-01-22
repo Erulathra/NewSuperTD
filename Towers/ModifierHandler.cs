@@ -76,7 +76,7 @@ public partial class ModifierHandler : Node
 
 	public Array<Modifier> GetCurrentModifiersArray()
 	{
-		Array<Modifier> result = new Array<Modifier>();
+		Array<Modifier> result = new();
 		foreach (string modifierId in actualModifiers)
 		{
 			result.Add(modifiersManager.ModifiersDictionary[modifierId]);

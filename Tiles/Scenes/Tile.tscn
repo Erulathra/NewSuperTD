@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://rgrqvghutv4r"]
+[gd_scene load_steps=9 format=3 uid="uid://rgrqvghutv4r"]
 
 [ext_resource type="Script" path="res://Tiles/Scenes/Tile.cs" id="1_gk4k3"]
 [ext_resource type="ArrayMesh" uid="uid://bsmwisiv78fb0" path="res://Tiles/Models/TileModel.obj" id="2_4lsdi"]
@@ -9,6 +9,40 @@ albedo_color = Color(0.933333, 0.929412, 0.835294, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_76uwo"]
 size = Vector3(1, 0.36702, 1)
+
+[sub_resource type="Animation" id="Animation_fbul1"]
+resource_name = "RegisterModifier"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.2, -0.132918, -0.0291736, 0.11445, -0.00377861, -0.0238683, -0.25, 0, 0.247368, 0.0268058, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 0.659648, 1)
+}
+
+[sub_resource type="Animation" id="Animation_u8dcc"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b82ed"]
+_data = {
+"RESET": SubResource("Animation_u8dcc"),
+"RegisterModifier": SubResource("Animation_fbul1")
+}
 
 [node name="Tile" type="Node3D"]
 script = ExtResource("1_gk4k3")
@@ -29,6 +63,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, 0)
 script = ExtResource("3_77g4l")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b82ed")
+}
 
 [connection signal="input_event" from="Mesh/Area3D" to="." method="OnArea3dInputEvent"]
 [connection signal="mouse_entered" from="Mesh/Area3D" to="." method="OnMouseEntered"]

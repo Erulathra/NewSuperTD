@@ -23,6 +23,7 @@ public abstract partial class Modifier : Resource
 	public virtual void OnRegister(Tile tile, GlobalTickTimer globalTickTimer)
 	{
 		RegisterTickCount = globalTickTimer.TickCount;
+		AnimateRegister(tile);
 
 		void OnGlobalTick(int tickCount, GlobalTickTimer _)
 		{
@@ -32,11 +33,18 @@ public abstract partial class Modifier : Resource
 			globalTickTimer.GlobalTick -= OnGlobalTick;
 		}
 
+		globalTickTimer.GlobalTick -= OnGlobalTick;
 		globalTickTimer.GlobalTick += OnGlobalTick;
 	}
 
 	public virtual void OnUnregister(Tile tile, GlobalTickTimer globalTickTimer)
 	{
-		
+	}
+
+	public virtual void AnimateRegister(Tile tile)
+	{
+		AnimationPlayer animationPlayer = tile.GetNode<AnimationPlayer>("AnimationPlayer");
+		animationPlayer.Play("RegisterModifier");
+		animationPlayer.Seek(0, true);
 	}
 }
