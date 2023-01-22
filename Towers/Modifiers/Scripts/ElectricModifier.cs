@@ -9,31 +9,30 @@ public partial class ElectricModifier : Modifier
 {
 	[Export()] public int SpreadDelayTickCount { get; private set; } = 2;
 
-	private Tile parentTile;
 	public override void OnRegister(Tile tile, GlobalTickTimer globalTickTimer)
 	{
 		base.OnRegister(tile, globalTickTimer);
 		
-		parentTile = tile;
-		globalTickTimer.GlobalTick += OnGlobalTick;
-	}
-	private void OnGlobalTick(int tickCount, GlobalTickTimer globalTickTimer)
-	{
-		if (tickCount % SpreadDelayTickCount == 0)
+		void OnGlobalTick(int tickCount, GlobalTickTimer globalTickTimer)
 		{
-			List<Tile> neighbors = parentTile.GetNeighbours();
-			foreach (Tile neighbor in neighbors)
+			if (tickCount % SpreadDelayTickCount == 0)
 			{
-				ModifierHandler modifierHandler = neighbor.GetNode<ModifierHandler>("ModifierHandler");
-				if (!modifierHandler.Has("Water"))
-					continue;
-				
-				if (modifierHandler.Has("Electric"))
-					continue;
-				
-				modifierHandler.RegisterModifier("Electric");
+				List<Tile> neighbors = tile.GetNeighbours();
+				foreach (Tile neighbor in neighbors)
+				{
+					ModifierHandler modifierHandler = neighbor.GetNode<ModifierHandler>("ModifierHandler");
+					if (!modifierHandler.Has("Water"))
+						continue;
+					
+					if (modifierHandler.Has("Electric"))
+						continue;
+					
+					modifierHandler.RegisterModifier("Electric");
+				}
+				globalTickTimer.GlobalTick -= OnGlobalTick;
 			}
-			globalTickTimer.GlobalTick -= OnGlobalTick;
 		}
+		
+		globalTickTimer.GlobalTick += OnGlobalTick;
 	}
 }

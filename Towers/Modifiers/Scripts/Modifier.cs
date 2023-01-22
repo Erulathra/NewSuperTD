@@ -1,10 +1,9 @@
-using System;
 using Godot;
 using NewSuperTD.Tiles.Scenes;
 
 namespace NewSuperTD.Towers.Modifiers;
 
-public abstract partial class Modifier : Resource, ICloneable
+public abstract partial class Modifier : Resource
 {
 	[Export] public Color ModifierColor { get; private set; }
 	[Export] public int StayTickCount { get; private set; }
@@ -39,11 +38,5 @@ public abstract partial class Modifier : Resource, ICloneable
 	public virtual void OnUnregister(Tile tile, GlobalTickTimer globalTickTimer)
 	{
 		
-	}
-
-	public object Clone()
-	{
-		Modifier modifier = (Modifier)MemberwiseClone();
-		return modifier;
 	}
 }

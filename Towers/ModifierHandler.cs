@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
 using NewSuperTD.Tiles.Scenes;
@@ -11,7 +12,7 @@ public partial class ModifierHandler : Node
 	[Signal]
 	public delegate void OnRegisterModifierEventHandler(Array<Modifier> currentModifiers);
 
-	private Godot.Collections.Dictionary<string, Modifier> actualModifiers;
+	private HashSet<string> actualModifiers;
 	private GlobalTickTimer globalTickTimer;
 
 	private ModifiersManager modifiersManager;
@@ -23,36 +24,36 @@ public partial class ModifierHandler : Node
 		modifiersManager = (ModifiersManager)GetTree().Root.FindChild("ModifiersManager", true, false);
 		globalTickTimer = (GlobalTickTimer)GetTree().Root.FindChild("GlobalTickTimer", true, false);
 
-		actualModifiers = new Godot.Collections.Dictionary<string, Modifier>();
+		actualModifiers = new();
 
 		parentTile = GetNode<Tile>("..");
 	}
 
 	public bool Has(string modifierId)
 	{
-		return actualModifiers.ContainsKey(modifierId);
+		return actualModifiers.Contains(modifierId);
 	}
 
-	public Modifier RegisterModifier(string modifierId)
+	public bool RegisterModifier(string modifierId)
 	{
 		if (!modifiersManager.ModifiersDictionary.ContainsKey(modifierId))
 		{
 			GD.PrintErr($"Modifier {modifierId}, doesnt exist.");
-			return null;
+			return false;
 		}
 		
-		if (actualModifiers.ContainsKey(modifierId))
-			return null;
+		if (actualModifiers.Contains(modifierId))
+			return false;
 
-		Modifier modifier = (Modifier)modifiersManager.ModifiersDictionary[modifierId].Clone();
-		actualModifiers.Add(modifierId, modifier);
+		Modifier modifier = modifiersManager.ModifiersDictionary[modifierId];
+		actualModifiers.Add(modifierId);
 		modifier.OnRegister(parentTile, globalTickTimer);
 
 		Array<Modifier> currentModifiersArray = GetCurrentModifiersArray();
 		EmitSignal(SignalName.OnRegisterModifier, currentModifiersArray);
 		parentTile.ModifiersColor = GetModiferColor(currentModifiersArray);
 
-		return modifier;
+		return true;
 	}
 	
 
@@ -64,11 +65,10 @@ public partial class ModifierHandler : Node
 			return;
 		}
 		
-		if (!actualModifiers.ContainsKey(modifierId))
+		if (!actualModifiers.Contains(modifierId))
 			return;
 
-		Modifier modifier = actualModifiers[modifierId];
-		modifier.OnUnregister(parentTile, globalTickTimer);
+		modifiersManager.ModifiersDictionary[modifierId].OnUnregister(parentTile, globalTickTimer);
 		actualModifiers.Remove(modifierId);
 		
 		parentTile.ModifiersColor = GetModiferColor(GetCurrentModifiersArray());
@@ -77,9 +77,9 @@ public partial class ModifierHandler : Node
 	public Array<Modifier> GetCurrentModifiersArray()
 	{
 		Array<Modifier> result = new Array<Modifier>();
-		foreach (Modifier modifier in actualModifiers.Values)
+		foreach (string modifierId in actualModifiers)
 		{
-			result.Add(modifier);
+			result.Add(modifiersManager.ModifiersDictionary[modifierId]);
 		}
 
 		return result;

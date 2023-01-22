@@ -11,7 +11,7 @@ public partial class WaterTower : Tower
 		foreach (Tile tile in TilesInRange)
 		{
 			ModifierHandler modifierHandler = tile.GetNode<ModifierHandler>("ModifierHandler");
-			if (modifierHandler.RegisterModifier("Water") != null)
+			if (modifierHandler.RegisterModifier("Water"))
 				AnimateThinking();
 		}
 	}
