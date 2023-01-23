@@ -53,6 +53,9 @@ public partial class Tile : Node3D
 		material.AlbedoColor = NormalColor;
 		mesh.MaterialOverride = material;
 
+		if (Engine.IsEditorHint())
+			return;
+		
 		neighbors = RaycastNeighbors();
 	}
 

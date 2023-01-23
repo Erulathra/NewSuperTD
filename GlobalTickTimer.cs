@@ -25,4 +25,5 @@ public partial class GlobalTickTimer : Timer
 		EmitSignal(SignalName.GlobalTick, TickCount, this);
 		TickCount++;
 	}
+
 }
