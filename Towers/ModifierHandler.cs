@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
+using NewSuperTD.Managers;
 using NewSuperTD.Tiles.Scenes;
 using NewSuperTD.Towers.Modifiers;
 using Array = System.Array;
@@ -26,7 +27,7 @@ public partial class ModifierHandler : Node
 
 		actualModifiers = new();
 
-		parentTile = GetNode<Tile>("..");
+		parentTile = GetParent<Tile>();
 	}
 
 	public bool Has(string modifierId)

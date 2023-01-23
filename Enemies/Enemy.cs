@@ -53,18 +53,6 @@ public partial class Enemy : Node3D
 		Animate(targetPosition, tweenDuration);
 	}
 
-	private void Animate(Vector3 targetPosition, float tweenDuration)
-	{
-		Tween jumpTween = CreateTween();
-		jumpTween.SetTrans(Tween.TransitionType.Cubic);
-		jumpTween.SetEase(Tween.EaseType.InOut);
-		jumpTween.TweenProperty(this, "position:y", targetPosition.y + jumpHeight, tweenDuration / 2);
-		jumpTween.TweenProperty(this, "position:y", targetPosition.y, tweenDuration / 2);
-		
-		AnimationPlayer animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-		animationPlayer.Play("Jump");
-	}
-
 	private void Move(Vector3 position, float distanceBetweenParentAndTarget)
 	{
 		if (targetTile == null)
@@ -75,5 +63,19 @@ public partial class Enemy : Node3D
 		float distanceToTarget = (GlobalPosition - targetTile.GlobalPosition).Length();
 		if (distanceToTarget < 0.5 * distanceBetweenParentAndTarget)
 			Reparent(targetTile);
+	}
+
+	private async void Animate(Vector3 targetPosition, float tweenDuration)
+	{
+		Tween jumpTween = CreateTween();
+		jumpTween.SetTrans(Tween.TransitionType.Cubic);
+		jumpTween.SetEase(Tween.EaseType.InOut);
+		jumpTween.TweenProperty(this, "position:y", targetPosition.y + jumpHeight, tweenDuration / 2);
+		jumpTween.TweenProperty(this, "position:y", targetPosition.y, tweenDuration / 2);
+		
+		AnimationPlayer animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		animationPlayer.Play("Jump");
+		await ToSignal(GetTree().CreateTimer(tweenDuration - 0.3), "timeout");
+		animationPlayer.PlayBackwards("Jump");
 	}
 }

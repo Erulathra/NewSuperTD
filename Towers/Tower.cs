@@ -21,8 +21,6 @@ public partial class Tower : Node3D
 		OwnerTile = GetNode<Tile>("..");
 		
 		TilesInRange = OwnerTile.GetTilesInRange(Range);
-		
-		Think();
 	}
 
 	private void OnGlobalTick(int tickSum, GlobalTickTimer globalTickTimer)

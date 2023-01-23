@@ -12,8 +12,8 @@ public partial class TowerManager : Node
 	[Export()] public Godot.Collections.Dictionary<String, Array<Variant>> TowerSceneDictionary;
 
 	private Godot.Collections.Dictionary<String, int> usedTowersDictionary;
-	private string actualTower = "Fire";
-
+	private string actualTower = "None";
+	private int hoverDistance = 0;
 	public String ActualTower
 	{
 		get => actualTower;
@@ -26,6 +26,7 @@ public partial class TowerManager : Node
 			}
 
 			actualTower = value;
+			hoverDistance = GetActualTowerRange();
 		}
 	}
 
@@ -57,7 +58,7 @@ public partial class TowerManager : Node
 
 	private void OnMouseEnter(Tile tile)
 	{
-		List<Tile> nearTiles = tile.GetTilesInRange(GetActualTowerRange());
+		List<Tile> nearTiles = tile.GetTilesInRange(hoverDistance);
 		foreach (Tile nearTile in nearTiles)
 		{
 			nearTile.IsHovered = true;
@@ -66,7 +67,7 @@ public partial class TowerManager : Node
 
 	private void OnMouseExit(Tile tile)
 	{
-		List<Tile> nearTiles = tile.GetTilesInRange(GetActualTowerRange());
+		List<Tile> nearTiles = tile.GetTilesInRange(hoverDistance);
 		foreach (Tile nearTile in nearTiles)
 		{
 			nearTile.IsHovered = false;
@@ -79,6 +80,9 @@ public partial class TowerManager : Node
 
 	private void OnTileClick(Tile tile, InputEvent inputEvent)
 	{
+		if (actualTower == "None")
+			return;
+		
 		InputEventMouseButton mouseButtonEvent = inputEvent as InputEventMouseButton;
 		if (mouseButtonEvent == null || mouseButtonEvent.ButtonIndex != MouseButton.Left || !mouseButtonEvent.Pressed)
 			return;
