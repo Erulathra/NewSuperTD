@@ -45,6 +45,5 @@ public abstract partial class Modifier : Resource
 	{
 		AnimationPlayer animationPlayer = tile.GetNode<AnimationPlayer>("AnimationPlayer");
 		animationPlayer.Play("RegisterModifier");
-		animationPlayer.Seek(0, true);
 	}
 }

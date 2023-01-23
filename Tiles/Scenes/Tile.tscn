@@ -4,25 +4,11 @@
 [ext_resource type="ArrayMesh" uid="uid://bsmwisiv78fb0" path="res://Tiles/Models/TileModel.obj" id="2_4lsdi"]
 [ext_resource type="Script" path="res://Towers/ModifierHandler.cs" id="3_77g4l"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h8ck1"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sapvx"]
 albedo_color = Color(0.933333, 0.929412, 0.835294, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_76uwo"]
 size = Vector3(1, 0.36702, 1)
-
-[sub_resource type="Animation" id="Animation_fbul1"]
-resource_name = "RegisterModifier"
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.2, -0.132918, -0.0291736, 0.11445, -0.00377861, -0.0238683, -0.25, 0, 0.247368, 0.0268058, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.3, 0.659648, 1)
-}
 
 [sub_resource type="Animation" id="Animation_u8dcc"]
 length = 0.001
@@ -38,6 +24,20 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0)
 }
 
+[sub_resource type="Animation" id="Animation_fbul1"]
+resource_name = "RegisterModifier"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.2, -0.132918, -0.0291736, 0.11445, -0.00377861, -0.0238683, -0.25, 0, 0.247368, 0.0268058, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 0.659648, 1)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b82ed"]
 _data = {
 "RESET": SubResource("Animation_u8dcc"),
@@ -48,7 +48,7 @@ _data = {
 script = ExtResource("1_gk4k3")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_h8ck1")
+material_override = SubResource("StandardMaterial3D_sapvx")
 mesh = ExtResource("2_4lsdi")
 
 [node name="Area3D" type="Area3D" parent="Mesh"]

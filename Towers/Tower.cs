@@ -36,6 +36,7 @@ public partial class Tower : Node3D
 
 	public virtual void AnimateThinking()
 	{
-		
+		AnimationPlayer animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		animationPlayer.Play("Attack");
 	}
 }
