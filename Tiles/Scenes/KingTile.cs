@@ -14,4 +14,10 @@ public partial class KingTile : PathTile
 		DistanceToKing = 0;
 		InitializePath();
 	}
+
+	public void GameOver()
+	{
+		AnimationPlayer kingAnimationPlayer = GetNode<AnimationPlayer>("King/AnimationPlayer");
+		kingAnimationPlayer.Play("Death");
+	}
 }

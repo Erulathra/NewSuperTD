@@ -27,6 +27,11 @@ public partial class Enemy : Node3D
 		globalTickTimer.GlobalTick += OnGlobalTick;
 	}
 
+	public void StopThinking()
+	{
+		globalTickTimer.GlobalTick -= OnGlobalTick;
+	}
+
 	private void OnGlobalTick(int tickCount, GlobalTickTimer globalTickTimer)
 	{
 		if (tickCount % thinkingTickCount != 0)
@@ -38,6 +43,17 @@ public partial class Enemy : Node3D
 		List<Tile> neighbors = parentTile.GetNeighbors();
 		targetTile = neighbors.OfType<PathTile>().First(pathNeighbor => pathNeighbor.DistanceToKing < distanceToKing);
 
+		if (targetTile is KingTile)
+		{
+			EmitSignal(SignalName.ReachTarget, this);
+		}
+
+		StartMoving();
+	}
+
+	private void StartMoving()
+	{
+		PathTile parentTile = GetParent<PathTile>();
 		Vector3 parentPosition = parentTile.GetNode<Node3D>("SurfaceHandle").GlobalPosition;
 		Vector3 targetPosition = targetTile.GetNode<Node3D>("SurfaceHandle").GlobalPosition;
 
