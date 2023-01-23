@@ -8,13 +8,6 @@ namespace NewSuperTD.Tiles.Scenes;
 [Tool]
 public partial class Tile : Node3D
 {
-	[Export] public Color HoverColor = Color.Color8(0, 0, 0, 80);
-
-	private StandardMaterial3D material;
-	[Export] public Color NormalColor = Color.FromString("#eeedd5", Colors.White);
-	private bool isHovered = false;
-	private Color modifiersColor = Colors.Transparent;
-
 	[Signal]
 	public delegate void InputEventEventHandler(Tile tile, InputEvent inputEvent);
 
@@ -23,6 +16,15 @@ public partial class Tile : Node3D
 
 	[Signal]
 	public delegate void MouseExitEventHandler(Tile tile);
+
+	[Export] public Color HoverColor = Color.Color8(0, 0, 0, 80);
+	private bool isHovered;
+
+	private StandardMaterial3D material;
+	private Color modifiersColor = Colors.Transparent;
+	private List<Tile> neighbors;
+
+	[Export] public Color NormalColor = Color.FromString("#eeedd5", Colors.White);
 
 	public Color ModifiersColor
 	{
@@ -50,11 +52,12 @@ public partial class Tile : Node3D
 		material = new StandardMaterial3D();
 		material.AlbedoColor = NormalColor;
 		mesh.MaterialOverride = material;
+
+		neighbors = RaycastNeighbors();
 	}
 
 	public override void _Process(double delta)
-	{
-	}
+	{ }
 
 	private void OnArea3dInputEvent(Node camera, InputEvent inputEvent, Vector3 position, Vector3 normal, int shapeIDx)
 	{
@@ -73,9 +76,8 @@ public partial class Tile : Node3D
 
 	public List<Tile> GetTilesInRange(int range)
 	{
-		HashSet<Tile> neighbors = new(GetNeighbours());
 		List<Tile> result = new();
-		
+
 		if (range == 0)
 		{
 			result.Add(this);
@@ -84,27 +86,32 @@ public partial class Tile : Node3D
 
 		if (range == 1)
 		{
-			result = GetNeighbours();
+			result = GetNeighbors();
 			result.Add(this);
 			return result;
 		}
 
-		foreach (Tile neighbor in neighbors)
+		List<Tile> tempNeighbors = GetNeighbors();
+		foreach (Tile neighbor in tempNeighbors)
 		{
 			List<Tile> distantNeighbors = neighbor.GetTilesInRange(range - 1);
-			foreach (Tile distantNeighbor in distantNeighbors) result.Add(distantNeighbor);
+			foreach (Tile distantNeighbor in distantNeighbors)
+				result.Add(distantNeighbor);
 		}
 
 		return result.ToList();
 	}
 
-	public List<Tile> GetNeighbours()
+	public List<Tile> GetNeighbors()
+	{
+		return new List<Tile>(neighbors);
+	}
+
+	private List<Tile> RaycastNeighbors()
 	{
 		List<Tile> result = new();
 
 		PhysicsDirectSpaceState3D spaceState = GetWorld3d().DirectSpaceState;
-		if (spaceState == null)
-			return result;
 
 		Basis globalBasis = GlobalTransform.basis;
 		Vector3[] worldDirections = { globalBasis.x, -globalBasis.x, globalBasis.z, -globalBasis.z };
@@ -113,27 +120,25 @@ public partial class Tile : Node3D
 			PhysicsRayQueryParameters3D raycastQuery = PhysicsRayQueryParameters3D.Create(Position, Position + 0.5f * direction);
 			raycastQuery.CollideWithAreas = true;
 			Dictionary raycastResult = spaceState.IntersectRay(raycastQuery);
-			if (raycastResult.Count > 0)
-			{
-				Node collider = (Node)raycastResult["collider"];
-				result.Add(collider.GetOwner<Tile>());
-			}
+
+			if (raycastResult.Count <= 0)
+				continue;
+
+			Node collider = (Node)raycastResult["collider"];
+			Tile tile = collider.GetOwner<Tile>();
+
+			if (tile == null)
+				continue;
+
+			result.Add(collider.GetOwner<Tile>());
 		}
 
 		return result;
 	}
 
-	public void UpdateColor()
+	private void UpdateColor()
 	{
-		if (IsHovered)
-		{
-			material.AlbedoColor = NormalColor.Blend(HoverColor);
-		}
-		else
-		{
-			material.AlbedoColor = NormalColor;
-		}
-		 
+		material.AlbedoColor = IsHovered ? NormalColor.Blend(HoverColor) : NormalColor;
 		material.AlbedoColor = material.AlbedoColor.Blend(ModifiersColor);
 	}
 }

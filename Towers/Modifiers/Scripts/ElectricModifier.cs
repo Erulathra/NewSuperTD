@@ -17,7 +17,7 @@ public partial class ElectricModifier : Modifier
 		{
 			if (tickCount % SpreadDelayTickCount == 0)
 			{
-				List<Tile> neighbors = tile.GetNeighbours();
+				List<Tile> neighbors = tile.GetNeighbors();
 				foreach (Tile neighbor in neighbors)
 				{
 					ModifierHandler modifierHandler = neighbor.GetNode<ModifierHandler>("ModifierHandler");

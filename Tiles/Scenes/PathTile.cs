@@ -15,7 +15,7 @@ public partial class PathTile : Tile
 	{
 		List<PathTile> pathTiles = new();
 
-		List<Tile> neighbors = GetNeighbours();
+		List<Tile> neighbors = GetNeighbors();
 		foreach (Tile tile in neighbors)
 		{
 			PathTile pathTile = tile as PathTile;
