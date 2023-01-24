@@ -1,4 +1,5 @@
 using Godot;
+using NewSuperTD.Enemies;
 using NewSuperTD.Tiles.Scenes;
 
 namespace NewSuperTD.Towers.Modifiers;
@@ -19,5 +20,10 @@ public partial class FireModifier : Modifier
 			modifierHandler.UnregisterModifier(ModifierId);
 			modifierHandler.UnregisterModifier("Water");
 		}
+	}
+
+	public override void GetDamage(Enemy enemy)
+	{
+		enemy.AnimateDamage();
 	}
 }

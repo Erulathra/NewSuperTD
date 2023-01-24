@@ -4,7 +4,7 @@
 [ext_resource type="ArrayMesh" uid="uid://bsmwisiv78fb0" path="res://Tiles/Models/TileModel.obj" id="2_4lsdi"]
 [ext_resource type="Script" path="res://Towers/ModifierHandler.cs" id="3_77g4l"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r8w5g"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t8s3u"]
 albedo_color = Color(0.933333, 0.929412, 0.835294, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_76uwo"]
@@ -48,7 +48,7 @@ _data = {
 script = ExtResource("1_gk4k3")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_r8w5g")
+material_override = SubResource("StandardMaterial3D_t8s3u")
 mesh = ExtResource("2_4lsdi")
 
 [node name="Area3D" type="Area3D" parent="Mesh"]

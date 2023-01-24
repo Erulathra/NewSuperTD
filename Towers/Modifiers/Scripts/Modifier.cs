@@ -1,4 +1,5 @@
 using Godot;
+using NewSuperTD.Enemies;
 using NewSuperTD.Tiles.Scenes;
 
 namespace NewSuperTD.Towers.Modifiers;
@@ -44,6 +45,14 @@ public abstract partial class Modifier : Resource
 	public virtual void AnimateRegister(Tile tile)
 	{
 		AnimationPlayer animationPlayer = tile.GetNode<AnimationPlayer>("AnimationPlayer");
+		
+		if (animationPlayer.IsPlaying())
+			animationPlayer.Seek(0 );
+		
 		animationPlayer.Play("RegisterModifier");
+	}
+
+	public virtual void GetDamage(Enemy enemy)
+	{
 	}
 }

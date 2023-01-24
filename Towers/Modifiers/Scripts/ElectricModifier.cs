@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Godot;
+using NewSuperTD.Enemies;
 using NewSuperTD.Tiles.Scenes;
 
 namespace NewSuperTD.Towers.Modifiers;
@@ -34,5 +35,10 @@ public partial class ElectricModifier : Modifier
 		}
 		
 		globalTickTimer.GlobalTick += OnGlobalTick;
+	}
+
+	public override void GetDamage(Enemy enemy)
+	{
+		enemy.AnimateDamage();
 	}
 }

@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using NewSuperTD.Tiles.Scenes;
+using NewSuperTD.Towers;
+using NewSuperTD.Towers.Modifiers;
 
 namespace NewSuperTD.Enemies;
 
@@ -78,7 +80,18 @@ public partial class Enemy : Node3D
 
 		float distanceToTarget = (GlobalPosition - targetTile.GlobalPosition).Length();
 		if (distanceToTarget < 0.5 * distanceBetweenParentAndTarget)
-			Reparent(targetTile);
+			ChangeParentTile();
+	}
+
+	private void ChangeParentTile()
+	{
+		Reparent(targetTile);
+
+		ModifierHandler targetModifierHandler = targetTile.GetNode<ModifierHandler>("ModifierHandler");
+		foreach (Modifier modifier in targetModifierHandler.GetCurrentModifiersArray())
+		{
+			modifier.GetDamage(this);
+		}
 	}
 
 	private async void Animate(Vector3 targetPosition, float tweenDuration)
@@ -93,5 +106,11 @@ public partial class Enemy : Node3D
 		animationPlayer.Play("Jump");
 		await ToSignal(GetTree().CreateTimer(tweenDuration - 0.3), "timeout");
 		animationPlayer.PlayBackwards("Jump");
+	}
+
+	public void AnimateDamage()
+	{
+		AnimationPlayer animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		animationPlayer.Play("GetDamage");
 	}
 }
