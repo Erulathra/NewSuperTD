@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://rumn1evlvsoi"]
+
+[ext_resource type="PackedScene" uid="uid://rgrqvghutv4r" path="res://Tiles/Scenes/Tile.tscn" id="1_lbdsr"]
+[ext_resource type="Script" path="res://Tiles/Scenes/PathTile.cs" id="2_juwwy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_372nu"]
+albedo_color = Color(0.490196, 0.580392, 0.364706, 1)
+
+[node name="PathTile" instance=ExtResource("1_lbdsr")]
+script = ExtResource("2_juwwy")
+NormalColor = Color(0.490196, 0.580392, 0.364706, 1)
+
+[node name="Mesh" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_372nu")

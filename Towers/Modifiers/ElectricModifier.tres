@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b0x2l2wtq5ehh"]
+
+[ext_resource type="Script" path="res://Towers/Modifiers/Scripts/ElectricModifier.cs" id="1_uc18i"]
+
+[resource]
+script = ExtResource("1_uc18i")
+SpreadDelayTickCount = 1
+ModifierColor = Color(1, 1, 0, 0.313726)
+StayTickCount = 10
+ModifierId = "Electric"

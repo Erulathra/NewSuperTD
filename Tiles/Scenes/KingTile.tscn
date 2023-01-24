@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=3 uid="uid://d0dsyh4aeoefq"]
+
+[ext_resource type="PackedScene" uid="uid://rumn1evlvsoi" path="res://Tiles/Scenes/PathTile.tscn" id="1_m1s3b"]
+[ext_resource type="Script" path="res://Tiles/Scenes/KingTile.cs" id="2_fqoiv"]
+[ext_resource type="ArrayMesh" uid="uid://bmirxsqsgokwo" path="res://Towers/Models/King.obj" id="2_oifax"]
+
+[sub_resource type="Animation" id="Animation_yjpy3"]
+resource_name = "Death"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../King:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1, 2, 2.4, 3),
+"transitions": PackedFloat32Array(0.277392, 0.277392, 0.277392, 0.277392, 0.277392, 0.277392),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.15591, 0.0340764, -0.180729), Vector3(0, 0, 0), Vector3(-0.122842, -0.69364, -0.0110391), Vector3(0, 0, 0), Vector3(0, 0, -1.5708)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../King:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.277392, 0.277392),
+"update": 0,
+"values": [Vector3(0, 0.1, 0), Vector3(0.4, 0.1, -0.4)]
+}
+
+[sub_resource type="Animation" id="Animation_k0c4l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../King:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../King:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sqnpo"]
+_data = {
+"Death": SubResource("Animation_yjpy3"),
+"RESET": SubResource("Animation_k0c4l")
+}
+
+[node name="KingTile" instance=ExtResource("1_m1s3b")]
+script = ExtResource("2_fqoiv")
+
+[node name="King" type="MeshInstance3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = ExtResource("2_oifax")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="King" index="0"]
+root_node = NodePath("../../AnimationPlayer")
+libraries = {
+"": SubResource("AnimationLibrary_sqnpo")
+}

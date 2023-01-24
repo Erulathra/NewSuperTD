@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bmirxsqsgokwo"
+path="res://.godot/imported/King.obj-bc24beca4165bdb710f1318d4ee8bdfb.mesh"
+
+[deps]
+
+files=["res://.godot/imported/King.obj-bc24beca4165bdb710f1318d4ee8bdfb.mesh"]
+
+source_file="res://Towers/Models/King.obj"
+dest_files=["res://.godot/imported/King.obj-bc24beca4165bdb710f1318d4ee8bdfb.mesh", "res://.godot/imported/King.obj-bc24beca4165bdb710f1318d4ee8bdfb.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

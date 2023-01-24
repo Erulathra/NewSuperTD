@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c4tvjdomlw6y8"]
+
+[ext_resource type="Script" path="res://Towers/Modifiers/Scripts/WaterModifer.cs" id="1_1b85e"]
+
+[resource]
+script = ExtResource("1_1b85e")
+ModifierColor = Color(0, 1, 1, 0.313726)
+StayTickCount = 25
+ModifierId = "Water"

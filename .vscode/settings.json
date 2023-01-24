@@ -1,9 +1,3 @@
 {
-    "cSpell.words": [
-        "bbcode"
-    ],
-    "cSpell.enableFiletypes": [
-        "!gdscript"
-    ],
     "godot_tools.editor_path": "/usr/bin/godot4"
 }

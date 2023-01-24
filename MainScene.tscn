@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3 uid="uid://dt1ke6qujvd68"]
+
+[ext_resource type="PackedScene" uid="uid://bt1ru8pive6e6" path="res://Levels/TestMap.tscn" id="2_l332e"]
+[ext_resource type="Environment" uid="uid://s5s07pbsd5hr" path="res://Enviroment.tres" id="3_e4oaw"]
+[ext_resource type="Script" path="res://GlobalTickTimer.cs" id="3_x1lwi"]
+[ext_resource type="Script" path="res://Managers/ModifiersManager.cs" id="4_2ea15"]
+[ext_resource type="Resource" uid="uid://dc80ajcnuqbbm" path="res://Towers/Modifiers/FireModifier.tres" id="5_6prbc"]
+[ext_resource type="Resource" uid="uid://c4tvjdomlw6y8" path="res://Towers/Modifiers/WaterModifier.tres" id="6_am3r5"]
+[ext_resource type="Resource" uid="uid://b0x2l2wtq5ehh" path="res://Towers/Modifiers/ElectricModifier.tres" id="7_3afk6"]
+[ext_resource type="PackedScene" uid="uid://d12tgmv84cjji" path="res://UI/TowerPicker.tscn" id="7_cawq5"]
+
+[node name="Root" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_e4oaw")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, -7, 10, 7)
+projection = 1
+size = 10.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.612372, 0.353553, 0, 0.5, 0.866025, -0.707107, -0.612372, 0.353553, 0, 5, 0)
+
+[node name="TileMap" parent="." instance=ExtResource("2_l332e")]
+
+[node name="GlobalTickTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+script = ExtResource("3_x1lwi")
+
+[node name="ModifiersManager" type="Node" parent="."]
+script = ExtResource("4_2ea15")
+ModifiersDictionary = {
+"Electric": ExtResource("7_3afk6"),
+"Fire": ExtResource("5_6prbc"),
+"Water": ExtResource("6_am3r5")
+}
+
+[node name="TowerPicker" parent="." instance=ExtResource("7_cawq5")]
