@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bnfue0hl64xru" path="res://Towers/FireTower.tscn" id="6_k05ou"]
 [ext_resource type="PackedScene" uid="uid://3q8ydn4i8hhp" path="res://Towers/ElectricTower.tscn" id="7_w3xru"]
 [ext_resource type="Script" path="res://Managers/EnemyManager.cs" id="8_nrvmq"]
-[ext_resource type="PackedScene" uid="uid://bt17ht02xr6uv" path="res://Enemies/Enemy.tscn" id="9_2rohh"]
+[ext_resource type="PackedScene" uid="uid://bt17ht02xr6uv" path="res://Enemies/Enemy.tscn" id="9_cd2b4"]
 
 [node name="TestMap" type="Node3D"]
 
@@ -184,5 +184,5 @@ TowerSceneDictionary = {
 script = ExtResource("8_nrvmq")
 spawnTickCount = 40
 enemyDictionary = {
-ExtResource("9_2rohh"): 5
+ExtResource("9_cd2b4"): 5
 }
