@@ -30,8 +30,12 @@ public partial class EnemyManager : Node
 	{
 		if ((tickCount + 7) % spawnTickCount != 0)
 			return;
-
+		
 		PackedScene[] enemiesTypes = enemyDictionary.Keys.ToArray();
+		
+		if (enemiesTypes.Length <= 0)
+			return;
+
 		PackedScene enemyToSpawnScene = enemiesTypes[GD.Randi() % enemiesTypes.Length];
 		enemyDictionary[enemyToSpawnScene]--;
 
