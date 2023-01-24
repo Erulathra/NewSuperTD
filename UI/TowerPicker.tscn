@@ -31,6 +31,9 @@ alignment = 1
 
 [node name="Water" type="Button" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.501961, 0.803922, 0.964706, 1)
+theme_override_colors/font_hover_color = Color(0.501961, 0.803922, 0.964706, 1)
+theme_override_colors/font_focus_color = Color(0.501961, 0.803922, 0.964706, 1)
 theme_override_fonts/font = ExtResource("1_lhx6j")
 theme_override_font_sizes/font_size = 48
 text = " 󰖌 "
@@ -38,6 +41,9 @@ icon_alignment = 1
 
 [node name="Fire" type="Button" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_pressed_color = Color(1, 0.427451, 0.356863, 1)
+theme_override_colors/font_hover_color = Color(1, 0.427451, 0.356863, 1)
+theme_override_colors/font_focus_color = Color(1, 0.427451, 0.356863, 1)
 theme_override_fonts/font = ExtResource("1_lhx6j")
 theme_override_font_sizes/font_size = 48
 text = " 󰈸 "
@@ -45,6 +51,9 @@ icon_alignment = 1
 
 [node name="Electric" type="Button" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.980392, 0.745098, 0.00784314, 1)
+theme_override_colors/font_hover_color = Color(0.980392, 0.745098, 0.00784314, 1)
+theme_override_colors/font_focus_color = Color(0.980392, 0.745098, 0.00784314, 1)
 theme_override_fonts/font = ExtResource("1_lhx6j")
 theme_override_font_sizes/font_size = 48
 text = " 󱐋 "
