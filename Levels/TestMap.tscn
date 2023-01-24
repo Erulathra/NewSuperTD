@@ -182,6 +182,7 @@ TowerSceneDictionary = {
 
 [node name="EnemyManager" type="Node" parent="."]
 script = ExtResource("8_nrvmq")
+spawnTickCount = 40
 enemyDictionary = {
-ExtResource("9_2rohh"): 10
+ExtResource("9_2rohh"): 5
 }

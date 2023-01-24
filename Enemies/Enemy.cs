@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Godot;
 using NewSuperTD.Tiles.Scenes;
 using NewSuperTD.Towers;
@@ -16,12 +17,31 @@ public partial class Enemy : Node3D
 	public delegate void ReachTargetEventHandler(Enemy enemy);
 
 	private GlobalTickTimer globalTickTimer;
-	[Export] private int moveTickCount = 10;
 
 	private Tile targetTile;
 
+	[ExportGroup("Logic")]
+	[Export] private int healthPoints = 100;
 	[Export] private int thinkingTickCount = 20;
+	
+	[ExportGroup("Animation")]
+	
 	[Export] private float jumpHeight = 0.2f;
+	[Export] private int moveTickCount = 10;
+
+	private Tween moveTween;
+	private bool isGoingToDeath = false;
+
+	public int HealthPoints
+	{
+		get => healthPoints;
+		set
+		{
+			healthPoints = value;
+			if (healthPoints <= 0)
+				OnDeath();
+		}
+	}
 
 	public override void _Ready()
 	{
@@ -63,7 +83,7 @@ public partial class Enemy : Node3D
 		float tweenDuration = ((float)globalTickTimer.WaitTime * moveTickCount);
 
 		Callable moveCallable = Callable.From((Vector3 newPosition) => Move(newPosition, distanceBetweenParentAndTarget));
-		Tween moveTween = CreateTween();
+		moveTween = CreateTween();
 		moveTween.SetTrans(Tween.TransitionType.Sine);
 		moveTween.SetEase(Tween.EaseType.InOut);
 		moveTween.TweenMethod(moveCallable, parentPosition, targetPosition, tweenDuration);
@@ -85,6 +105,9 @@ public partial class Enemy : Node3D
 
 	private void ChangeParentTile()
 	{
+		if (GetParent() == targetTile)
+			return;
+		
 		Reparent(targetTile);
 
 		ModifierHandler targetModifierHandler = targetTile.GetNode<ModifierHandler>("ModifierHandler");
@@ -94,7 +117,17 @@ public partial class Enemy : Node3D
 		}
 	}
 
-	private async void Animate(Vector3 targetPosition, float tweenDuration)
+	private async void OnDeath()
+	{
+		isGoingToDeath = true;
+		StopThinking();
+		await AnimateDeath();
+		EmitSignal(SignalName.Death, this);
+		
+		QueueFree();
+	}
+
+	private async Task Animate(Vector3 targetPosition, float tweenDuration)
 	{
 		Tween jumpTween = CreateTween();
 		jumpTween.SetTrans(Tween.TransitionType.Cubic);
@@ -105,12 +138,27 @@ public partial class Enemy : Node3D
 		AnimationPlayer animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		animationPlayer.Play("Jump");
 		await ToSignal(GetTree().CreateTimer(tweenDuration - 0.3), "timeout");
+		
+		if (isGoingToDeath)
+			return;
+		
 		animationPlayer.PlayBackwards("Jump");
 	}
-
 	public void AnimateDamage()
 	{
+		if (isGoingToDeath)
+			return;
+		
 		AnimationPlayer animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		animationPlayer.Play("GetDamage");
+	}
+
+	private async Task AnimateDeath()
+	{
+		AnimationPlayer animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
+		await ToSignal(moveTween, Tween.SignalName.Finished);
+		animationPlayer.Play("Death");
+		await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
 	}
 }

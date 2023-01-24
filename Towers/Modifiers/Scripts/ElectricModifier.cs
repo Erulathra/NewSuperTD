@@ -9,6 +9,7 @@ namespace NewSuperTD.Towers.Modifiers;
 public partial class ElectricModifier : Modifier
 {
 	[Export()] public int SpreadDelayTickCount { get; private set; } = 2;
+	[Export()] private int damage = 10;
 
 	public override void OnRegister(Tile tile, GlobalTickTimer globalTickTimer)
 	{
@@ -39,6 +40,7 @@ public partial class ElectricModifier : Modifier
 
 	public override void GetDamage(Enemy enemy)
 	{
+		enemy.HealthPoints -= damage;
 		enemy.AnimateDamage();
 	}
 }

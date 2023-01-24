@@ -6,7 +6,7 @@ namespace NewSuperTD.Towers.Modifiers;
 
 public partial class FireModifier : Modifier
 {
-	[Export] public int Damage;
+	[Export] public int Damage = 20;
 
 	private Tile ownerTile;
 
@@ -25,5 +25,6 @@ public partial class FireModifier : Modifier
 	public override void GetDamage(Enemy enemy)
 	{
 		enemy.AnimateDamage();
+		enemy.HealthPoints -= 40;
 	}
 }
