@@ -1,6 +1,6 @@
-3D Logic - Tower Defence game made in Godot4 for learning purposes.
+3D Logic - Tower Defence game made in Godot4
 
-This project was created for "Podstawy Gier" on Lodz university of technology.
+This project was created for the "Games basics" course at Lodz University of Technology.
 
 Credits:
 - Szymon Świędrych
