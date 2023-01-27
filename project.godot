@@ -26,10 +26,6 @@ window/size/borderless=true
 
 project/assembly_name="NewSuperTD"
 
-[editor]
-
-export/convert_text_resources_to_binary=true
-
 [physics]
 
 2d/run_on_separate_thread=true

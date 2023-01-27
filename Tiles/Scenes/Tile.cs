@@ -22,7 +22,7 @@ public partial class Tile : Node3D
 
 	private StandardMaterial3D material;
 	private Color modifiersColor = Colors.Transparent;
-	private List<Tile> neighbors;
+	private Array<Tile> neighbors;
 
 	[Export] public Color NormalColor = Color.FromString("#eeedd5", Colors.White);
 
@@ -77,42 +77,44 @@ public partial class Tile : Node3D
 		EmitSignal(SignalName.MouseExit, this);
 	}
 
-	public List<Tile> GetTilesInRange(int range)
+	public Array<Tile> GetTilesInRange(int range)
 	{
-		List<Tile> result = new();
 
 		if (range == 0)
 		{
-			result.Add(this);
-			return result;
+			Array<Tile> resultArray = new Array<Tile>();
+			resultArray.Add(this);
+			return resultArray;
 		}
 
 		if (range == 1)
 		{
-			result = GetNeighbors();
-			result.Add(this);
-			return result;
+			Array<Tile> resultArray = GetNeighbors();
+			resultArray.Add(this);
+			return resultArray;
 		}
+		
+		HashSet<Tile> result = new();
 
-		List<Tile> tempNeighbors = GetNeighbors();
+		Array<Tile> tempNeighbors = GetNeighbors();
 		foreach (Tile neighbor in tempNeighbors)
 		{
-			List<Tile> distantNeighbors = neighbor.GetTilesInRange(range - 1);
+			Array<Tile> distantNeighbors = neighbor.GetTilesInRange(range - 1);
 			foreach (Tile distantNeighbor in distantNeighbors)
 				result.Add(distantNeighbor);
 		}
 
-		return result.ToList();
+		return new Array<Tile>(result);
 	}
 
-	public List<Tile> GetNeighbors()
+	public Array<Tile> GetNeighbors()
 	{
-		return new List<Tile>(neighbors);
+		return new Array<Tile>(neighbors);
 	}
 
-	private List<Tile> RaycastNeighbors()
+	private Array<Tile> RaycastNeighbors()
 	{
-		List<Tile> result = new();
+		Array<Tile> result = new();
 
 		PhysicsDirectSpaceState3D spaceState = GetWorld3d().DirectSpaceState;
 

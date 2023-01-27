@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://d12tgmv84cjji"]
+[gd_scene load_steps=5 format=3 uid="uid://d12tgmv84cjji"]
 
 [ext_resource type="Script" path="res://UI/TowerPicker.cs" id="1_hwu3k"]
-[ext_resource type="FontFile" uid="uid://cnscigw3sso6a" path="res://UI/Assets/Fonts/IBM 3270 Nerd Font Complete.ttf" id="1_lhx6j"]
+[ext_resource type="PackedScene" uid="uid://x4qt3gxxhba3" path="res://UI/TowerCards/WaterCard.tscn" id="2_pbqwd"]
+[ext_resource type="PackedScene" uid="uid://sc10xs3uisya" path="res://UI/TowerCards/FireCard.tscn" id="3_y3npw"]
+[ext_resource type="PackedScene" uid="uid://brwusbwppthvm" path="res://UI/TowerCards/ElectricCard.tscn" id="4_nwdgm"]
 
 [node name="TowerPicker" type="Control"]
 layout_mode = 3
@@ -12,53 +14,24 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_hwu3k")
+towerCardsDictionary = {
+"Electric": ExtResource("4_nwdgm"),
+"Fire": ExtResource("3_y3npw"),
+"Water": ExtResource("2_pbqwd")
+}
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+[node name="CardHorizontalBox" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -16.5
-offset_top = -78.0
-offset_right = 16.5
-offset_bottom = -38.0
+offset_left = -500.0
+offset_top = -70.0
+offset_right = 500.0
+offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
-
-[node name="Water" type="Button" parent="CanvasLayer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_pressed_color = Color(0.501961, 0.803922, 0.964706, 1)
-theme_override_colors/font_hover_color = Color(0.501961, 0.803922, 0.964706, 1)
-theme_override_colors/font_focus_color = Color(0.501961, 0.803922, 0.964706, 1)
-theme_override_fonts/font = ExtResource("1_lhx6j")
-theme_override_font_sizes/font_size = 48
-text = " 󰖌 "
-icon_alignment = 1
-
-[node name="Fire" type="Button" parent="CanvasLayer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_pressed_color = Color(1, 0.427451, 0.356863, 1)
-theme_override_colors/font_hover_color = Color(1, 0.427451, 0.356863, 1)
-theme_override_colors/font_focus_color = Color(1, 0.427451, 0.356863, 1)
-theme_override_fonts/font = ExtResource("1_lhx6j")
-theme_override_font_sizes/font_size = 48
-text = " 󰈸 "
-icon_alignment = 1
-
-[node name="Electric" type="Button" parent="CanvasLayer/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_pressed_color = Color(0.980392, 0.745098, 0.00784314, 1)
-theme_override_colors/font_hover_color = Color(0.980392, 0.745098, 0.00784314, 1)
-theme_override_colors/font_focus_color = Color(0.980392, 0.745098, 0.00784314, 1)
-theme_override_fonts/font = ExtResource("1_lhx6j")
-theme_override_font_sizes/font_size = 48
-text = " 󱐋 "
-icon_alignment = 1
-
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/Water" to="." method="SetTower" binds= ["Water"]]
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/Fire" to="." method="SetTower" binds= ["Fire"]]
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/Electric" to="." method="SetTower" binds= ["Electric"]]

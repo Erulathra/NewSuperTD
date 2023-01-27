@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using Godot.Collections;
 
 namespace NewSuperTD.Tiles.Scenes;
 
@@ -13,9 +13,9 @@ public partial class PathTile : Tile
 
 	public void InitializePath()
 	{
-		List<PathTile> pathTiles = new();
+		Array<PathTile> pathTiles = new();
 
-		List<Tile> neighbors = GetNeighbors();
+		Array<Tile> neighbors = GetNeighbors();
 		foreach (Tile tile in neighbors)
 		{
 			PathTile pathTile = tile as PathTile;

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://x4qt3gxxhba3"]
+
+[ext_resource type="PackedScene" uid="uid://dvjj1nlvrhn1m" path="res://UI/TowerCards/TowerCard.tscn" id="1_u1axa"]
+
+[node name="WaterCard" instance=ExtResource("1_u1axa")]
+symbol = " 󰖌 "
+color = Color(0, 1, 1, 1)
+
+[node name="Button" parent="." index="0"]
+theme_override_colors/font_pressed_color = Color(0, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(0, 1, 1, 1)
+text = "  󰖌 "

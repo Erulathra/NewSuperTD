@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://sc10xs3uisya"]
+
+[ext_resource type="PackedScene" uid="uid://dvjj1nlvrhn1m" path="res://UI/TowerCards/TowerCard.tscn" id="1_7sas3"]
+
+[node name="FireCard" instance=ExtResource("1_7sas3")]
+symbol = " 󰈸 "
+color = Color(1, 0.333333, 0, 1)
+
+[node name="Button" parent="." index="0"]
+theme_override_colors/font_pressed_color = Color(1, 0.333333, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 0.333333, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 0.333333, 0, 1)
+text = " 󰈸 "
