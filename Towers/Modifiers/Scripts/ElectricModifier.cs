@@ -1,6 +1,5 @@
-using System;
-using System.Collections.Generic;
 using Godot;
+using Godot.Collections;
 using NewSuperTD.Enemies;
 using NewSuperTD.Tiles.Scenes;
 
@@ -19,7 +18,7 @@ public partial class ElectricModifier : Modifier
 		{
 			if (tickCount % SpreadDelayTickCount == 0)
 			{
-				List<Tile> neighbors = tile.GetNeighbors();
+				Array<Tile> neighbors = tile.GetNeighbors();
 				foreach (Tile neighbor in neighbors)
 				{
 					ModifierHandler modifierHandler = neighbor.GetNode<ModifierHandler>("ModifierHandler");

@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Collections.Generic;
 using Godot.Collections;
 using NewSuperTD.Towers;
 
@@ -8,10 +7,11 @@ namespace NewSuperTD.Tiles.Scenes;
 
 public partial class TowerManager : Node
 {
-	[Export()] public Node TilesParent;
-	[Export()] public Godot.Collections.Dictionary<String, Array<Variant>> TowerSceneDictionary;
+	[Signal] public delegate void TowerPlacedEventHandler();
+	
+	[Export] public Node TilesParent;
+	[Export] public Dictionary<String, Array<Variant>> TowerSceneDictionary;
 
-	private Godot.Collections.Dictionary<String, int> usedTowersDictionary;
 	private string actualTower = "None";
 	private int hoverDistance = 0;
 	public String ActualTower
@@ -33,12 +33,6 @@ public partial class TowerManager : Node
 	public override void _Ready()
 	{
 		BindTileInputEvents();
-		usedTowersDictionary = new Godot.Collections.Dictionary<string, int>();
-
-		foreach (string towerId in TowerSceneDictionary.Keys)
-		{
-			usedTowersDictionary.Add(towerId, 0);
-		}
 	}
 
 	private void BindTileInputEvents()
@@ -58,7 +52,7 @@ public partial class TowerManager : Node
 
 	private void OnMouseEnter(Tile tile)
 	{
-		List<Tile> nearTiles = tile.GetTilesInRange(hoverDistance);
+		Array<Tile> nearTiles = tile.GetTilesInRange(hoverDistance);
 		foreach (Tile nearTile in nearTiles)
 		{
 			nearTile.IsHovered = true;
@@ -67,7 +61,7 @@ public partial class TowerManager : Node
 
 	private void OnMouseExit(Tile tile)
 	{
-		List<Tile> nearTiles = tile.GetTilesInRange(hoverDistance);
+		Array<Tile> nearTiles = tile.GetTilesInRange(hoverDistance);
 		foreach (Tile nearTile in nearTiles)
 		{
 			nearTile.IsHovered = false;
@@ -80,17 +74,22 @@ public partial class TowerManager : Node
 
 	private void OnTileClick(Tile tile, InputEvent inputEvent)
 	{
-		if (actualTower == "None")
-			return;
-		
 		InputEventMouseButton mouseButtonEvent = inputEvent as InputEventMouseButton;
 		if (mouseButtonEvent == null || mouseButtonEvent.ButtonIndex != MouseButton.Left || !mouseButtonEvent.Pressed)
 			return;
 		
+		PlaceTower(tile);
+	}
+
+	private void PlaceTower(Tile tile)
+	{
+		if (actualTower == "None")
+			return;
+
 		if (tile is PathTile)
 			return;
-		
-		if ((int)TowerSceneDictionary[ActualTower][1] <= usedTowersDictionary[ActualTower])
+
+		if ((int)TowerSceneDictionary[ActualTower][1] <= 0)
 			return;
 
 		PackedScene towerScene = (PackedScene)TowerSceneDictionary[ActualTower][0];
@@ -99,7 +98,8 @@ public partial class TowerManager : Node
 		newTower.Name = "Tower";
 		newTower.Position = tile.GetNode<Node3D>("SurfaceHandle").Position;
 
-		usedTowersDictionary[ActualTower] += 1;
+		int availableTowers = (int)TowerSceneDictionary[ActualTower][1] - 1;
+		TowerSceneDictionary[ActualTower][1] = availableTowers;
 	}
 
 	private int GetActualTowerRange()

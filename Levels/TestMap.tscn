@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bt1ru8pive6e6"]
+[gd_scene load_steps=11 format=3 uid="uid://bt1ru8pive6e6"]
 
 [ext_resource type="PackedScene" uid="uid://rgrqvghutv4r" path="res://Tiles/Scenes/Tile.tscn" id="1_7itmd"]
 [ext_resource type="PackedScene" uid="uid://rumn1evlvsoi" path="res://Tiles/Scenes/PathTile.tscn" id="2_sem6s"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://3q8ydn4i8hhp" path="res://Towers/ElectricTower.tscn" id="7_w3xru"]
 [ext_resource type="Script" path="res://Managers/EnemyManager.cs" id="8_nrvmq"]
 [ext_resource type="PackedScene" uid="uid://bt17ht02xr6uv" path="res://Enemies/Enemy.tscn" id="9_cd2b4"]
+[ext_resource type="PackedScene" uid="uid://d12tgmv84cjji" path="res://UI/TowerPicker.tscn" id="10_68rpe"]
 
 [node name="TestMap" type="Node3D"]
 
@@ -186,3 +187,5 @@ spawnTickCount = 40
 enemyDictionary = {
 ExtResource("9_cd2b4"): 5
 }
+
+[node name="TowerPicker" parent="." instance=ExtResource("10_68rpe")]

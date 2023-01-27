@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvjj1nlvrhn1m"]
+
+[ext_resource type="Script" path="res://UI/TowerCards/TowerCard.cs" id="1_4grdh"]
+[ext_resource type="FontFile" uid="uid://cnscigw3sso6a" path="res://UI/Assets/Fonts/IBM 3270 Nerd Font Complete.ttf" id="2_bvxvt"]
+
+[node name="TowerCard" type="Control"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4grdh")
+symbol = " # "
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.078
+anchor_bottom = 0.083
+offset_right = 0.159996
+offset_bottom = 0.240826
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_bvxvt")
+theme_override_font_sizes/font_size = 48
+text = " # "
+icon_alignment = 1

@@ -1,7 +1,7 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using Godot.Collections;
 using NewSuperTD.Tiles.Scenes;
 using NewSuperTD.Towers;
 using NewSuperTD.Towers.Modifiers;
@@ -62,7 +62,7 @@ public partial class Enemy : Node3D
 		PathTile parentTile = GetParent<PathTile>();
 		int distanceToKing = parentTile.DistanceToKing;
 
-		List<Tile> neighbors = parentTile.GetNeighbors();
+		Array<Tile> neighbors = parentTile.GetNeighbors();
 		targetTile = neighbors.OfType<PathTile>().First(pathNeighbor => pathNeighbor.DistanceToKing < distanceToKing);
 
 		if (targetTile is KingTile)
