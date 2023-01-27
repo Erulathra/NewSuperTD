@@ -1,12 +1,14 @@
 using Godot;
 using Godot.Collections;
 using NewSuperTD.Tiles.Scenes;
+using NewSuperTD.Towers;
 using NewSuperTD.UI.TowerCards;
 
 public partial class TowerPicker : Control
 {
 	[Export] private Dictionary<string, PackedScene> towerCardsDictionary = new();
 	private Array<TowerCard> cards = new();
+	private TowerCard selectedCard;
 	
 	private TowerManager towerManager;
 	private HBoxContainer hBox;
@@ -20,6 +22,8 @@ public partial class TowerPicker : Control
 	public void OnLevelLoad()
 	{
 		towerManager = GetParent().GetNode<TowerManager>("TowerManager");
+		towerManager.TowerPlaced += OnTowerPlaced;
+		
 		hBox = GetNode<HBoxContainer>("CanvasLayer/CardHorizontalBox");
 
 		Dictionary<string, Array<Variant>> towerSceneDictionary = towerManager.TowerSceneDictionary;
@@ -47,6 +51,14 @@ public partial class TowerPicker : Control
 		}
 	}
 
+	private void OnTowerPlaced(Tower tower)
+	{
+		towerManager.ActualTower = "None";
+		cards.Remove(selectedCard);
+		selectedCard.QueueFree();
+		selectedCard = null;
+	}
+
 	private void OnCardUp(string towerId, TowerCard towerCard)
 	{
 		foreach (var card in cards)
@@ -55,6 +67,7 @@ public partial class TowerPicker : Control
 		}
 		
 		towerCard.Select();
+		selectedCard = towerCard;
 
 		towerManager.ActualTower = towerId;
 	}

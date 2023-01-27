@@ -2,12 +2,13 @@ using Godot;
 using System;
 using Godot.Collections;
 using NewSuperTD.Towers;
+using NewSuperTD.UI.TowerCards;
 
 namespace NewSuperTD.Tiles.Scenes;
 
 public partial class TowerManager : Node
 {
-	[Signal] public delegate void TowerPlacedEventHandler();
+	[Signal] public delegate void TowerPlacedEventHandler(Tower tower);
 	
 	[Export] public Node TilesParent;
 	[Export] public Dictionary<String, Array<Variant>> TowerSceneDictionary;
@@ -19,6 +20,13 @@ public partial class TowerManager : Node
 		get => actualTower;
 		set
 		{
+			if (value == "None")
+			{
+				actualTower = value;
+				hoverDistance = 0;
+				return;
+			}
+			
 			if (!TowerSceneDictionary.ContainsKey(value))
 			{
 				GD.PrintErr("Wrong Tower ID");
@@ -100,6 +108,8 @@ public partial class TowerManager : Node
 
 		int availableTowers = (int)TowerSceneDictionary[ActualTower][1] - 1;
 		TowerSceneDictionary[ActualTower][1] = availableTowers;
+		
+		EmitSignal(SignalName.TowerPlaced, newTower);
 	}
 
 	private int GetActualTowerRange()
