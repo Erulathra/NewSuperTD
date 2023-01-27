@@ -13,6 +13,7 @@ public partial class TowerManager : Node
 	[Export] public Node TilesParent;
 	[Export] public Dictionary<String, Array<Variant>> TowerSceneDictionary;
 
+	public Tile LastHoverTile { get; private set; }
 	private string actualTower = "None";
 	private int hoverDistance = 0;
 	public String ActualTower
@@ -22,8 +23,10 @@ public partial class TowerManager : Node
 		{
 			if (value == "None")
 			{
+				UnHoverTiles(LastHoverTile, hoverDistance);
 				actualTower = value;
 				hoverDistance = 0;
+				LastHoverTile.IsHovered = true;
 				return;
 			}
 			
@@ -60,6 +63,7 @@ public partial class TowerManager : Node
 
 	private void OnMouseEnter(Tile tile)
 	{
+		LastHoverTile = tile;
 		Array<Tile> nearTiles = tile.GetTilesInRange(hoverDistance);
 		foreach (Tile nearTile in nearTiles)
 		{
@@ -69,7 +73,12 @@ public partial class TowerManager : Node
 
 	private void OnMouseExit(Tile tile)
 	{
-		Array<Tile> nearTiles = tile.GetTilesInRange(hoverDistance);
+		UnHoverTiles(tile, hoverDistance);
+	}
+
+	private void UnHoverTiles(Tile tile, int distance)
+	{
+		Array<Tile> nearTiles = tile.GetTilesInRange(distance);
 		foreach (Tile nearTile in nearTiles)
 		{
 			nearTile.IsHovered = false;
