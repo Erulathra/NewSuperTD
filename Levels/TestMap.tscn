@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://bt1ru8pive6e6"]
+[gd_scene load_steps=12 format=3 uid="uid://bt1ru8pive6e6"]
 
 [ext_resource type="PackedScene" uid="uid://rgrqvghutv4r" path="res://Tiles/Scenes/Tile.tscn" id="1_7itmd"]
+[ext_resource type="Script" path="res://Levels/Level.cs" id="1_k0pgi"]
 [ext_resource type="PackedScene" uid="uid://rumn1evlvsoi" path="res://Tiles/Scenes/PathTile.tscn" id="2_sem6s"]
 [ext_resource type="PackedScene" uid="uid://d0dsyh4aeoefq" path="res://Tiles/Scenes/KingTile.tscn" id="3_et443"]
 [ext_resource type="Script" path="res://Managers/TowerManager.cs" id="4_spjbr"]
@@ -12,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://d12tgmv84cjji" path="res://UI/TowerPicker.tscn" id="10_68rpe"]
 
 [node name="TestMap" type="Node3D"]
+script = ExtResource("1_k0pgi")
+TowersToThreeStars = 2
+TowersToTwoStars = 4
 
 [node name="Tiles" type="Node3D" parent="."]
 
@@ -177,7 +181,7 @@ script = ExtResource("4_spjbr")
 TilesParent = NodePath("../Tiles")
 TowerSceneDictionary = {
 "Electric": [ExtResource("7_w3xru"), 1],
-"Fire": [ExtResource("6_k05ou"), 2],
+"Fire": [ExtResource("6_k05ou"), 3],
 "Water": [ExtResource("5_3la8y"), 1]
 }
 

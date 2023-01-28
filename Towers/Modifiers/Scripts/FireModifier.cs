@@ -25,6 +25,6 @@ public partial class FireModifier : Modifier
 	public override void GetDamage(Enemy enemy)
 	{
 		enemy.AnimateDamage();
-		enemy.HealthPoints -= 40;
+		enemy.HealthPoints -= Damage;
 	}
 }

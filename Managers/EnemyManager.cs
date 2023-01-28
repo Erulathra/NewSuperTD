@@ -16,6 +16,9 @@ public partial class EnemyManager : Node
 	
 	private PathTile startTile;
 	private KingTile kingTile;
+
+	private Array<Enemy> enemiesAlive = new();
+	
 	public override void _Ready()
 	{
 		Array<Node> tiles = GetParent<Node>().GetNode("Tiles").GetChildren();
@@ -45,8 +48,11 @@ public partial class EnemyManager : Node
 		Enemy newEnemy = (Enemy)enemyToSpawnScene.Instantiate();
 		startTile.AddChild(newEnemy);
 		newEnemy.GlobalPosition = startTile.GetNode<Node3D>("SurfaceHandle").GlobalPosition;
+		
+		enemiesAlive.Add(newEnemy);
 
 		newEnemy.ReachTarget += OnEnemyReachTarget;
+		newEnemy.Death += OnEnemyDeath;
 		EnemyReachTarget += newEnemy.StopThinking;
 	}
 
@@ -57,5 +63,13 @@ public partial class EnemyManager : Node
 		
 		kingTile.GameOver();
 		EmitSignal(SignalName.EnemyReachTarget);
+	}
+
+	private void OnEnemyDeath(Enemy enemy)
+	{
+		enemiesAlive.Remove(enemy);
+		if (enemiesAlive.Count <= 0)
+			GD.Print("End");
+
 	}
 }
