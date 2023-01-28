@@ -109,6 +109,8 @@ public partial class Tile : Node3D
 
 	public Array<Tile> GetNeighbors()
 	{
+		neighbors ??= RaycastNeighbors();
+
 		return new Array<Tile>(neighbors);
 	}
 
