@@ -9,6 +9,8 @@ namespace NewSuperTD.Managers;
 public partial class EnemyManager : Node
 {
 	[Signal] public delegate void EnemyReachTargetEventHandler();
+
+	[Signal] public delegate void GameOverEventHandler();
 	[Signal] public delegate void AllEnemiesAreDeadEventHandler();
 
 	private Array<Enemy> enemiesAlive = new();
@@ -56,13 +58,15 @@ public partial class EnemyManager : Node
 		EnemyReachTarget += newEnemy.StopThinking;
 	}
 
-	private void OnEnemyReachTarget(Enemy enemy)
+	private async void OnEnemyReachTarget(Enemy enemy)
 	{
 		GlobalTickTimer globalTickTimer = (GlobalTickTimer)GetTree().Root.FindChild("GlobalTickTimer", true, false);
 		globalTickTimer.GlobalTick -= OnGlobalTick;
 
 		kingTile.GameOver();
 		EmitSignal(SignalName.EnemyReachTarget);
+		await ToSignal(kingTile.GetNode<AnimationPlayer>("King/AnimationPlayer"), AnimationPlayer.SignalName.AnimationFinished);
+		EmitSignal(SignalName.GameOver);
 	}
 
 	private void OnEnemyDeath(Enemy enemy)
