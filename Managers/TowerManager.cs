@@ -1,22 +1,23 @@
 using Godot;
-using System;
 using Godot.Collections;
 using NewSuperTD.Towers;
-using NewSuperTD.UI.TowerCards;
 
 namespace NewSuperTD.Tiles.Scenes;
 
 public partial class TowerManager : Node
 {
+
 	[Signal] public delegate void TowerPlacedEventHandler(Tower tower);
-	
+
+	private string actualTower = "None";
+	private int hoverDistance;
+
 	[Export] public Node TilesParent;
-	[Export] public Dictionary<String, Array<Variant>> TowerSceneDictionary;
+	[Export] public Dictionary<string, Array<Variant>> TowerSceneDictionary;
 
 	public Tile LastHoverTile { get; private set; }
-	private string actualTower = "None";
-	private int hoverDistance = 0;
-	public String ActualTower
+
+	public string ActualTower
 	{
 		get => actualTower;
 		set
@@ -29,7 +30,7 @@ public partial class TowerManager : Node
 				LastHoverTile.IsHovered = true;
 				return;
 			}
-			
+
 			if (!TowerSceneDictionary.ContainsKey(value))
 			{
 				GD.PrintErr("Wrong Tower ID");
@@ -66,9 +67,7 @@ public partial class TowerManager : Node
 		LastHoverTile = tile;
 		Array<Tile> nearTiles = tile.GetTilesInRange(hoverDistance);
 		foreach (Tile nearTile in nearTiles)
-		{
 			nearTile.IsHovered = true;
-		}
 	}
 
 	private void OnMouseExit(Tile tile)
@@ -80,21 +79,18 @@ public partial class TowerManager : Node
 	{
 		Array<Tile> nearTiles = tile.GetTilesInRange(distance);
 		foreach (Tile nearTile in nearTiles)
-		{
 			nearTile.IsHovered = false;
-		}
 	}
 
 	public override void _Process(double delta)
-	{
-	}
+	{ }
 
 	private void OnTileClick(Tile tile, InputEvent inputEvent)
 	{
 		InputEventMouseButton mouseButtonEvent = inputEvent as InputEventMouseButton;
 		if (mouseButtonEvent == null || mouseButtonEvent.ButtonIndex != MouseButton.Left || !mouseButtonEvent.Pressed)
 			return;
-		
+
 		PlaceTower(tile);
 	}
 
@@ -117,7 +113,7 @@ public partial class TowerManager : Node
 
 		int availableTowers = (int)TowerSceneDictionary[ActualTower][1] - 1;
 		TowerSceneDictionary[ActualTower][1] = availableTowers;
-		
+
 		EmitSignal(SignalName.TowerPlaced, newTower);
 	}
 
@@ -127,5 +123,4 @@ public partial class TowerManager : Node
 		Tower tower = towerScene.Instantiate<Tower>();
 		return tower.Range;
 	}
-	
 }

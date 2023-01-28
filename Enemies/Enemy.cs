@@ -156,7 +156,7 @@ public partial class Enemy : Node3D
 	private async Task AnimateDeath()
 	{
 		AnimationPlayer animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-		await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
+		animationPlayer.Stop();
 		await ToSignal(moveTween, Tween.SignalName.Finished);
 		animationPlayer.Play("Death");
 		await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);

@@ -4,7 +4,7 @@ using NewSuperTD.Tiles.Scenes;
 using NewSuperTD.Towers;
 using NewSuperTD.UI.TowerCards;
 
-public partial class TowerPicker : Control
+public partial class GameHud : Control
 {
 	[Export] private Dictionary<string, PackedScene> towerCardsDictionary = new();
 	private Array<TowerCard> cards = new();

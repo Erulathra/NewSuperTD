@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dt1ke6qujvd68"]
 
-[ext_resource type="PackedScene" uid="uid://bt1ru8pive6e6" path="res://Levels/TestMap.tscn" id="2_l332e"]
+[ext_resource type="PackedScene" uid="uid://dd6q4mv3lo2gt" path="res://Levels/TestMap.tscn" id="2_l332e"]
 [ext_resource type="Environment" uid="uid://s5s07pbsd5hr" path="res://Enviroment.tres" id="3_e4oaw"]
 [ext_resource type="Script" path="res://GlobalTickTimer.cs" id="3_x1lwi"]
 [ext_resource type="Script" path="res://Managers/ModifiersManager.cs" id="4_2ea15"]

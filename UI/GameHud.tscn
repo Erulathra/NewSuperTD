@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://d12tgmv84cjji"]
+[gd_scene load_steps=5 format=3 uid="uid://s7cg2vqiiw0j"]
 
-[ext_resource type="Script" path="res://UI/TowerPicker.cs" id="1_hwu3k"]
+[ext_resource type="Script" path="res://UI/GameHud.cs" id="1_hwu3k"]
 [ext_resource type="PackedScene" uid="uid://x4qt3gxxhba3" path="res://UI/TowerCards/WaterCard.tscn" id="2_pbqwd"]
 [ext_resource type="PackedScene" uid="uid://sc10xs3uisya" path="res://UI/TowerCards/FireCard.tscn" id="3_y3npw"]
 [ext_resource type="PackedScene" uid="uid://brwusbwppthvm" path="res://UI/TowerCards/ElectricCard.tscn" id="4_nwdgm"]
 
-[node name="TowerPicker" type="Control"]
+[node name="GameHud" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
