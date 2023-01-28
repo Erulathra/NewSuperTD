@@ -1,0 +1,99 @@
+[gd_scene load_steps=2 format=3 uid="uid://5m4i0186fu7x"]
+
+[ext_resource type="FontFile" uid="uid://bx0goye7snm60" path="res://UI/Assets/Fonts/Kanit-SemiBold.ttf" id="1_77bf7"]
+
+[node name="VictoryUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -150.0
+offset_right = 300.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(300, 150)
+
+[node name="Title" type="RichTextLabel" parent="CanvasLayer/Panel"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.0
+offset_top = -144.0
+offset_right = 203.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_77bf7")
+theme_override_fonts/bold_font = ExtResource("1_77bf7")
+theme_override_font_sizes/bold_font_size = 80
+bbcode_enabled = true
+text = "[center][b]DEFEAT
+[/b][/center]"
+
+[node name="Stars" type="RichTextLabel" parent="CanvasLayer/Panel"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -203.0
+offset_top = -68.0
+offset_right = 202.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_separation = 0
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("1_77bf7")
+theme_override_fonts/bold_font = ExtResource("1_77bf7")
+theme_override_font_sizes/bold_font_size = 80
+bbcode_enabled = true
+text = "[color=red][wave][center][b]󰚌 󰚌 󰚌
+[/b][/center][/wave][/color]"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -229.0
+offset_top = 64.0
+offset_right = 228.0
+offset_bottom = 118.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="MenuButton" type="Button" parent="CanvasLayer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_77bf7")
+text = "MENU"
+
+[node name="TryAgainButton" type="Button" parent="CanvasLayer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_77bf7")
+text = "TRY AGAIN"
