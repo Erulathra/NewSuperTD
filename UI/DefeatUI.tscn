@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://5m4i0186fu7x"]
+[gd_scene load_steps=3 format=3 uid="uid://5m4i0186fu7x"]
 
 [ext_resource type="FontFile" uid="uid://bx0goye7snm60" path="res://UI/Assets/Fonts/Kanit-SemiBold.ttf" id="1_77bf7"]
+[ext_resource type="Theme" uid="uid://cctk7iosbnvio" path="res://UI/Resources/UITheme.tres" id="2_8qrlm"]
 
-[node name="VictoryUI" type="Control"]
+[node name="DefeatUI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,6 +26,7 @@ offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(300, 150)
+theme = ExtResource("2_8qrlm")
 
 [node name="Title" type="RichTextLabel" parent="CanvasLayer/Panel"]
 clip_contents = false

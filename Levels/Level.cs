@@ -1,5 +1,6 @@
 using Godot;
 using NewSuperTD.Managers;
+using NewSuperTD.UI;
 
 namespace NewSuperTD.Levels;
 
@@ -21,11 +22,13 @@ public partial class Level : Node3D
 
 	private void OnAllEnemiesAreDead()
 	{
-		GD.Print("Win");
+		VictoryUI newVictoryUi = victoryScene.Instantiate<VictoryUI>();
+		AddChild(newVictoryUi);
 	}
 
 	private void OnGameOver()
 	{
-		GD.Print("GameOver");
+		DefeatUI newDefeatUi = defeatScene.Instantiate<DefeatUI>();
+		AddChild(newDefeatUi);
 	}
 }

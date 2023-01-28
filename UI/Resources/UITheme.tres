@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cctk7iosbnvio"]
+
+[ext_resource type="StyleBox" uid="uid://1qxkby7kb3hc" path="res://UI/Resources/FlatWindowPanel.tres" id="1_07qi3"]
+[ext_resource type="FontFile" uid="uid://bx0goye7snm60" path="res://UI/Assets/Fonts/Kanit-SemiBold.ttf" id="1_p3eu4"]
+
+[resource]
+default_font = ExtResource("1_p3eu4")
+/styles/panel = ExtResource("1_07qi3")
+Control/styles/panel = ExtResource("1_07qi3")
