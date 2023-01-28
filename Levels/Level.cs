@@ -22,13 +22,13 @@ public partial class Level : Node3D
 
 	private void OnAllEnemiesAreDead()
 	{
-		VictoryUI newVictoryUi = victoryScene.Instantiate<VictoryUI>();
+		Node newVictoryUi = victoryScene.Instantiate();
 		AddChild(newVictoryUi);
 	}
 
 	private void OnGameOver()
 	{
-		DefeatUI newDefeatUi = defeatScene.Instantiate<DefeatUI>();
+		Node newDefeatUi = defeatScene.Instantiate();
 		AddChild(newDefeatUi);
 	}
 }

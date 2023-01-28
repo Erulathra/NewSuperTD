@@ -1,0 +1,39 @@
+[gd_scene load_steps=11 format=3 uid="uid://dd6q4mv3lo2gt"]
+
+[ext_resource type="Script" path="res://Levels/Level.cs" id="1_vd67q"]
+[ext_resource type="PackedScene" uid="uid://cswt0uo6mwcl4" path="res://UI/VictoryUI.tscn" id="2_dvqn0"]
+[ext_resource type="PackedScene" uid="uid://5m4i0186fu7x" path="res://UI/DefeatUI.tscn" id="3_t7ck4"]
+[ext_resource type="Script" path="res://Managers/TowerManager.cs" id="7_5gvar"]
+[ext_resource type="PackedScene" uid="uid://3q8ydn4i8hhp" path="res://Towers/ElectricTower.tscn" id="8_si7fc"]
+[ext_resource type="PackedScene" uid="uid://bnfue0hl64xru" path="res://Towers/FireTower.tscn" id="9_gkne6"]
+[ext_resource type="PackedScene" uid="uid://c2tj6156hkd7b" path="res://Towers/WaterTower.tscn" id="10_4abdx"]
+[ext_resource type="Script" path="res://Managers/EnemyManager.cs" id="11_8c810"]
+[ext_resource type="PackedScene" uid="uid://bt17ht02xr6uv" path="res://Enemies/Enemy.tscn" id="12_47ixc"]
+[ext_resource type="PackedScene" uid="uid://s7cg2vqiiw0j" path="res://UI/GameHud.tscn" id="13_jqps5"]
+
+[node name="TestMap" type="Node3D"]
+script = ExtResource("1_vd67q")
+TowersToThreeStars = 2
+TowersToTwoStars = 4
+victoryScene = ExtResource("2_dvqn0")
+defeatScene = ExtResource("3_t7ck4")
+
+[node name="Tiles" type="Node3D" parent="."]
+
+[node name="TowerManager" type="Node" parent="." node_paths=PackedStringArray("TilesParent")]
+script = ExtResource("7_5gvar")
+TilesParent = NodePath("../Tiles")
+TowerSceneDictionary = {
+"Electric": [ExtResource("8_si7fc"), 1],
+"Fire": [ExtResource("9_gkne6"), 3],
+"Water": [ExtResource("10_4abdx"), 1]
+}
+
+[node name="EnemyManager" type="Node" parent="."]
+script = ExtResource("11_8c810")
+enemyDictionary = {
+ExtResource("12_47ixc"): 5
+}
+spawnTickCount = 40
+
+[node name="GameHud" parent="." instance=ExtResource("13_jqps5")]

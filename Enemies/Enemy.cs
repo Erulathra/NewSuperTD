@@ -10,27 +10,28 @@ namespace NewSuperTD.Enemies;
 
 public partial class Enemy : Node3D
 {
-	[Signal]
-	public delegate void DeathEventHandler(Enemy enemy);
+	[Signal] public delegate void DeathEventHandler(Enemy enemy);
 
-	[Signal]
-	public delegate void ReachTargetEventHandler(Enemy enemy);
+	[Signal] public delegate void FinishMovingEventHandler();
+
+	[Signal] public delegate void ReachTargetEventHandler(Enemy enemy);
 
 	private GlobalTickTimer globalTickTimer;
 
-	private Tile targetTile;
-
 	[ExportGroup("Logic")]
 	[Export] private int healthPoints = 100;
-	[Export] private int thinkingTickCount = 20;
-	
+
+	private bool isGoingToDeath;
+
 	[ExportGroup("Animation")]
-	
 	[Export] private float jumpHeight = 0.2f;
+
 	[Export] private int moveTickCount = 10;
 
 	private Tween moveTween;
-	private bool isGoingToDeath = false;
+
+	private Tile targetTile;
+	[Export] private int thinkingTickCount = 20;
 
 	public int HealthPoints
 	{
@@ -38,7 +39,7 @@ public partial class Enemy : Node3D
 		set
 		{
 			healthPoints = value;
-			if (healthPoints <= 0)
+			if (healthPoints <= 0 && !isGoingToDeath)
 				OnDeath();
 		}
 	}
@@ -66,9 +67,7 @@ public partial class Enemy : Node3D
 		targetTile = neighbors.OfType<PathTile>().First(pathNeighbor => pathNeighbor.DistanceToKing < distanceToKing);
 
 		if (targetTile is KingTile)
-		{
 			EmitSignal(SignalName.ReachTarget, this);
-		}
 
 		StartMoving();
 	}
@@ -80,13 +79,18 @@ public partial class Enemy : Node3D
 		Vector3 targetPosition = targetTile.GetNode<Node3D>("SurfaceHandle").GlobalPosition;
 
 		float distanceBetweenParentAndTarget = (parentPosition - targetPosition).Length();
-		float tweenDuration = ((float)globalTickTimer.WaitTime * moveTickCount);
+		float tweenDuration = (float)globalTickTimer.WaitTime * moveTickCount;
 
 		Callable moveCallable = Callable.From((Vector3 newPosition) => Move(newPosition, distanceBetweenParentAndTarget));
 		moveTween = CreateTween();
 		moveTween.SetTrans(Tween.TransitionType.Sine);
 		moveTween.SetEase(Tween.EaseType.InOut);
 		moveTween.TweenMethod(moveCallable, parentPosition, targetPosition, tweenDuration);
+		moveTween.Parallel().TweenCallback(Callable.From(() =>
+		{
+			moveTween.Kill();
+			EmitSignal(SignalName.FinishMoving);
+		})).SetDelay(tweenDuration);
 
 		Animate(targetPosition, tweenDuration);
 	}
@@ -107,14 +111,23 @@ public partial class Enemy : Node3D
 	{
 		if (GetParent() == targetTile)
 			return;
-		
+
+		ModifierHandler oldParentModifierHandler = GetParent<Tile>().GetNode<ModifierHandler>("ModifierHandler");
+		oldParentModifierHandler.OnRegisterModifier -= OnParentRegisterModifier;
+
 		Reparent(targetTile);
 
 		ModifierHandler targetModifierHandler = targetTile.GetNode<ModifierHandler>("ModifierHandler");
 		foreach (Modifier modifier in targetModifierHandler.GetCurrentModifiersArray())
-		{
 			modifier.GetDamage(this);
-		}
+
+		targetModifierHandler.OnRegisterModifier += OnParentRegisterModifier;
+	}
+
+	private void OnParentRegisterModifier(Array<Modifier> currentModifiers)
+	{
+		foreach (Modifier modifier in currentModifiers)
+			modifier.GetDamage(this);
 	}
 
 	private async void OnDeath()
@@ -123,32 +136,28 @@ public partial class Enemy : Node3D
 		StopThinking();
 		await AnimateDeath();
 		EmitSignal(SignalName.Death, this);
-		
+
 		QueueFree();
 	}
 
-	private async Task Animate(Vector3 targetPosition, float tweenDuration)
+	private void Animate(Vector3 targetPosition, float tweenDuration)
 	{
+		AnimationPlayer animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		animationPlayer.Play("Jump");
+
 		Tween jumpTween = CreateTween();
 		jumpTween.SetTrans(Tween.TransitionType.Cubic);
 		jumpTween.SetEase(Tween.EaseType.InOut);
 		jumpTween.TweenProperty(this, "position:y", targetPosition.y + jumpHeight, tweenDuration / 2);
 		jumpTween.TweenProperty(this, "position:y", targetPosition.y, tweenDuration / 2);
-		
-		AnimationPlayer animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-		animationPlayer.Play("Jump");
-		await ToSignal(GetTree().CreateTimer(tweenDuration - 0.3), "timeout");
-		
-		if (isGoingToDeath)
-			return;
-		
-		animationPlayer.PlayBackwards("Jump");
+		jumpTween.Parallel().TweenCallback(Callable.From(() => animationPlayer.PlayBackwards("Jump"))).SetDelay(tweenDuration / 2 - 0.3);
 	}
+
 	public void AnimateDamage()
 	{
-		if (isGoingToDeath)
+		if (!IsInstanceValid(this))
 			return;
-		
+
 		AnimationPlayer animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		animationPlayer.Play("GetDamage");
 	}
@@ -156,8 +165,8 @@ public partial class Enemy : Node3D
 	private async Task AnimateDeath()
 	{
 		AnimationPlayer animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		await ToSignal(this, SignalName.FinishMoving);
 		animationPlayer.Stop();
-		await ToSignal(moveTween, Tween.SignalName.Finished);
 		animationPlayer.Play("Death");
 		await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
 	}

@@ -7,7 +7,7 @@ namespace NewSuperTD.Towers.Modifiers;
 
 public partial class ElectricModifier : Modifier
 {
-	[Export()] public int SpreadDelayTickCount { get; private set; } = 2;
+	[Export()] public int SpreadDelayTickCount { get; private set; } = 1;
 	[Export()] private int damage = 10;
 
 	public override void OnRegister(Tile tile, GlobalTickTimer globalTickTimer)

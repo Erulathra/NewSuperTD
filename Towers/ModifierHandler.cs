@@ -10,8 +10,7 @@ namespace NewSuperTD.Towers;
 
 public partial class ModifierHandler : Node
 {
-	[Signal]
-	public delegate void OnRegisterModifierEventHandler(Array<Modifier> currentModifiers);
+	[Signal] public delegate void OnRegisterModifierEventHandler(Array<Modifier> currentModifiers);
 
 	private HashSet<string> actualModifiers;
 	private GlobalTickTimer globalTickTimer;
