@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dftucwpdkrg2x"]
+[gd_scene load_steps=10 format=3 uid="uid://dftucwpdkrg2x"]
 
 [ext_resource type="Theme" uid="uid://cctk7iosbnvio" path="res://UI/Resources/UITheme.tres" id="1_gs2mq"]
 [ext_resource type="Script" path="res://Levels/MainMenu.cs" id="1_o6xs8"]
 [ext_resource type="PackedScene" uid="uid://rgrqvghutv4r" path="res://Tiles/Scenes/Tile.tscn" id="2_pa02s"]
 [ext_resource type="PackedScene" uid="uid://rumn1evlvsoi" path="res://Tiles/Scenes/PathTile.tscn" id="3_m88e4"]
 [ext_resource type="PackedScene" uid="uid://bnfue0hl64xru" path="res://Towers/FireTower.tscn" id="3_ptkax"]
+[ext_resource type="Script" path="res://GlobalTickTimer.cs" id="6_35av7"]
 
 [sub_resource type="Animation" id="Animation_omtil"]
 length = 0.001
@@ -88,7 +89,7 @@ text = "EXIT"
 
 [node name="CreditsWindow" type="Panel" parent="UI/CanvasLayer"]
 visible = false
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -192,6 +193,11 @@ HoverColor = Color(0, 0, 0, 0.490196)
 libraries = {
 "": SubResource("AnimationLibrary_nqjot")
 }
+
+[node name="GlobalTickTimer" type="Timer" parent="Node3D"]
+wait_time = 0.1
+autostart = true
+script = ExtResource("6_35av7")
 
 [connection signal="pressed" from="UI/CanvasLayer/VBoxContainer/PlayButton" to="." method="OnPressPlayButton"]
 [connection signal="pressed" from="UI/CanvasLayer/VBoxContainer/CreditsButton" to="." method="OnPressCreditsButton"]
