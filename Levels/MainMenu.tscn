@@ -86,6 +86,72 @@ theme = ExtResource("1_gs2mq")
 theme_override_font_sizes/font_size = 30
 text = "EXIT"
 
+[node name="CreditsWindow" type="Panel" parent="UI/CanvasLayer"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -150.0
+offset_right = 250.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_gs2mq")
+
+[node name="Title" type="RichTextLabel" parent="UI/CanvasLayer/CreditsWindow"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 15.0
+offset_top = 1.0
+offset_right = -89.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_gs2mq")
+theme_override_font_sizes/bold_font_size = 47
+bbcode_enabled = true
+text = "[b] CREDITS"
+
+[node name="Text" type="RichTextLabel" parent="UI/CanvasLayer/CreditsWindow"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -250.0
+offset_right = -20.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_gs2mq")
+theme_override_font_sizes/bold_font_size = 20
+bbcode_enabled = true
+text = "[b] [wave][center][rainbow]Szymon Świędrych
+Mateusz Banasik
+Stanisław Jarecki
+Anastazja Załataja [/rainbow]
+Game created for the \"Game Basic\" course
+on Lodz University of Techology"
+
+[node name="CreditsExitButton" type="Button" parent="UI/CanvasLayer/CreditsWindow"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -70.0
+offset_top = 15.0
+offset_right = -15.0
+offset_bottom = 70.0
+grow_horizontal = 0
+theme = ExtResource("1_gs2mq")
+theme_override_font_sizes/font_size = 30
+text = "X"
+
 [node name="Node3D" type="Node3D" parent="."]
 
 [node name="Tile8" parent="Node3D" instance=ExtResource("2_pa02s")]
@@ -126,3 +192,8 @@ HoverColor = Color(0, 0, 0, 0.490196)
 libraries = {
 "": SubResource("AnimationLibrary_nqjot")
 }
+
+[connection signal="pressed" from="UI/CanvasLayer/VBoxContainer/PlayButton" to="." method="OnPressPlayButton"]
+[connection signal="pressed" from="UI/CanvasLayer/VBoxContainer/CreditsButton" to="." method="OnPressCreditsButton"]
+[connection signal="pressed" from="UI/CanvasLayer/VBoxContainer/ExitButton" to="." method="OnPressExitButton"]
+[connection signal="pressed" from="UI/CanvasLayer/CreditsWindow/CreditsExitButton" to="." method="OnPressCreditsExitButton"]

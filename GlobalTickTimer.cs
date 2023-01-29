@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Godot;
 
 namespace NewSuperTD;
@@ -26,4 +27,9 @@ public partial class GlobalTickTimer : Timer
 		TickCount++;
 	}
 
+	public void StopAndResetTickCount()
+	{
+		Stop();
+		TickCount = 0;
+	}
 }
