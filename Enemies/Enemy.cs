@@ -148,8 +148,8 @@ public partial class Enemy : Node3D
 		Tween jumpTween = CreateTween();
 		jumpTween.SetTrans(Tween.TransitionType.Cubic);
 		jumpTween.SetEase(Tween.EaseType.InOut);
-		jumpTween.TweenProperty(this, "position:y", targetPosition.y + jumpHeight, tweenDuration / 2);
-		jumpTween.TweenProperty(this, "position:y", targetPosition.y, tweenDuration / 2);
+		jumpTween.TweenProperty(this, "position:y", targetPosition.Y + jumpHeight, tweenDuration / 2);
+		jumpTween.TweenProperty(this, "position:y", targetPosition.Y, tweenDuration / 2);
 		jumpTween.Parallel().TweenCallback(Callable.From(() => animationPlayer.PlayBackwards("Jump"))).SetDelay(tweenDuration / 2 - 0.3);
 	}
 

@@ -8,8 +8,12 @@ public partial class LevelManager : Node
 	[Export] private PackedScene mainMenuScene;
 	
 	private Level currentLevel;
-	
+	private MainMenu mainMenu;
+
 	public override void _Ready()
-	{ }
+	{
+		mainMenu = mainMenuScene.Instantiate<MainMenu>();
+		AddChild(mainMenu);
+	}
 
 }
