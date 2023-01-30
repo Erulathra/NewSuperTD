@@ -15,6 +15,9 @@ public partial class TowerManager : Node
 	[Export] public Node TilesParent;
 	[Export] public Dictionary<string, Array<Variant>> TowerSceneDictionary;
 
+	// Hack to bypass exported Dictionary godot bug
+	private Dictionary<string, Array<Variant>> currentTowerDictionary;
+
 	public Tile LastHoverTile { get; private set; }
 
 	public string ActualTower
@@ -31,7 +34,7 @@ public partial class TowerManager : Node
 				return;
 			}
 
-			if (!TowerSceneDictionary.ContainsKey(value))
+			if (!currentTowerDictionary.ContainsKey(value))
 			{
 				GD.PrintErr("Wrong Tower ID");
 				return;
@@ -44,6 +47,12 @@ public partial class TowerManager : Node
 
 	public override void _Ready()
 	{
+		currentTowerDictionary = new();
+		foreach (var tower in TowerSceneDictionary)
+		{
+			currentTowerDictionary.Add(tower.Key, new Array<Variant>(tower.Value));
+		}
+		
 		BindTileInputEvents();
 	}
 
@@ -102,24 +111,24 @@ public partial class TowerManager : Node
 		if (tile is PathTile)
 			return;
 
-		if ((int)TowerSceneDictionary[ActualTower][1] <= 0)
+		if ((int)currentTowerDictionary[ActualTower][1] <= 0)
 			return;
 
-		PackedScene towerScene = (PackedScene)TowerSceneDictionary[ActualTower][0];
+		PackedScene towerScene = (PackedScene)currentTowerDictionary[ActualTower][0];
 		Node3D newTower = towerScene.Instantiate<Node3D>();
 		tile.AddChild(newTower);
 		newTower.Name = "Tower";
 		newTower.Position = tile.GetNode<Node3D>("SurfaceHandle").Position;
 
-		int availableTowers = (int)TowerSceneDictionary[ActualTower][1] - 1;
-		TowerSceneDictionary[ActualTower][1] = availableTowers;
+		int availableTowers = (int)currentTowerDictionary[ActualTower][1] - 1;
+		currentTowerDictionary[ActualTower][1] = availableTowers;
 
 		EmitSignal(SignalName.TowerPlaced, newTower);
 	}
 
 	private int GetActualTowerRange()
 	{
-		PackedScene towerScene = (PackedScene)TowerSceneDictionary[ActualTower][0];
+		PackedScene towerScene = (PackedScene)currentTowerDictionary[ActualTower][0];
 		Tower tower = towerScene.Instantiate<Tower>();
 		return tower.Range;
 	}

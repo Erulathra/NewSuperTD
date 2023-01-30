@@ -101,3 +101,6 @@ size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("1_4cypc")
 text = "NEXT
 "
+
+[connection signal="pressed" from="CanvasLayer/Panel/HBoxContainer/MenuButton" to="." method="OnPressMenuButton"]
+[connection signal="pressed" from="CanvasLayer/Panel/HBoxContainer/NextButton" to="." method="OnPressContinueButton"]

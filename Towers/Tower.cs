@@ -5,10 +5,8 @@ using NewSuperTD.Tiles.Scenes;
 namespace NewSuperTD.Towers;
 public partial class Tower : Node3D
 {
-	[Export()]
-	public int Range { get; private set; } = 1;
-
-	[Export()] public int ThinkingTickCount { get; private set; } = 10;
+	[Export] public int Range { get; private set; } = 1;
+	[Export] public int ThinkingTickCount { get; private set; } = 10;
 	
 	public Array<Tile> TilesInRange { get; private set; }
 	public Tile OwnerTile { get; private set; }

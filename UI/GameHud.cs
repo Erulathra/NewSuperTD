@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
 using NewSuperTD.Tiles.Scenes;
@@ -6,13 +7,14 @@ using NewSuperTD.UI.TowerCards;
 
 public partial class GameHud : Control
 {
-	[Export] private Dictionary<string, PackedScene> towerCardsDictionary = new();
+	[Export] private Godot.Collections.Dictionary<string, PackedScene> towerCardsDictionary = new();
+	
 	private Array<TowerCard> cards = new();
-	private TowerCard selectedCard;
-	
-	private TowerManager towerManager;
 	private HBoxContainer hBox;
-	
+	private TowerCard selectedCard;
+
+	private TowerManager towerManager;
+
 	public override void _Ready()
 	{
 		base._Ready();
@@ -23,14 +25,14 @@ public partial class GameHud : Control
 	{
 		towerManager = GetParent().GetNode<TowerManager>("TowerManager");
 		towerManager.TowerPlaced += OnTowerPlaced;
-		
+
 		hBox = GetNode<HBoxContainer>("CanvasLayer/CardHorizontalBox");
 
-		Dictionary<string, Array<Variant>> towerSceneDictionary = towerManager.TowerSceneDictionary;
-		foreach (var tower in towerSceneDictionary)
+		Godot.Collections.Dictionary<string, Array<Variant>> towerSceneDictionary = towerManager.TowerSceneDictionary;
+		foreach (KeyValuePair<string, Array<Variant>> tower in towerSceneDictionary)
 		{
 			int availableTowers = (int)tower.Value[1];
-			
+
 			for (int i = 0; i < availableTowers; i++)
 			{
 				if (!towerCardsDictionary.ContainsKey(tower.Key))
@@ -38,11 +40,11 @@ public partial class GameHud : Control
 					GD.PushError($"No card in dictionary with id: {tower.Key}");
 					return;
 				}
-				
+
 				PackedScene cardScene = towerCardsDictionary[tower.Key];
 				TowerCard newCard = (TowerCard)cardScene.Instantiate();
 				newCard.TowerId = tower.Key;
-				
+
 				cards.Add(newCard);
 				hBox.AddChild(newCard);
 
@@ -61,20 +63,29 @@ public partial class GameHud : Control
 
 	private void OnCardUp(string towerId, TowerCard towerCard)
 	{
-		foreach (var card in cards)
-		{
+		foreach (TowerCard card in cards)
 			card.UnSelect();
-		}
-		
+
 		towerCard.Select();
 		selectedCard = towerCard;
 
 		towerManager.ActualTower = towerId;
 	}
 
-
 	private void SetTower(string towerId)
 	{
 		towerManager.ActualTower = towerId;
+	}
+
+	public async void OnPressRefreshButton()
+	{
+		LevelManager levelManager = (LevelManager) GetTree().Root.FindChild("LevelManager", true, false);
+		await levelManager.ReloadLevel();
+	}
+	
+	public async void OnPressMenuButton()
+	{
+		LevelManager levelManager = (LevelManager) GetTree().Root.FindChild("LevelManager", true, false);
+		await levelManager.LoadMainMenu();
 	}
 }

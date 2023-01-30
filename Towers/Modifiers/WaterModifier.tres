@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_1b85e")
 ModifierColor = Color(0, 1, 1, 0.313726)
-StayTickCount = 25
+StayTickCount = 10
 ModifierId = "Water"

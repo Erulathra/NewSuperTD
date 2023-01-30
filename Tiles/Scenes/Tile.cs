@@ -8,23 +8,18 @@ namespace NewSuperTD.Tiles.Scenes;
 [Tool]
 public partial class Tile : Node3D
 {
-	[Signal]
-	public delegate void InputEventEventHandler(Tile tile, InputEvent inputEvent);
-
-	[Signal]
-	public delegate void MouseEnterEventHandler(Tile tile);
-
-	[Signal]
-	public delegate void MouseExitEventHandler(Tile tile);
+	[Signal] public delegate void InputEventEventHandler(Tile tile, InputEvent inputEvent);
+	[Signal] public delegate void MouseEnterEventHandler(Tile tile);
+	[Signal] public delegate void MouseExitEventHandler(Tile tile);
 
 	[Export] public Color HoverColor = Color.Color8(0, 0, 0, 80);
+	[Export] public Color NormalColor = Color.FromString("#eeedd5", Colors.White);
+	
 	private bool isHovered;
 
 	private StandardMaterial3D material;
 	private Color modifiersColor = Colors.Transparent;
 	private Array<Tile> neighbors;
-
-	[Export] public Color NormalColor = Color.FromString("#eeedd5", Colors.White);
 
 	public Color ModifiersColor
 	{
@@ -109,6 +104,8 @@ public partial class Tile : Node3D
 
 	public Array<Tile> GetNeighbors()
 	{
+		neighbors ??= RaycastNeighbors();
+
 		return new Array<Tile>(neighbors);
 	}
 
@@ -116,10 +113,10 @@ public partial class Tile : Node3D
 	{
 		Array<Tile> result = new();
 
-		PhysicsDirectSpaceState3D spaceState = GetWorld3d().DirectSpaceState;
+		PhysicsDirectSpaceState3D spaceState = GetWorld3D().DirectSpaceState;
 
-		Basis globalBasis = GlobalTransform.basis;
-		Vector3[] worldDirections = { globalBasis.x, -globalBasis.x, globalBasis.z, -globalBasis.z };
+		Basis globalBasis = GlobalTransform.Basis;
+		Vector3[] worldDirections = { globalBasis.X, -globalBasis.X, globalBasis.Z, -globalBasis.Z };
 		foreach (Vector3 direction in worldDirections)
 		{
 			PhysicsRayQueryParameters3D raycastQuery = PhysicsRayQueryParameters3D.Create(Position, Position + 0.5f * direction);
