@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://5m4i0186fu7x"]
+[gd_scene load_steps=4 format=3 uid="uid://5m4i0186fu7x"]
 
 [ext_resource type="FontFile" uid="uid://bx0goye7snm60" path="res://UI/Assets/Fonts/Kanit-SemiBold.ttf" id="1_77bf7"]
+[ext_resource type="Script" path="res://UI/DefeatUI.cs" id="1_newu7"]
 [ext_resource type="Theme" uid="uid://cctk7iosbnvio" path="res://UI/Resources/UITheme.tres" id="2_8qrlm"]
 
 [node name="DefeatUI" type="Control"]
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_newu7")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -99,3 +101,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("1_77bf7")
 text = "TRY AGAIN"
+
+[connection signal="pressed" from="CanvasLayer/Panel/HBoxContainer/MenuButton" to="." method="OnPressMenuButton"]
+[connection signal="pressed" from="CanvasLayer/Panel/HBoxContainer/TryAgainButton" to="." method="OnPressReloadButton"]

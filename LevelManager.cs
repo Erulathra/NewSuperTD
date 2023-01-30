@@ -31,6 +31,7 @@ public partial class LevelManager : Node
 		CurrentLevel?.QueueFree();
 
 		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 
 		index = Mathf.Wrap(index, 0, Levels.Count);
 
@@ -49,6 +50,7 @@ public partial class LevelManager : Node
 		CurrentLevel?.QueueFree();
 		CurrentLevelIndex = -1;
 
+		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 		
 		CurrentLevel = mainMenuScene.Instantiate();
