@@ -13,11 +13,11 @@ public partial class EnemyManager : Node
 	[Signal] public delegate void GameOverEventHandler();
 	[Signal] public delegate void AllEnemiesAreDeadEventHandler();
 
-	private Array<Enemy> enemiesAlive = new();
-	[Export] private Dictionary<PackedScene, int> enemyDictionary = new();
-	private KingTile kingTile;
-
+	[Export] private Dictionary<PackedScene, int> enemyDictionary; //todo: copy this dict to avoid bug
 	[Export] private int spawnTickCount = 20;
+	
+	private KingTile kingTile;
+	private Array<Enemy> enemiesAlive = new();
 
 	private PathTile startTile;
 

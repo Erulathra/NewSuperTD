@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://s7cg2vqiiw0j"]
+[gd_scene load_steps=6 format=3 uid="uid://s7cg2vqiiw0j"]
 
 [ext_resource type="Script" path="res://UI/GameHud.cs" id="1_hwu3k"]
 [ext_resource type="PackedScene" uid="uid://x4qt3gxxhba3" path="res://UI/TowerCards/WaterCard.tscn" id="2_pbqwd"]
 [ext_resource type="PackedScene" uid="uid://sc10xs3uisya" path="res://UI/TowerCards/FireCard.tscn" id="3_y3npw"]
 [ext_resource type="PackedScene" uid="uid://brwusbwppthvm" path="res://UI/TowerCards/ElectricCard.tscn" id="4_nwdgm"]
+[ext_resource type="Theme" uid="uid://cctk7iosbnvio" path="res://UI/Resources/UITheme.tres" id="5_5825f"]
 
 [node name="GameHud" type="Control"]
 layout_mode = 3
@@ -35,3 +36,32 @@ offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
+
+[node name="MenuButton" type="Button" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -70.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -70.0
+grow_horizontal = 0
+theme = ExtResource("5_5825f")
+theme_override_font_sizes/font_size = 28
+text = "󰍜"
+
+[node name="ReplayButton" type="Button" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -133.0
+offset_top = 20.0
+offset_right = -83.0
+offset_bottom = 71.0
+grow_horizontal = 0
+theme = ExtResource("5_5825f")
+theme_override_font_sizes/font_size = 28
+text = ""
+
+[connection signal="pressed" from="CanvasLayer/MenuButton" to="." method="OnPressMenuButton"]
+[connection signal="pressed" from="CanvasLayer/ReplayButton" to="." method="OnPressRefreshButton"]

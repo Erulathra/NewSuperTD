@@ -6,56 +6,52 @@ using NewSuperTD.Levels;
 
 public partial class LevelManager : Node
 {
-	[Export(PropertyHint.ArrayType, "PackedScene")]
-	private Array<PackedScene> Levels;
+	[Export(PropertyHint.File, "*.tscn")]
+	private Array<string> Levels;
 	[Export] private PackedScene mainMenuScene;
 	
-	public Level CurrentLevel { get; private set; }
+	public Node CurrentLevel { get; private set; }
 	public int CurrentLevelIndex { get; private set; }
 	
-	private MainMenu mainMenu;
-
 	public override void _Ready()
 	{
 		CurrentLevelIndex = -1;
-		mainMenu = mainMenuScene.Instantiate<MainMenu>();
-		AddChild(mainMenu);
+		CurrentLevel = mainMenuScene.Instantiate<MainMenu>();
+		AddChild(CurrentLevel);
 	}
 
-	public async void LoadLevel(int index)
+	public async Task ReloadLevel()
+	{
+		await LoadLevel(CurrentLevelIndex);
+	}
+
+	public async Task LoadLevel(int index)
 	{
 		await SceneTransitionOut();
 
-		if (CurrentLevel != null)
-		{
-			CurrentLevel.QueueFree();
-			CurrentLevel = null;
-		}
-
-		if (mainMenu != null)
-		{
-			mainMenu.QueueFree();
-			mainMenu = null;
-		}
+		CurrentLevel?.QueueFree();
 
 		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 
-		CurrentLevel = Levels[index].Instantiate<Level>();
-		AddChild(CurrentLevel);
+		PackedScene packedLevel = GD.Load<PackedScene>(Levels[index]);
+		var newLevel = packedLevel.Instantiate();
+		AddChild(newLevel);
 		CurrentLevelIndex = index;
+
+		CurrentLevel = newLevel;
 
 		await SceneTransitionIn();
 	}
 
-	public async void LoadMainMenu()
+	public async Task LoadMainMenu()
 	{
-		await SceneTransitionOut();
-		
-		CurrentLevel.QueueFree();
+		CurrentLevel?.QueueFree();
 		CurrentLevelIndex = -1;
+
+		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 		
-		mainMenu = mainMenuScene.Instantiate<MainMenu>();
-		AddChild(mainMenu);
+		CurrentLevel = mainMenuScene.Instantiate();
+		AddChild(CurrentLevel);
 
 		await SceneTransitionIn();
 	}
