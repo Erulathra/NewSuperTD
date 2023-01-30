@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dt1ke6qujvd68"]
+[gd_scene load_steps=9 format=3 uid="uid://dt1ke6qujvd68"]
 
 [ext_resource type="Environment" uid="uid://s5s07pbsd5hr" path="res://Enviroment.tres" id="3_e4oaw"]
 [ext_resource type="Script" path="res://Managers/ModifiersManager.cs" id="4_2ea15"]
@@ -6,9 +6,12 @@
 [ext_resource type="Resource" uid="uid://c4tvjdomlw6y8" path="res://Towers/Modifiers/WaterModifier.tres" id="6_am3r5"]
 [ext_resource type="Resource" uid="uid://b0x2l2wtq5ehh" path="res://Towers/Modifiers/ElectricModifier.tres" id="7_3afk6"]
 [ext_resource type="PackedScene" uid="uid://dftucwpdkrg2x" path="res://Levels/MainMenu.tscn" id="8_bgane"]
+[ext_resource type="PackedScene" uid="uid://drk76idhioois" path="res://UI/LevelTransitions.tscn" id="8_n1wn0"]
 [ext_resource type="Script" path="res://LevelManager.cs" id="8_rviaj"]
 
 [node name="Root" type="Node3D"]
+
+[node name="SceneTransitions" parent="." instance=ExtResource("8_n1wn0")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("3_e4oaw")

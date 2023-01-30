@@ -26,7 +26,7 @@ public partial class LevelManager : Node
 
 	public async Task LoadLevel(int index)
 	{
-		await SceneTransitionOut();
+		await SceneTransitionIn();
 
 		CurrentLevel?.QueueFree();
 
@@ -36,17 +36,19 @@ public partial class LevelManager : Node
 		index = Mathf.Wrap(index, 0, Levels.Count);
 
 		PackedScene packedLevel = GD.Load<PackedScene>(Levels[index]);
-		var newLevel = packedLevel.Instantiate();
+		Node newLevel = packedLevel.Instantiate();
 		AddChild(newLevel);
 		CurrentLevelIndex = index;
 
 		CurrentLevel = newLevel;
 
-		await SceneTransitionIn();
+		await SceneTransitionOut();
 	}
 
 	public async Task LoadMainMenu()
 	{
+		await SceneTransitionIn();
+		
 		CurrentLevel?.QueueFree();
 		CurrentLevelIndex = -1;
 
@@ -56,16 +58,18 @@ public partial class LevelManager : Node
 		CurrentLevel = mainMenuScene.Instantiate();
 		AddChild(CurrentLevel);
 
-		await SceneTransitionIn();
+		await SceneTransitionOut();
 	}
 
 	public async Task SceneTransitionIn()
 	{
-		GD.Print("IN");
+		LevelTransitions levelTransitions = (LevelTransitions) GetTree().Root.FindChild("SceneTransitions", true, false);
+		await levelTransitions.AnimateIn();
 	}
 	
 	public async Task SceneTransitionOut()
 	{
-		GD.Print("OUT");
+		LevelTransitions levelTransitions = (LevelTransitions) GetTree().Root.FindChild("SceneTransitions", true, false);
+		await levelTransitions.AnimateOut();
 	}
 }
