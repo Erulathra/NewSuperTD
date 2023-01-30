@@ -77,15 +77,15 @@ public partial class GameHud : Control
 		towerManager.ActualTower = towerId;
 	}
 
-	public void OnPressRefreshButton()
+	public async void OnPressRefreshButton()
 	{
 		LevelManager levelManager = (LevelManager) GetTree().Root.FindChild("LevelManager", true, false);
-		levelManager.ReloadLevel();
+		await levelManager.ReloadLevel();
 	}
 	
-	public void OnPressMenuButton()
+	public async void OnPressMenuButton()
 	{
 		LevelManager levelManager = (LevelManager) GetTree().Root.FindChild("LevelManager", true, false);
-		levelManager.LoadMainMenu();
+		await levelManager.LoadMainMenu();
 	}
 }

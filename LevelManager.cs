@@ -32,6 +32,8 @@ public partial class LevelManager : Node
 
 		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 
+		index = Mathf.Wrap(index, 0, Levels.Count);
+
 		PackedScene packedLevel = GD.Load<PackedScene>(Levels[index]);
 		var newLevel = packedLevel.Instantiate();
 		AddChild(newLevel);

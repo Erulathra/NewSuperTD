@@ -27,8 +27,8 @@ public partial class MainMenu : Node
 		GetTree().Quit();
 	}
 
-	void OnPressPlayButton()
+	async void OnPressPlayButton()
 	{
-		GetParent<LevelManager>().LoadLevel(0);
+		await GetParent<LevelManager>().LoadLevel(2);
 	}
 }
