@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cxob8gi240aqf"]
+
+[node name="BaseButton" type="Button"]
+anchors_preset = -1
+offset_right = 650.0
+offset_bottom = 419.0
