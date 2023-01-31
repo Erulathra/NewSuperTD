@@ -5,15 +5,15 @@ namespace NewSuperTD.Levels;
 
 public partial class BaseButton : Button
 {
-	private Button button;
+	/*private Button button;
 	public override void _Ready()
 	{
 		button = GetNode<Button>(".");
 		
-	}
-	public async void ChangeLevelPress()
+	}*/
+	public void ChangeLevelPress()
 	{
 		 //GetTree().ChangeSceneToFile(button.SceneFilePath);
-		 GetTree().ChangeSceneToFile("res://MainScene.tscn");
+		GetTree().ChangeSceneToFile("res://MainScene.tscn");
 	}
 }
