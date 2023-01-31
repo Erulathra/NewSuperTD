@@ -48,26 +48,3 @@ public partial class ChooseLevelMenu : Node
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

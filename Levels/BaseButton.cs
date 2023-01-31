@@ -3,12 +3,17 @@ using Godot;
 
 namespace NewSuperTD.Levels;
 
-public partial class BaseButton : Control
+public partial class BaseButton : Button
 {
-	
+	private Button button;
+	public override void _Ready()
+	{
+		button = GetNode<Button>(".");
+		
+	}
 	public async void ChangeLevelPress()
 	{
-		LevelManager levelManager = (LevelManager) GetTree().Root.FindChild("LevelManager", true, false);
-		await levelManager.LoadLevel(2);
+		 //GetTree().ChangeSceneToFile(button.SceneFilePath);
+		 GetTree().ChangeSceneToFile("res://MainScene.tscn");
 	}
 }

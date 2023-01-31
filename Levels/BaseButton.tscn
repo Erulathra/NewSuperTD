@@ -1,6 +1,14 @@
-[gd_scene format=3 uid="uid://cxob8gi240aqf"]
+[gd_scene load_steps=2 format=3 uid="uid://cxob8gi240aqf"]
+
+[ext_resource type="Script" path="res://Levels/BaseButton.cs" id="1_hv5wp"]
 
 [node name="BaseButton" type="Button"]
 anchors_preset = -1
-offset_right = 650.0
-offset_bottom = 419.0
+anchor_right = 0.191406
+anchor_bottom = 0.227778
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_hv5wp")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="." to="." method="ChangeLevelPress"]
