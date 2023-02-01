@@ -49,6 +49,7 @@ script = ExtResource("1_gk4k3")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_hp5hf")
+
 mesh = ExtResource("2_4lsdi")
 
 [node name="Area3D" type="Area3D" parent="Mesh"]
