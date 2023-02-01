@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dftucwpdkrg2x"]
+[gd_scene load_steps=11 format=3 uid="uid://dftucwpdkrg2x"]
 
 [ext_resource type="Theme" uid="uid://cctk7iosbnvio" path="res://UI/Resources/UITheme.tres" id="1_gs2mq"]
 [ext_resource type="Script" path="res://Levels/MainMenu.cs" id="1_o6xs8"]
 [ext_resource type="PackedScene" uid="uid://rgrqvghutv4r" path="res://Tiles/Scenes/Tile.tscn" id="2_pa02s"]
+[ext_resource type="PackedScene" uid="uid://byxyuafhvejio" path="res://UI/LevelSelectionMenu/LevelSelectionMenu.tscn" id="3_8vpgk"]
 [ext_resource type="PackedScene" uid="uid://rumn1evlvsoi" path="res://Tiles/Scenes/PathTile.tscn" id="3_m88e4"]
 [ext_resource type="PackedScene" uid="uid://bnfue0hl64xru" path="res://Towers/FireTower.tscn" id="3_ptkax"]
 [ext_resource type="Script" path="res://GlobalTickTimer.cs" id="6_35av7"]
@@ -153,48 +154,51 @@ theme = ExtResource("1_gs2mq")
 theme_override_font_sizes/font_size = 30
 text = "X"
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="LevelSelector" parent="UI" instance=ExtResource("3_8vpgk")]
+visible = false
 
-[node name="Tile8" parent="Node3D" instance=ExtResource("2_pa02s")]
+[node name="Background" type="Node3D" parent="."]
+
+[node name="Tile8" parent="Background" instance=ExtResource("2_pa02s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
-[node name="Tile12" parent="Node3D" instance=ExtResource("2_pa02s")]
+[node name="Tile12" parent="Background" instance=ExtResource("2_pa02s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
 
-[node name="Tile9" parent="Node3D" instance=ExtResource("2_pa02s")]
+[node name="Tile9" parent="Background" instance=ExtResource("2_pa02s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 
-[node name="Tile33" parent="Node3D" instance=ExtResource("2_pa02s")]
+[node name="Tile33" parent="Background" instance=ExtResource("2_pa02s")]
 
-[node name="FireTower" parent="Node3D/Tile33" instance=ExtResource("3_ptkax")]
+[node name="FireTower" parent="Background/Tile33" instance=ExtResource("3_ptkax")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110785, 0)
 
-[node name="PathTile5" parent="Node3D" instance=ExtResource("3_m88e4")]
+[node name="PathTile5" parent="Background" instance=ExtResource("3_m88e4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
 HoverColor = Color(0, 0, 0, 0.490196)
 
-[node name="PathTile6" parent="Node3D" instance=ExtResource("3_m88e4")]
+[node name="PathTile6" parent="Background" instance=ExtResource("3_m88e4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 HoverColor = Color(0, 0, 0, 0.490196)
 
-[node name="PathTile7" parent="Node3D" instance=ExtResource("3_m88e4")]
+[node name="PathTile7" parent="Background" instance=ExtResource("3_m88e4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
 HoverColor = Color(0, 0, 0, 0.490196)
 
-[node name="PathTile8" parent="Node3D" instance=ExtResource("3_m88e4")]
+[node name="PathTile8" parent="Background" instance=ExtResource("3_m88e4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 HoverColor = Color(0, 0, 0, 0.490196)
 
-[node name="PathTile9" parent="Node3D" instance=ExtResource("3_m88e4")]
+[node name="PathTile9" parent="Background" instance=ExtResource("3_m88e4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
 HoverColor = Color(0, 0, 0, 0.490196)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background"]
 libraries = {
 "": SubResource("AnimationLibrary_nqjot")
 }
 
-[node name="GlobalTickTimer" type="Timer" parent="Node3D"]
+[node name="GlobalTickTimer" type="Timer" parent="Background"]
 wait_time = 0.1
 autostart = true
 script = ExtResource("6_35av7")

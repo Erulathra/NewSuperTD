@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://byxyuafhvejio"]
+
+[ext_resource type="Script" path="res://UI/LevelSelectionMenu/LevelSelectionMenu.cs" id="1_gin3o"]
+[ext_resource type="PackedScene" uid="uid://e8raqh038bj3" path="res://UI/LevelSelectionMenu/LevelButton.tscn" id="2_4nlbr"]
+[ext_resource type="Theme" uid="uid://cctk7iosbnvio" path="res://UI/Resources/UITheme.tres" id="2_d5ej8"]
+[ext_resource type="FontFile" uid="uid://bx0goye7snm60" path="res://UI/Assets/Fonts/Kanit-SemiBold.ttf" id="3_eh0ks"]
+
+[node name="LevelSelector" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_gin3o")
+levelButtonPackedScene = ExtResource("2_4nlbr")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 0.279968
+theme = ExtResource("2_d5ej8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_d5ej8")
+theme_override_fonts/font = ExtResource("3_eh0ks")
+theme_override_font_sizes/font_size = 64
+text = "PICK A LEVEL"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer" type="Control" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+columns = 4
+
+[node name="Spacer2" type="Control" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3

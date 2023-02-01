@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://e8raqh038bj3"]
+
+[ext_resource type="Theme" uid="uid://cctk7iosbnvio" path="res://UI/Resources/UITheme.tres" id="1_ljuvp"]
+[ext_resource type="Script" path="res://UI/LevelSelectionMenu/LevelButton.cs" id="2_wpdtg"]
+
+[node name="LevelButton" type="Button"]
+custom_minimum_size = Vector2(150, 100)
+anchors_preset = -1
+anchor_left = -0.021
+anchor_top = -0.031
+anchor_right = 0.096
+anchor_bottom = 0.108
+offset_left = 26.88
+offset_top = 22.32
+offset_right = -25.88
+offset_bottom = -21.76
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ljuvp")
+theme_override_font_sizes/font_size = 30
+icon_alignment = 1
+script = ExtResource("2_wpdtg")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="." to="." method="OnPress"]

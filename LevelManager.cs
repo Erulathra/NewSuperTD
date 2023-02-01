@@ -19,11 +19,16 @@ public partial class LevelManager : Node
 		AddChild(CurrentLevel);
 	}
 
+	public int GetLevelsCount()
+	{
+		return Levels.Count;
+	}
+
 	public async Task ReloadLevel()
 	{
 		await LoadLevel(CurrentLevelIndex);
 	}
-
+	
 	public async Task LoadLevel(int index)
 	{
 		await SceneTransitionIn();
