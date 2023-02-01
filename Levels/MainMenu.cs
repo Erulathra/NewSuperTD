@@ -6,7 +6,7 @@ public partial class MainMenu : Node
 {
 	public override void _Ready()
 	{
-		AnimationPlayer animationPlayer = GetNode<AnimationPlayer>("Node3D/AnimationPlayer");
+		AnimationPlayer animationPlayer = GetNode<AnimationPlayer>("Background/AnimationPlayer");
 		animationPlayer.Play("Rotate");
 	}
 
@@ -27,8 +27,9 @@ public partial class MainMenu : Node
 		GetTree().Quit();
 	}
 
-	async void OnPressPlayButton()
+	void OnPressPlayButton()
 	{
-		await GetParent<LevelManager>().LoadLevel(2);
+		CanvasLayer levelSelector = GetNode<CanvasLayer>("UI/LevelSelector");
+		levelSelector.Visible = true;
 	}
 }
