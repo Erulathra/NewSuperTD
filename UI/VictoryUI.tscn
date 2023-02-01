@@ -95,6 +95,13 @@ theme = ExtResource("4_nof6h")
 theme_override_fonts/font = ExtResource("1_4cypc")
 text = "MENU"
 
+[node name="RepeatButton" type="Button" parent="CanvasLayer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_nof6h")
+theme_override_fonts/font = ExtResource("1_4cypc")
+text = "REPEAT"
+
 [node name="NextButton" type="Button" parent="CanvasLayer/Panel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -103,4 +110,5 @@ text = "NEXT
 "
 
 [connection signal="pressed" from="CanvasLayer/Panel/HBoxContainer/MenuButton" to="." method="OnPressMenuButton"]
+[connection signal="pressed" from="CanvasLayer/Panel/HBoxContainer/RepeatButton" to="." method="OnPressRepeatButton"]
 [connection signal="pressed" from="CanvasLayer/Panel/HBoxContainer/NextButton" to="." method="OnPressContinueButton"]
