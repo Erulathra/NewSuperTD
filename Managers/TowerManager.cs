@@ -14,6 +14,7 @@ public partial class TowerManager : Node
 
 	[Export] public Node TilesParent;
 	[Export] public Dictionary<string, Array<Variant>> TowerSceneDictionary;
+	public int PlacedTowersCount { get; private set; } = 0;
 
 	// Hack to bypass exported Dictionary godot bug
 	private Dictionary<string, Array<Variant>> currentTowerDictionary;
@@ -91,9 +92,6 @@ public partial class TowerManager : Node
 			nearTile.IsHovered = false;
 	}
 
-	public override void _Process(double delta)
-	{ }
-
 	private void OnTileClick(Tile tile, InputEvent inputEvent)
 	{
 		InputEventMouseButton mouseButtonEvent = inputEvent as InputEventMouseButton;
@@ -123,6 +121,7 @@ public partial class TowerManager : Node
 		int availableTowers = (int)currentTowerDictionary[ActualTower][1] - 1;
 		currentTowerDictionary[ActualTower][1] = availableTowers;
 
+		PlacedTowersCount++;
 		EmitSignal(SignalName.TowerPlaced, newTower);
 	}
 
