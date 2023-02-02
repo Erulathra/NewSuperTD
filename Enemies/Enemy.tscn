@@ -1,10 +1,88 @@
-[gd_scene load_steps=9 format=3 uid="uid://bt17ht02xr6uv"]
+[gd_scene load_steps=21 format=3 uid="uid://bt17ht02xr6uv"]
 
 [ext_resource type="Script" path="res://Enemies/Enemy.cs" id="1_uft23"]
 [ext_resource type="ArrayMesh" uid="uid://d3b8dynmarn6y" path="res://Enemies/Models/Pawn.obj" id="1_yh24e"]
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_36rmn"]
 albedo_color = Color(0.337255, 0.32549, 0.321569, 1)
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_eh3ee"]
+enabled_inputs = 2
+input_0/name = "Jumping"
+input_0/auto_advance = false
+input_1/name = "Landing"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fa738"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3mp2r"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_va5hu"]
+enabled_inputs = 2
+input_0/name = "GetDamage"
+input_0/auto_advance = true
+input_1/name = "Idle"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eouod"]
+animation = &"Death"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ix0dh"]
+animation = &"GetDamage"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_6m6jc"]
+filter_enabled = true
+filters = ["Pawn:position", "Pawn:rotation"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kmkvj"]
+animation = &"Jump"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_b1wf2"]
+enabled_inputs = 2
+input_0/name = "Jumping"
+input_0/auto_advance = false
+input_1/name = "Idle"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0o2l4"]
+animation = &"Jump"
+play_mode = 1
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_gvnrj"]
+enabled_inputs = 2
+input_0/name = "Living"
+input_0/auto_advance = false
+input_1/name = "Death"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5xps7"]
+graph_offset = Vector2(-229.415, -16.9467)
+nodes/AirTransition/node = SubResource("AnimationNodeTransition_eh3ee")
+nodes/AirTransition/position = Vector2(20, -20)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_3mp2r")
+nodes/Animation/position = Vector2(60, 160)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_fa738")
+"nodes/Animation 2/position" = Vector2(0, 440)
+nodes/DamageTransition/node = SubResource("AnimationNodeTransition_va5hu")
+nodes/DamageTransition/position = Vector2(260, 280)
+nodes/Death/node = SubResource("AnimationNodeAnimation_eouod")
+nodes/Death/position = Vector2(540, 220)
+nodes/GetDamage/node = SubResource("AnimationNodeAnimation_ix0dh")
+nodes/GetDamage/position = Vector2(0, 320)
+nodes/GetDamageBlending/node = SubResource("AnimationNodeBlend2_6m6jc")
+nodes/GetDamageBlending/position = Vector2(480, 20)
+nodes/Jump/node = SubResource("AnimationNodeAnimation_kmkvj")
+nodes/Jump/position = Vector2(-200, -40)
+nodes/JumpingTransition/node = SubResource("AnimationNodeTransition_b1wf2")
+nodes/JumpingTransition/position = Vector2(260, 20)
+nodes/Landing/node = SubResource("AnimationNodeAnimation_0o2l4")
+nodes/Landing/position = Vector2(-200, 80)
+nodes/LivingTransition/node = SubResource("AnimationNodeTransition_gvnrj")
+nodes/LivingTransition/position = Vector2(780, 60)
+nodes/output/position = Vector2(1020, 20)
+node_connections = [&"output", 0, &"LivingTransition", &"GetDamageBlending", 0, &"JumpingTransition", &"GetDamageBlending", 1, &"DamageTransition", &"AirTransition", 0, &"Jump", &"AirTransition", 1, &"Landing", &"JumpingTransition", 0, &"AirTransition", &"JumpingTransition", 1, &"Animation", &"DamageTransition", 0, &"GetDamage", &"DamageTransition", 1, &"Animation 2", &"LivingTransition", 0, &"GetDamageBlending", &"LivingTransition", 1, &"Death"]
 
 [sub_resource type="Animation" id="Animation_54jjo"]
 resource_name = "Death"
@@ -46,7 +124,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.15),
 "transitions": PackedFloat32Array(1, 0.101532, 1),
-"update": 1,
+"update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0.0882233, 0, 0.0920504), Vector3(0, 0, 0)]
 }
 
@@ -162,6 +240,24 @@ script = ExtResource("1_uft23")
 [node name="Pawn" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_yh24e")
 surface_material_override/0 = SubResource("ORMMaterial3D_36rmn")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_5xps7")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/AirTransition/current_state = "Jumping"
+parameters/AirTransition/transition_request = ""
+parameters/AirTransition/current_index = 0
+parameters/DamageTransition/current_state = "Idle"
+parameters/DamageTransition/transition_request = ""
+parameters/DamageTransition/current_index = 1
+parameters/GetDamageBlending/blend_amount = 1.0
+parameters/JumpingTransition/current_state = "Idle"
+parameters/JumpingTransition/transition_request = ""
+parameters/JumpingTransition/current_index = 1
+parameters/LivingTransition/current_state = "Living"
+parameters/LivingTransition/transition_request = ""
+parameters/LivingTransition/current_index = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
