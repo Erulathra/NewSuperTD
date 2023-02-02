@@ -1,11 +1,12 @@
-[gd_scene load_steps=21 format=3 uid="uid://bt17ht02xr6uv"]
+[gd_scene load_steps=21 format=3 uid="uid://s8qhcd7ef3mj"]
 
-[ext_resource type="Script" path="res://Enemies/Enemy.cs" id="1_uft23"]
-[ext_resource type="ArrayMesh" uid="uid://d3b8dynmarn6y" path="res://Enemies/Models/Pawn.obj" id="1_yh24e"]
+[ext_resource type="Script" path="res://Enemies/Enemy.cs" id="1_lfvwu"]
+[ext_resource type="ArrayMesh" uid="uid://d3b8dynmarn6y" path="res://Enemies/Models/Pawn.obj" id="2_3hdkk"]
 
-[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_36rmn"]
-resource_local_to_scene = true
-albedo_color = Color(0.337255, 0.32549, 0.321569, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_snogy"]
+albedo_color = Color(0.466667, 0.278431, 0.0666667, 1)
+metallic = 1.0
+roughness = 0.28
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_eh3ee"]
 enabled_inputs = 2
@@ -138,7 +139,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Color(0.337255, 0.32549, 0.321569, 1), Color(0.501961, 0, 0, 1), Color(0.501961, 0, 0, 1), Color(0.337255, 0.32549, 0.321569, 1)]
+"values": [Color(0.466667, 0.278431, 0.0666667, 1), Color(0.501961, 0, 0, 1), Color(0.501961, 0, 0, 1), Color(0.466667, 0.278431, 0.0666667, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_6d6aq"]
@@ -247,7 +248,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0.337255, 0.32549, 0.321569, 1)]
+"values": [Color(0.466667, 0.278431, 0.0666667, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_akpps"]
@@ -260,11 +261,13 @@ _data = {
 
 [node name="Enemy" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0032537, 0, 0)
-script = ExtResource("1_uft23")
+script = ExtResource("1_lfvwu")
+healthPoints = 200
+thinkingTickCount = 40
 
 [node name="Pawn" type="MeshInstance3D" parent="."]
-mesh = ExtResource("1_yh24e")
-surface_material_override/0 = SubResource("ORMMaterial3D_36rmn")
+mesh = ExtResource("2_3hdkk")
+surface_material_override/0 = SubResource("StandardMaterial3D_snogy")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_5xps7")
@@ -288,5 +291,3 @@ parameters/LivingTransition/current_index = 0
 libraries = {
 "": SubResource("AnimationLibrary_akpps")
 }
-
-[node name="Test" type="Node" parent="."]

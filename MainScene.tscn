@@ -34,5 +34,5 @@ ModifiersDictionary = {
 
 [node name="LevelManager" type="Node" parent="."]
 script = ExtResource("8_rviaj")
-Levels = ["res://Levels/Tutorial.tscn", "res://Levels/FireLevel.tscn", "res://Levels/TutorialWater.tscn"]
+Levels = ["res://Levels/Tutorial.tscn", "res://Levels/FireLevel.tscn", "res://Levels/ThickEnemyTutorial.tscn", "res://Levels/TutorialWater.tscn"]
 mainMenuScene = ExtResource("8_bgane")
