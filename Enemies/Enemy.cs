@@ -11,27 +11,22 @@ namespace NewSuperTD.Enemies;
 public partial class Enemy : Node3D
 {
 	[Signal] public delegate void DeathEventHandler(Enemy enemy);
-
 	[Signal] public delegate void FinishMovingEventHandler();
-
 	[Signal] public delegate void ReachTargetEventHandler(Enemy enemy);
-
-	private GlobalTickTimer globalTickTimer;
 
 	[ExportGroup("Logic")]
 	[Export] private int healthPoints = 100;
-
-	private bool isGoingToDeath;
+	[Export] private int thinkingTickCount = 20;
 
 	[ExportGroup("Animation")]
 	[Export] private float jumpHeight = 0.2f;
-
 	[Export] private int moveTickCount = 10;
-
+	
+	private bool isGoingToDeath;
 	private Tween moveTween;
-
 	private Tile targetTile;
-	[Export] private int thinkingTickCount = 20;
+	
+	private GlobalTickTimer globalTickTimer;
 
 	public int HealthPoints
 	{
@@ -135,22 +130,34 @@ public partial class Enemy : Node3D
 		isGoingToDeath = true;
 		StopThinking();
 		await AnimateDeath();
-		EmitSignal(SignalName.Death, this);
 
-		QueueFree();
+		AnimationTree animationTree = GetNode<AnimationTree>("AnimationTree");
+		animationTree.AnimationFinished += animationName =>
+		{
+			if (animationName != "Death")
+				return;
+			
+			EmitSignal(SignalName.Death, this);
+			QueueFree();
+		};
 	}
 
 	private void Animate(Vector3 targetPosition, float tweenDuration)
 	{
-		AnimationPlayer animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-		animationPlayer.Play("Jump");
+		AnimationTree animationTree = GetNode<AnimationTree>("AnimationTree");
+		animationTree.Set("parameters/AirTransition/transition_request", "Jumping");
+		animationTree.Set("parameters/JumpingTransition/transition_request", "Jumping");
 
 		Tween jumpTween = CreateTween();
 		jumpTween.SetTrans(Tween.TransitionType.Cubic);
 		jumpTween.SetEase(Tween.EaseType.InOut);
 		jumpTween.TweenProperty(this, "position:y", targetPosition.Y + jumpHeight, tweenDuration / 2);
 		jumpTween.TweenProperty(this, "position:y", targetPosition.Y, tweenDuration / 2);
-		jumpTween.Parallel().TweenCallback(Callable.From(() => animationPlayer.PlayBackwards("Jump"))).SetDelay(tweenDuration / 2 - 0.3);
+		jumpTween.Parallel().TweenCallback(Callable.From(() =>
+		{
+			animationTree.Set("parameters/AirTransition/transition_request", "Landing");
+			animationTree.Set("parameters/JumpingTransition/transition_request", "Jumping");
+		})).SetDelay(tweenDuration / 2 - 0.3);
 	}
 
 	public void AnimateDamage()
@@ -158,20 +165,15 @@ public partial class Enemy : Node3D
 		if (!IsInstanceValid(this))
 			return;
 
-		AnimationPlayer animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-		
-		if (animationPlayer.IsPlaying())
-			animationPlayer.Queue("GedDamage");
-		else
-			animationPlayer.Play("GetDamage");
+		AnimationTree animationTree = GetNode<AnimationTree>("AnimationTree");
+		animationTree.Set("parameters/DamageTransition/transition_request", "GetDamage");
 	}
 
 	private async Task AnimateDeath()
 	{
-		AnimationPlayer animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		await ToSignal(this, SignalName.FinishMoving);
-		animationPlayer.Stop();
-		animationPlayer.Play("Death");
-		await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
+		AnimationTree animationTree = GetNode<AnimationTree>("AnimationTree");
+		animationTree.Set("parameters/LivingTransition/transition_request", "Death");
 	}
+	
 }
