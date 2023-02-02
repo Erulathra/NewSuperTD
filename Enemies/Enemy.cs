@@ -159,7 +159,11 @@ public partial class Enemy : Node3D
 			return;
 
 		AnimationPlayer animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-		animationPlayer.Play("GetDamage");
+		
+		if (animationPlayer.IsPlaying())
+			animationPlayer.Queue("GedDamage");
+		else
+			animationPlayer.Play("GetDamage");
 	}
 
 	private async Task AnimateDeath()
