@@ -4,6 +4,7 @@
 [ext_resource type="ArrayMesh" uid="uid://d3b8dynmarn6y" path="res://Enemies/Models/Pawn.obj" id="1_yh24e"]
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_36rmn"]
+resource_local_to_scene = true
 albedo_color = Color(0.337255, 0.32549, 0.321569, 1)
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_eh3ee"]
@@ -34,7 +35,7 @@ animation = &"GetDamage"
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_6m6jc"]
 filter_enabled = true
-filters = ["Pawn:position", "Pawn:rotation"]
+filters = ["Pawn:position", "Pawn:rotation", "Pawn:surface_material_override/0:albedo_color"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kmkvj"]
 animation = &"Jump"
@@ -58,7 +59,7 @@ input_1/name = "Death"
 input_1/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5xps7"]
-graph_offset = Vector2(-229.415, -16.9467)
+graph_offset = Vector2(-105.385, 123.803)
 nodes/AirTransition/node = SubResource("AnimationNodeTransition_eh3ee")
 nodes/AirTransition/position = Vector2(20, -20)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_3mp2r")
@@ -82,7 +83,7 @@ nodes/Landing/position = Vector2(-200, 80)
 nodes/LivingTransition/node = SubResource("AnimationNodeTransition_gvnrj")
 nodes/LivingTransition/position = Vector2(780, 60)
 nodes/output/position = Vector2(1020, 20)
-node_connections = [&"output", 0, &"LivingTransition", &"GetDamageBlending", 0, &"JumpingTransition", &"GetDamageBlending", 1, &"DamageTransition", &"AirTransition", 0, &"Jump", &"AirTransition", 1, &"Landing", &"JumpingTransition", 0, &"AirTransition", &"JumpingTransition", 1, &"Animation", &"DamageTransition", 0, &"GetDamage", &"DamageTransition", 1, &"Animation 2", &"LivingTransition", 0, &"GetDamageBlending", &"LivingTransition", 1, &"Death"]
+node_connections = [&"output", 0, &"LivingTransition", &"AirTransition", 0, &"Jump", &"AirTransition", 1, &"Landing", &"DamageTransition", 0, &"GetDamage", &"DamageTransition", 1, &"Animation 2", &"GetDamageBlending", 0, &"JumpingTransition", &"GetDamageBlending", 1, &"DamageTransition", &"JumpingTransition", 0, &"AirTransition", &"JumpingTransition", 1, &"Animation", &"LivingTransition", 0, &"GetDamageBlending", &"LivingTransition", 1, &"Death"]
 
 [sub_resource type="Animation" id="Animation_54jjo"]
 resource_name = "Death"
@@ -126,6 +127,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 0.101532, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0.0882233, 0, 0.0920504), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pawn:surface_material_override/0:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.337255, 0.32549, 0.321569, 1), Color(0.501961, 0, 0, 1), Color(0.501961, 0, 0, 1), Color(0.337255, 0.32549, 0.321569, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_6d6aq"]
@@ -223,6 +236,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Pawn:surface_material_override/0:albedo_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.337255, 0.32549, 0.321569, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_akpps"]

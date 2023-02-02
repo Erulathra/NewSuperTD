@@ -11,7 +11,7 @@ emission_energy_multiplier = 0.5
 
 [node name="FireTower" instance=ExtResource("1_er3ef")]
 script = ExtResource("2_mvbfx")
-ThinkingTickCount = 20
+ThinkingTickCount = 40
 
 [node name="MeshInstance3D" parent="MeshHandle" index="0"]
 surface_material_override/1 = SubResource("ORMMaterial3D_a0k5s")

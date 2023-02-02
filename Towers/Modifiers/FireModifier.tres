@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_qqixj")
-Damage = 30
+Damage = 20
 ModifierColor = Color(1, 0.533333, 0, 0.313726)
 StayTickCount = 5
 ModifierId = "Fire"
