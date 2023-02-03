@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Godot.Collections;
+using NewSuperTD.Enemies;
 
 namespace NewSuperTD.Tiles.Scenes;
 
@@ -142,5 +143,17 @@ public partial class Tile : Node3D
 	{
 		material.AlbedoColor = IsHovered ? NormalColor.Blend(HoverColor) : NormalColor;
 		material.AlbedoColor = material.AlbedoColor.Blend(ModifiersColor);
+	}
+
+	public Enemy GetEnemy()
+	{
+		Array<Node> children = GetChildren();
+		foreach (Node child in children)
+		{
+			if (child is Enemy enemy)
+				return enemy;
+		}
+
+		return null;
 	}
 }

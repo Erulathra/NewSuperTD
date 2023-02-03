@@ -5,8 +5,7 @@ using NewSuperTD.Levels;
 
 public partial class LevelManager : Node
 {
-	[Export(PropertyHint.File, "*.tscn")]
-	private Array<string> Levels;
+	[Export] private Array<PackedScene> levels;
 	[Export] private PackedScene mainMenuScene;
 	
 	public Node CurrentLevel { get; private set; }
@@ -21,16 +20,22 @@ public partial class LevelManager : Node
 
 	public int GetLevelsCount()
 	{
-		return Levels.Count;
+		return levels.Count;
 	}
 
 	public async Task ReloadLevel()
 	{
 		await LoadLevel(CurrentLevelIndex);
 	}
-	
+
 	public async Task LoadLevel(int index)
 	{
+		if (index < 0 || index >= levels.Count)
+		{
+			await LoadMainMenu();
+			return;
+		}
+		
 		await SceneTransitionIn();
 
 		CurrentLevel?.QueueFree();
@@ -38,10 +43,7 @@ public partial class LevelManager : Node
 		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 
-		index = Mathf.Wrap(index, 0, Levels.Count);
-
-		PackedScene packedLevel = GD.Load<PackedScene>(Levels[index]);
-		Node newLevel = packedLevel.Instantiate();
+		Node newLevel = levels[index].Instantiate();
 		AddChild(newLevel);
 		CurrentLevelIndex = index;
 

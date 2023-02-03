@@ -21,7 +21,7 @@ public partial class Enemy : Node3D
 	[ExportGroup("Animation")]
 	[Export] private float jumpHeight = 0.2f;
 	[Export] private int moveTickCount = 10;
-	
+
 	private bool isGoingToDeath;
 	private Tween moveTween;
 	private Tile targetTile;
@@ -63,8 +63,26 @@ public partial class Enemy : Node3D
 
 		if (targetTile is KingTile)
 			EmitSignal(SignalName.ReachTarget, this);
+		
+		if (!CanMove(tickCount))
+			return;
 
 		StartMoving();
+	}
+
+	private bool CanMove(int tickCount)
+	{
+		if (tickCount % thinkingTickCount != 0)
+			return false;
+
+		Enemy targetTileEnemy = targetTile.GetEnemy();
+		if (targetTileEnemy == null)
+			return true;
+
+		if (targetTileEnemy == this)
+			return false;
+		
+		return targetTileEnemy.CanMove(tickCount);
 	}
 
 	private void StartMoving()
@@ -124,17 +142,7 @@ public partial class Enemy : Node3D
 		foreach (Modifier modifier in currentModifiers)
 			modifier.GetDamage(this);
 	}
-
-	private async void OnDeath()
-	{
-		isGoingToDeath = true;
-		StopThinking();
-		await AnimateDeath();
-		EmitSignal(SignalName.Death, this);
-
-		QueueFree();
-	}
-
+	
 	private void Animate(Vector3 targetPosition, float tweenDuration)
 	{
 		AnimationTree animationTree = GetNode<AnimationTree>("AnimationTree");
@@ -162,11 +170,36 @@ public partial class Enemy : Node3D
 		animationTree.Set("parameters/DamageTransition/transition_request", "GetDamage");
 	}
 
+	private async void OnDeath()
+	{
+		isGoingToDeath = true;
+		StopThinking();
+		await AnimateDeath();
+
+		AnimationTree animationTree = GetNode<AnimationTree>("AnimationTree");
+		animationTree.AnimationFinished += animationName =>
+		{
+			if (animationName != "Death")
+				return;
+
+			EmitSignal(SignalName.Death, this);
+
+			QueueFree();
+		};
+	}
+
 	private async Task AnimateDeath()
 	{
-		await ToSignal(this, SignalName.FinishMoving);
 		AnimationTree animationTree = GetNode<AnimationTree>("AnimationTree");
 		animationTree.Set("parameters/LivingTransition/transition_request", "Death");
-		await ToSignal(animationTree, AnimationTree.SignalName.AnimationFinished);
+	}
+
+	public override void _ExitTree()
+	{
+		if (IsQueuedForDeletion())
+		{
+			MeshInstance3D mesh = GetNode<MeshInstance3D>("Pawn");
+			mesh.SetSurfaceOverrideMaterial(0, null);
+		}
 	}
 }

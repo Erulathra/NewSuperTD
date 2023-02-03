@@ -1,6 +1,5 @@
 using Godot;
 using NewSuperTD.Managers;
-using NewSuperTD.UI;
 
 namespace NewSuperTD.Levels;
 
