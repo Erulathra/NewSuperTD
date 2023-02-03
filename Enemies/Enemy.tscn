@@ -288,5 +288,3 @@ parameters/LivingTransition/current_index = 0
 libraries = {
 "": SubResource("AnimationLibrary_akpps")
 }
-
-[node name="Test" type="Node" parent="."]

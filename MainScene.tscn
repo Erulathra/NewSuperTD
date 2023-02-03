@@ -1,13 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://dt1ke6qujvd68"]
+[gd_scene load_steps=13 format=3 uid="uid://dt1ke6qujvd68"]
 
 [ext_resource type="Environment" uid="uid://s5s07pbsd5hr" path="res://Enviroment.tres" id="3_e4oaw"]
 [ext_resource type="Script" path="res://Managers/ModifiersManager.cs" id="4_2ea15"]
 [ext_resource type="Resource" uid="uid://dc80ajcnuqbbm" path="res://Towers/Modifiers/FireModifier.tres" id="5_6prbc"]
 [ext_resource type="Resource" uid="uid://c4tvjdomlw6y8" path="res://Towers/Modifiers/WaterModifier.tres" id="6_am3r5"]
 [ext_resource type="Resource" uid="uid://b0x2l2wtq5ehh" path="res://Towers/Modifiers/ElectricModifier.tres" id="7_3afk6"]
+[ext_resource type="Script" path="res://Managers/LevelManager.cs" id="7_cxlxw"]
+[ext_resource type="PackedScene" uid="uid://cef38amxw82ib" path="res://Levels/Tutorial.tscn" id="8_2bxqg"]
 [ext_resource type="PackedScene" uid="uid://dftucwpdkrg2x" path="res://Levels/MainMenu.tscn" id="8_bgane"]
 [ext_resource type="PackedScene" uid="uid://drk76idhioois" path="res://UI/LevelTransitions.tscn" id="8_n1wn0"]
-[ext_resource type="Script" path="res://LevelManager.cs" id="8_rviaj"]
+[ext_resource type="PackedScene" uid="uid://cgppdbm00mykq" path="res://Levels/FireLevel.tscn" id="9_7ikcm"]
+[ext_resource type="PackedScene" uid="uid://c2bdbej62fwf2" path="res://Levels/ThickEnemyTutorial.tscn" id="10_n0x8y"]
+[ext_resource type="PackedScene" uid="uid://4e5wvihff0wu" path="res://Levels/TutorialWater.tscn" id="11_33gfq"]
 
 [node name="Root" type="Node3D"]
 
@@ -33,6 +37,6 @@ ModifiersDictionary = {
 }
 
 [node name="LevelManager" type="Node" parent="."]
-script = ExtResource("8_rviaj")
-Levels = ["res://Levels/Tutorial.tscn", "res://Levels/FireLevel.tscn", "res://Levels/ThickEnemyTutorial.tscn", "res://Levels/TutorialWater.tscn"]
+script = ExtResource("7_cxlxw")
+levels = [ExtResource("8_2bxqg"), ExtResource("9_7ikcm"), ExtResource("10_n0x8y"), ExtResource("11_33gfq")]
 mainMenuScene = ExtResource("8_bgane")

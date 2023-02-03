@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://4e5wvihff0wu"]
+[gd_scene load_steps=8 format=3 uid="uid://4e5wvihff0wu"]
 
 [ext_resource type="PackedScene" uid="uid://dd6q4mv3lo2gt" path="res://Levels/BaseLevel.tscn" id="1_04rif"]
 [ext_resource type="PackedScene" uid="uid://rgrqvghutv4r" path="res://Tiles/Scenes/Tile.tscn" id="2_jqn87"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://rumn1evlvsoi" path="res://Tiles/Scenes/PathTile.tscn" id="4_dkljx"]
 [ext_resource type="PackedScene" uid="uid://d0dsyh4aeoefq" path="res://Tiles/Scenes/KingTile.tscn" id="5_bypyo"]
 [ext_resource type="PackedScene" uid="uid://3q8ydn4i8hhp" path="res://Towers/ElectricTower.tscn" id="6_ekc6k"]
+[ext_resource type="PackedScene" uid="uid://bt17ht02xr6uv" path="res://Enemies/Enemy.tscn" id="7_bojug"]
 
 [node name="TestMap" instance=ExtResource("1_04rif")]
 TowersToThreeStars = 1
@@ -104,3 +105,7 @@ HoverColor = Color(0, 0, 0, 0.490196)
 TowerSceneDictionary = {
 "Electric": [ExtResource("6_ekc6k"), 1]
 }
+
+[node name="EnemyManager" parent="." index="2"]
+enemiesToSpawn = [[ExtResource("7_bojug"), 10]]
+spawnTickCount = 20
