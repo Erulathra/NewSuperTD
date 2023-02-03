@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://s8qhcd7ef3mj"]
 
-[ext_resource type="Script" path="res://Enemies/Enemy.cs" id="1_lfvwu"]
+[ext_resource type="Script" path="res://Enemies/ThickEnemy.cs" id="1_ty0g8"]
 [ext_resource type="ArrayMesh" uid="uid://d3b8dynmarn6y" path="res://Enemies/Models/Pawn.obj" id="2_3hdkk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_snogy"]
@@ -261,9 +261,8 @@ _data = {
 
 [node name="Enemy" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0032537, 0, 0)
-script = ExtResource("1_lfvwu")
-healthPoints = 200
-thinkingTickCount = 40
+script = ExtResource("1_ty0g8")
+healthPoints = 150
 
 [node name="Pawn" type="MeshInstance3D" parent="."]
 mesh = ExtResource("2_3hdkk")

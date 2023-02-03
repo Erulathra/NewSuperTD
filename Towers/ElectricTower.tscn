@@ -11,7 +11,7 @@ emission = Color(1, 0.882353, 0, 1)
 [node name="ElectricTower" instance=ExtResource("1_ub7x0")]
 script = ExtResource("2_wkd6i")
 Range = 0
-ThinkingTickCount = 40
+ThinkingTickCount = 60
 
 [node name="MeshInstance3D" parent="MeshHandle" index="0"]
 surface_material_override/1 = SubResource("ORMMaterial3D_1o272")

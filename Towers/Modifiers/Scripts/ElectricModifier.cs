@@ -39,7 +39,12 @@ public partial class ElectricModifier : Modifier
 
 	public override void GetDamage(Enemy enemy)
 	{
-		enemy.HealthPoints -= damage;
+		int finalDamage = damage;
+
+		if (enemy is IElectricResistance)
+			finalDamage /= 2;
+		
+		enemy.HealthPoints -= finalDamage;
 		enemy.AnimateDamage();
 	}
 }
