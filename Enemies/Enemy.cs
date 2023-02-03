@@ -181,17 +181,25 @@ public partial class Enemy : Node3D
 		{
 			if (animationName != "Death")
 				return;
-			
+
 			EmitSignal(SignalName.Death, this);
+
 			QueueFree();
 		};
 	}
 
 	private async Task AnimateDeath()
 	{
-		await ToSignal(this, SignalName.FinishMoving);
 		AnimationTree animationTree = GetNode<AnimationTree>("AnimationTree");
 		animationTree.Set("parameters/LivingTransition/transition_request", "Death");
 	}
-	
+
+	public override void _ExitTree()
+	{
+		if (IsQueuedForDeletion())
+		{
+			MeshInstance3D mesh = GetNode<MeshInstance3D>("Pawn");
+			mesh.SetSurfaceOverrideMaterial(0, null);
+		}
+	}
 }

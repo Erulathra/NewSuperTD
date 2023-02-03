@@ -30,14 +30,18 @@ public partial class LevelManager : Node
 
 	public async Task LoadLevel(int index)
 	{
+		if (index < 0 || index >= levels.Count)
+		{
+			await LoadMainMenu();
+			return;
+		}
+		
 		await SceneTransitionIn();
 
 		CurrentLevel?.QueueFree();
 
 		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-
-		index = Mathf.Wrap(index, 0, levels.Count);
 
 		Node newLevel = levels[index].Instantiate();
 		AddChild(newLevel);
