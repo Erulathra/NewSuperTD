@@ -42,7 +42,7 @@ public partial class ElectricModifier : Modifier
 		int finalDamage = damage;
 
 		if (enemy is IElectricResistance)
-			finalDamage /= 2;
+			finalDamage /= 4;
 		
 		enemy.HealthPoints -= finalDamage;
 	}
