@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bnfue0hl64xru" path="res://Towers/FireTower.tscn" id="6_rrbls"]
 [ext_resource type="PackedScene" uid="uid://c2tj6156hkd7b" path="res://Towers/WaterTower.tscn" id="7_adcxy"]
 [ext_resource type="PackedScene" uid="uid://bt17ht02xr6uv" path="res://Enemies/Enemy.tscn" id="8_hhvmj"]
-[ext_resource type="PackedScene" uid="uid://s8qhcd7ef3mj" path="res://Enemies/ThicEnemy.tscn" id="9_4nhml"]
+[ext_resource type="PackedScene" uid="uid://cpbdx7t81fjl2" path="res://Enemies/RubberEnemy.tscn" id="9_5qr4t"]
 
 [node name="TestMap" instance=ExtResource("1_db5cs")]
 TowersToThreeStars = 3
@@ -192,4 +192,4 @@ TowerSceneDictionary = {
 }
 
 [node name="EnemyManager" parent="." index="2"]
-enemiesToSpawn = [[ExtResource("8_hhvmj"), 5], [ExtResource("9_4nhml"), 2], [ExtResource("8_hhvmj"), 5]]
+enemiesToSpawn = [[ExtResource("8_hhvmj"), 5], [ExtResource("9_5qr4t"), 2], [ExtResource("8_hhvmj"), 5]]
