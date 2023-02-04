@@ -21,6 +21,7 @@ public partial class Enemy : Node3D
 	[ExportGroup("Animation")]
 	[Export] private float jumpHeight = 0.2f;
 	[Export] private int moveTickCount = 10;
+	[Export] private int damageToGreatDamageAnimation = 20;
 
 	private bool isGoingToDeath;
 	private Tween moveTween;
@@ -33,7 +34,13 @@ public partial class Enemy : Node3D
 		get => healthPoints;
 		set
 		{
+			if (healthPoints - value >= damageToGreatDamageAnimation)
+				AnimateGreatDamage();
+			else if (healthPoints - value > 0)
+				AnimateDamage();
+			
 			healthPoints = value;
+			
 			if (healthPoints <= 0 && !isGoingToDeath)
 				OnDeath();
 		}
@@ -161,13 +168,24 @@ public partial class Enemy : Node3D
 		})).SetDelay(tweenDuration / 2 - 0.3);
 	}
 
-	public void AnimateDamage()
+	private void AnimateDamage()
 	{
 		if (!IsInstanceValid(this))
 			return;
 
 		AnimationTree animationTree = GetNode<AnimationTree>("AnimationTree");
-		animationTree.Set("parameters/DamageTransition/transition_request", "GetDamage");
+		animationTree.Set("parameters/DamageType/transition_request", "Damage");
+		animationTree.Set("parameters/DamageOneShot/request", 1);
+	}
+
+	private void AnimateGreatDamage()
+	{
+		if (!IsInstanceValid(this))
+			return;
+		
+		AnimationTree animationTree = GetNode<AnimationTree>("AnimationTree");
+		animationTree.Set("parameters/DamageType/transition_request", "GreatDamage");
+		animationTree.Set("parameters/DamageOneShot/request", 1);
 	}
 
 	private async void OnDeath()

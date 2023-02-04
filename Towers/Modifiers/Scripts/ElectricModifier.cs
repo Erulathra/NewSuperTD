@@ -45,6 +45,5 @@ public partial class ElectricModifier : Modifier
 			finalDamage /= 2;
 		
 		enemy.HealthPoints -= finalDamage;
-		enemy.AnimateDamage();
 	}
 }

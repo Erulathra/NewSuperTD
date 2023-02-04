@@ -1,12 +1,12 @@
-[gd_scene load_steps=21 format=3 uid="uid://s8qhcd7ef3mj"]
+[gd_scene load_steps=24 format=3 uid="uid://cpbdx7t81fjl2"]
 
-[ext_resource type="Script" path="res://Enemies/ThickEnemy.cs" id="1_ty0g8"]
-[ext_resource type="ArrayMesh" uid="uid://d3b8dynmarn6y" path="res://Enemies/Models/Pawn.obj" id="2_3hdkk"]
+[ext_resource type="Script" path="res://Enemies/ThickEnemy.cs" id="1_4v5vm"]
+[ext_resource type="ArrayMesh" uid="uid://d3b8dynmarn6y" path="res://Enemies/Models/Pawn.obj" id="2_vucb8"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_snogy"]
-albedo_color = Color(0.466667, 0.278431, 0.0666667, 1)
-metallic = 1.0
-roughness = 0.28
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trak7"]
+albedo_color = Color(1, 1, 0, 1)
+metallic = 0.1
+roughness = 0.3
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_eh3ee"]
 input_0/name = "Jumping"
@@ -22,11 +22,13 @@ animation = &"RESET"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3mp2r"]
 animation = &"RESET"
 
-[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_va5hu"]
-input_0/name = "GetDamage"
-input_0/auto_advance = true
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_ecoiw"]
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_3bkuf"]
+input_0/name = "Damage"
+input_0/auto_advance = false
 input_0/reset = true
-input_1/name = "Idle"
+input_1/name = "GreatDamage"
 input_1/auto_advance = false
 input_1/reset = true
 
@@ -39,6 +41,9 @@ animation = &"GetDamage"
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_6m6jc"]
 filter_enabled = true
 filters = ["Pawn:position", "Pawn:rotation", "Pawn:surface_material_override/0:albedo_color"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yhmw7"]
+animation = &"GetGreatDamage"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kmkvj"]
 animation = &"Jump"
@@ -64,21 +69,25 @@ input_1/auto_advance = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5xps7"]
-graph_offset = Vector2(-105.385, 123.803)
+graph_offset = Vector2(-181.774, 377.116)
 nodes/AirTransition/node = SubResource("AnimationNodeTransition_eh3ee")
 nodes/AirTransition/position = Vector2(20, -20)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_3mp2r")
 nodes/Animation/position = Vector2(60, 160)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_fa738")
-"nodes/Animation 2/position" = Vector2(0, 440)
-nodes/DamageTransition/node = SubResource("AnimationNodeTransition_va5hu")
-nodes/DamageTransition/position = Vector2(260, 280)
+"nodes/Animation 2/position" = Vector2(-80, 300)
+nodes/DamageOneShot/node = SubResource("AnimationNodeOneShot_ecoiw")
+nodes/DamageOneShot/position = Vector2(311.684, 387.787)
+nodes/DamageType/node = SubResource("AnimationNodeTransition_3bkuf")
+nodes/DamageType/position = Vector2(40, 500)
 nodes/Death/node = SubResource("AnimationNodeAnimation_eouod")
 nodes/Death/position = Vector2(540, 220)
 nodes/GetDamage/node = SubResource("AnimationNodeAnimation_ix0dh")
-nodes/GetDamage/position = Vector2(0, 320)
+nodes/GetDamage/position = Vector2(-160, 480)
 nodes/GetDamageBlending/node = SubResource("AnimationNodeBlend2_6m6jc")
 nodes/GetDamageBlending/position = Vector2(480, 20)
+nodes/GetGreatDamage/node = SubResource("AnimationNodeAnimation_yhmw7")
+nodes/GetGreatDamage/position = Vector2(-180, 600)
 nodes/Jump/node = SubResource("AnimationNodeAnimation_kmkvj")
 nodes/Jump/position = Vector2(-200, -40)
 nodes/JumpingTransition/node = SubResource("AnimationNodeTransition_b1wf2")
@@ -88,7 +97,7 @@ nodes/Landing/position = Vector2(-200, 80)
 nodes/LivingTransition/node = SubResource("AnimationNodeTransition_gvnrj")
 nodes/LivingTransition/position = Vector2(780, 60)
 nodes/output/position = Vector2(1020, 20)
-node_connections = [&"output", 0, &"LivingTransition", &"AirTransition", 0, &"Jump", &"AirTransition", 1, &"Landing", &"DamageTransition", 0, &"GetDamage", &"DamageTransition", 1, &"Animation 2", &"GetDamageBlending", 0, &"JumpingTransition", &"GetDamageBlending", 1, &"DamageTransition", &"JumpingTransition", 0, &"AirTransition", &"JumpingTransition", 1, &"Animation", &"LivingTransition", 0, &"GetDamageBlending", &"LivingTransition", 1, &"Death"]
+node_connections = [&"output", 0, &"LivingTransition", &"AirTransition", 0, &"Jump", &"AirTransition", 1, &"Landing", &"DamageOneShot", 0, &"Animation 2", &"DamageOneShot", 1, &"DamageType", &"DamageType", 0, &"GetDamage", &"DamageType", 1, &"GetGreatDamage", &"GetDamageBlending", 0, &"JumpingTransition", &"GetDamageBlending", 1, &"DamageOneShot", &"JumpingTransition", 0, &"AirTransition", &"JumpingTransition", 1, &"Animation", &"LivingTransition", 0, &"GetDamageBlending", &"LivingTransition", 1, &"Death"]
 
 [sub_resource type="Animation" id="Animation_54jjo"]
 resource_name = "Death"
@@ -124,6 +133,23 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Pawn:surface_material_override/0:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 0, 1), Color(0.501961, 0, 0, 1), Color(0.501961, 0, 0, 1), Color(1, 1, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_essom"]
+resource_name = "GetGreatDamage"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Pawn:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -143,7 +169,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Color(0.466667, 0.278431, 0.0666667, 1), Color(0.501961, 0, 0, 1), Color(0.501961, 0, 0, 1), Color(0.466667, 0.278431, 0.0666667, 1)]
+"values": [Color(0.337255, 0.32549, 0.321569, 1), Color(0.501961, 0, 0, 1), Color(0.501961, 0, 0, 1), Color(0.337255, 0.32549, 0.321569, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_6d6aq"]
@@ -252,25 +278,26 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0.466667, 0.278431, 0.0666667, 1)]
+"values": [Color(1, 1, 0, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_akpps"]
 _data = {
 "Death": SubResource("Animation_54jjo"),
 "GetDamage": SubResource("Animation_e3frg"),
+"GetGreatDamage": SubResource("Animation_essom"),
 "Jump": SubResource("Animation_6d6aq"),
 "RESET": SubResource("Animation_3ijow")
 }
 
 [node name="Enemy" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0032537, 0, 0)
-script = ExtResource("1_ty0g8")
-healthPoints = 150
+script = ExtResource("1_4v5vm")
+damageToGreatDamageAnimation = 15
 
 [node name="Pawn" type="MeshInstance3D" parent="."]
-mesh = ExtResource("2_3hdkk")
-surface_material_override/0 = SubResource("StandardMaterial3D_snogy")
+mesh = ExtResource("2_vucb8")
+surface_material_override/0 = SubResource("StandardMaterial3D_trak7")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_5xps7")
@@ -279,9 +306,11 @@ active = true
 parameters/AirTransition/current_state = "Jumping"
 parameters/AirTransition/transition_request = ""
 parameters/AirTransition/current_index = 0
-parameters/DamageTransition/current_state = "Idle"
-parameters/DamageTransition/transition_request = ""
-parameters/DamageTransition/current_index = 1
+parameters/DamageOneShot/active = false
+parameters/DamageOneShot/request = 0
+parameters/DamageType/current_state = ""
+parameters/DamageType/transition_request = ""
+parameters/DamageType/current_index = 0
 parameters/GetDamageBlending/blend_amount = 1.0
 parameters/JumpingTransition/current_state = "Idle"
 parameters/JumpingTransition/transition_request = ""
