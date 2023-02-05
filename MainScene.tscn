@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dt1ke6qujvd68"]
+[gd_scene load_steps=15 format=3 uid="uid://dt1ke6qujvd68"]
 
 [ext_resource type="Environment" uid="uid://s5s07pbsd5hr" path="res://Enviroment.tres" id="3_e4oaw"]
 [ext_resource type="Script" path="res://Managers/ModifiersManager.cs" id="4_2ea15"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c2bdbej62fwf2" path="res://Levels/ThickEnemyTutorial.tscn" id="10_n0x8y"]
 [ext_resource type="PackedScene" uid="uid://4e5wvihff0wu" path="res://Levels/TutorialWater.tscn" id="11_33gfq"]
 [ext_resource type="PackedScene" uid="uid://cq7xiokw4wxsp" path="res://Levels/HardLevel.tscn" id="12_jafmi"]
+[ext_resource type="PackedScene" uid="uid://ctlpfi562ohdu" path="res://Levels/KnightLevel.tscn" id="13_xs61t"]
 
 [node name="Root" type="Node3D"]
 
@@ -39,5 +40,5 @@ ModifiersDictionary = {
 
 [node name="LevelManager" type="Node" parent="."]
 script = ExtResource("7_cxlxw")
-levels = [ExtResource("8_2bxqg"), ExtResource("9_7ikcm"), ExtResource("10_n0x8y"), ExtResource("11_33gfq"), ExtResource("12_jafmi")]
+levels = [ExtResource("8_2bxqg"), ExtResource("9_7ikcm"), ExtResource("10_n0x8y"), ExtResource("11_33gfq"), ExtResource("12_jafmi"), ExtResource("13_xs61t")]
 mainMenuScene = ExtResource("8_bgane")
