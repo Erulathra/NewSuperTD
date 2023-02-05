@@ -1,10 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://s7cg2vqiiw0j"]
+[gd_scene load_steps=11 format=3 uid="uid://s7cg2vqiiw0j"]
 
 [ext_resource type="Script" path="res://UI/GameHud.cs" id="1_hwu3k"]
 [ext_resource type="PackedScene" uid="uid://x4qt3gxxhba3" path="res://UI/TowerCards/WaterCard.tscn" id="2_pbqwd"]
 [ext_resource type="PackedScene" uid="uid://sc10xs3uisya" path="res://UI/TowerCards/FireCard.tscn" id="3_y3npw"]
 [ext_resource type="PackedScene" uid="uid://brwusbwppthvm" path="res://UI/TowerCards/ElectricCard.tscn" id="4_nwdgm"]
 [ext_resource type="Theme" uid="uid://cctk7iosbnvio" path="res://UI/Resources/UITheme.tres" id="5_5825f"]
+[ext_resource type="FontFile" uid="uid://db25l6gx4wmis" path="res://UI/Assets/Fonts/IBM 3270 Nerd Font Complete.ttf" id="6_o0fl2"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_aiwt8"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_xki5n"]
+events = [SubResource("InputEventKey_aiwt8")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_cwj17"]
+device = -1
+keycode = 82
+unicode = 114
+
+[sub_resource type="Shortcut" id="Shortcut_fcruh"]
+events = [SubResource("InputEventKey_cwj17")]
 
 [node name="GameHud" type="Control"]
 layout_mode = 3
@@ -44,10 +60,12 @@ anchor_right = 1.0
 offset_left = -70.0
 offset_top = 20.0
 offset_right = -20.0
-offset_bottom = -70.0
+offset_bottom = 70.0
 grow_horizontal = 0
 theme = ExtResource("5_5825f")
-theme_override_font_sizes/font_size = 28
+theme_override_fonts/font = ExtResource("6_o0fl2")
+theme_override_font_sizes/font_size = 15
+shortcut = SubResource("Shortcut_xki5n")
 text = "󰍜"
 
 [node name="ReplayButton" type="Button" parent="CanvasLayer"]
@@ -60,8 +78,11 @@ offset_right = -83.0
 offset_bottom = 71.0
 grow_horizontal = 0
 theme = ExtResource("5_5825f")
-theme_override_font_sizes/font_size = 28
-text = ""
+theme_override_fonts/font = ExtResource("6_o0fl2")
+theme_override_font_sizes/font_size = 14
+shortcut = SubResource("Shortcut_fcruh")
+text = "   "
+alignment = 0
 
 [connection signal="pressed" from="CanvasLayer/MenuButton" to="." method="OnPressMenuButton"]
 [connection signal="pressed" from="CanvasLayer/ReplayButton" to="." method="OnPressRefreshButton"]
