@@ -2,7 +2,7 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bx0goye7snm60"
+uid="uid://4fqu5sobdwgg"
 path="res://.godot/imported/Kanit-SemiBold.ttf-2b2a6f403aa1f03adc6a4d23368ac084.fontdata"
 
 [deps]
@@ -27,7 +27,12 @@ Fallbacks=null
 fallbacks=[]
 Compress=null
 compress=true
-preload=[]
+preload=[{
+"chars": [],
+"glyphs": [],
+"name": "New Configuration",
+"size": Vector2i(16, 0)
+}]
 language_support={}
 script_support={}
 opentype_features={}

@@ -371,7 +371,6 @@ jumpHeight = 1.0
 damageToGreatDamageAnimation = 15
 
 [node name="Pawn" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = ExtResource("2_qmuys")
 surface_material_override/0 = SubResource("ORMMaterial3D_36rmn")
 
