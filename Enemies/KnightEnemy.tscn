@@ -1,0 +1,410 @@
+[gd_scene load_steps=27 format=3 uid="uid://caenxx42rmtdc"]
+
+[ext_resource type="Script" path="res://Enemies/KnightEnemy.cs" id="1_67w6h"]
+[ext_resource type="ArrayMesh" uid="uid://b0t2n1ud6g687" path="res://Enemies/Models/Knight.obj" id="2_qmuys"]
+[ext_resource type="AudioStream" uid="uid://c7ox4nmpnx2pe" path="res://Enemies/Assets/SoundFX/GetDamage.wav" id="3_k62u0"]
+[ext_resource type="AudioStream" uid="uid://qe3oka1ll3k7" path="res://Enemies/Assets/SoundFX/GetGreatDamage.wav" id="4_c01cv"]
+[ext_resource type="AudioStream" uid="uid://ddks3k8n60ai1" path="res://Enemies/Assets/SoundFX/Death.wav" id="5_aurx0"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_36rmn"]
+resource_local_to_scene = true
+albedo_color = Color(0.290196, 0.290196, 0.278431, 1)
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_eh3ee"]
+input_0/name = "Jumping"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "Landing"
+input_1/auto_advance = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fa738"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3mp2r"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_ecoiw"]
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_3bkuf"]
+input_0/name = "Damage"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "GreatDamage"
+input_1/auto_advance = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eouod"]
+animation = &"Death"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ix0dh"]
+animation = &"GetDamage"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_6m6jc"]
+filter_enabled = true
+filters = ["DamageFX:playing", "GreatDamageFX:playing", "Pawn:position", "Pawn:rotation", "Pawn:surface_material_override/0:albedo_color"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yhmw7"]
+animation = &"GetGreatDamage"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kmkvj"]
+animation = &"Jump"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_b1wf2"]
+input_0/name = "Jumping"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "Idle"
+input_1/auto_advance = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0o2l4"]
+animation = &"Jump"
+play_mode = 1
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_gvnrj"]
+input_0/name = "Living"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "Death"
+input_1/auto_advance = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_jkhpl"]
+graph_offset = Vector2(-179.786, -74.9921)
+nodes/AirTransition/node = SubResource("AnimationNodeTransition_eh3ee")
+nodes/AirTransition/position = Vector2(20, -20)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_3mp2r")
+nodes/Animation/position = Vector2(60, 160)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_fa738")
+"nodes/Animation 2/position" = Vector2(-80, 300)
+nodes/DamageOneShot/node = SubResource("AnimationNodeOneShot_ecoiw")
+nodes/DamageOneShot/position = Vector2(311.684, 387.787)
+nodes/DamageType/node = SubResource("AnimationNodeTransition_3bkuf")
+nodes/DamageType/position = Vector2(40, 500)
+nodes/Death/node = SubResource("AnimationNodeAnimation_eouod")
+nodes/Death/position = Vector2(540, 220)
+nodes/GetDamage/node = SubResource("AnimationNodeAnimation_ix0dh")
+nodes/GetDamage/position = Vector2(-160, 480)
+nodes/GetDamageBlending/node = SubResource("AnimationNodeBlend2_6m6jc")
+nodes/GetDamageBlending/position = Vector2(480, 20)
+nodes/GetGreatDamage/node = SubResource("AnimationNodeAnimation_yhmw7")
+nodes/GetGreatDamage/position = Vector2(-180, 600)
+nodes/Jump/node = SubResource("AnimationNodeAnimation_kmkvj")
+nodes/Jump/position = Vector2(-200, -40)
+nodes/JumpingTransition/node = SubResource("AnimationNodeTransition_b1wf2")
+nodes/JumpingTransition/position = Vector2(260, 20)
+nodes/Landing/node = SubResource("AnimationNodeAnimation_0o2l4")
+nodes/Landing/position = Vector2(-200, 80)
+nodes/LivingTransition/node = SubResource("AnimationNodeTransition_gvnrj")
+nodes/LivingTransition/position = Vector2(780, 60)
+nodes/output/position = Vector2(1020, 20)
+node_connections = [&"output", 0, &"LivingTransition", &"AirTransition", 0, &"Jump", &"AirTransition", 1, &"Landing", &"DamageOneShot", 0, &"Animation 2", &"DamageOneShot", 1, &"DamageType", &"DamageType", 0, &"GetDamage", &"DamageType", 1, &"GetGreatDamage", &"GetDamageBlending", 0, &"JumpingTransition", &"GetDamageBlending", 1, &"DamageOneShot", &"JumpingTransition", 0, &"AirTransition", &"JumpingTransition", 1, &"Animation", &"LivingTransition", 0, &"GetDamageBlending", &"LivingTransition", 1, &"Death"]
+
+[sub_resource type="Animation" id="Animation_54jjo"]
+resource_name = "Death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pawn:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1.93188, 1.93188),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pawn:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4, 0.6, 0.7, 1),
+"transitions": PackedFloat32Array(1.93188, 1.93188, 1.93188, 1.93188, 1.93188, 1.93188, 1.93188),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.261799, 0, 0), Vector3(0.261799, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.230907, 0, 0), Vector3(1.5708, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DeathFX:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_e3frg"]
+resource_name = "GetDamage"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pawn:surface_material_override/0:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.501961, 0, 0, 1), Color(0.501961, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DamageFX:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.05),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_essom"]
+resource_name = "GetGreatDamage"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pawn:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 0.101532, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.0882233, 0, 0.0920504), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pawn:surface_material_override/0:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.501961, 0, 0, 1), Color(0.501961, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GreatDamageFX:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.05),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_6d6aq"]
+resource_name = "Jump"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.015, 0, 0.015, 0, 1.1, -0.068, 0, 0.015, 0, 0.9, -0.015, 0, 0.015, 0, 1, -0.015, 0, 0.015, 0),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.015, 0, 0.9, -0.068255, 0.00130969, 0.015, 0, 1.1, -0.015, 0, 0.015, 0, 1, -0.015, 0, 0.015, 0),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.015, 0, 0.015, 0, 1.1, -0.068, 0, 0.015, 0, 0.9, -0.015, 0, 0.015, 0, 1, -0.015, 0, 0.015, 0),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3)
+}
+
+[sub_resource type="Animation" id="Animation_3ijow"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pawn:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Pawn:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Pawn:surface_material_override/0:albedo_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.290196, 0.290196, 0.278431, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("DamageFX:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("GreatDamageFX:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("DeathFX:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_akpps"]
+_data = {
+"Death": SubResource("Animation_54jjo"),
+"GetDamage": SubResource("Animation_e3frg"),
+"GetGreatDamage": SubResource("Animation_essom"),
+"Jump": SubResource("Animation_6d6aq"),
+"RESET": SubResource("Animation_3ijow")
+}
+
+[node name="Enemy" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0032537, 0, 0)
+script = ExtResource("1_67w6h")
+jumpHeight = 1.0
+damageToGreatDamageAnimation = 15
+
+[node name="Pawn" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = ExtResource("2_qmuys")
+surface_material_override/0 = SubResource("ORMMaterial3D_36rmn")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_jkhpl")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/AirTransition/current_state = "Jumping"
+parameters/AirTransition/transition_request = ""
+parameters/AirTransition/current_index = 0
+parameters/DamageOneShot/active = false
+parameters/DamageOneShot/request = 0
+parameters/DamageType/current_state = ""
+parameters/DamageType/transition_request = ""
+parameters/DamageType/current_index = 0
+parameters/GetDamageBlending/blend_amount = 1.0
+parameters/JumpingTransition/current_state = "Idle"
+parameters/JumpingTransition/transition_request = ""
+parameters/JumpingTransition/current_index = 1
+parameters/LivingTransition/current_state = "Living"
+parameters/LivingTransition/transition_request = ""
+parameters/LivingTransition/current_index = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_akpps")
+}
+
+[node name="DamageFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_k62u0")
+
+[node name="GreatDamageFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_c01cv")
+
+[node name="DeathFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_aurx0")

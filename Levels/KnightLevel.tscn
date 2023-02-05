@@ -1,0 +1,190 @@
+[gd_scene load_steps=10 format=3 uid="uid://ctlpfi562ohdu"]
+
+[ext_resource type="PackedScene" uid="uid://dd6q4mv3lo2gt" path="res://Levels/BaseLevel.tscn" id="1_2ta75"]
+[ext_resource type="PackedScene" uid="uid://rgrqvghutv4r" path="res://Tiles/Scenes/Tile.tscn" id="2_lm5hj"]
+[ext_resource type="PackedScene" uid="uid://rumn1evlvsoi" path="res://Tiles/Scenes/PathTile.tscn" id="3_vx3sm"]
+[ext_resource type="PackedScene" uid="uid://d0dsyh4aeoefq" path="res://Tiles/Scenes/KingTile.tscn" id="4_vsl2c"]
+[ext_resource type="PackedScene" uid="uid://3q8ydn4i8hhp" path="res://Towers/ElectricTower.tscn" id="5_h5j1m"]
+[ext_resource type="PackedScene" uid="uid://bnfue0hl64xru" path="res://Towers/FireTower.tscn" id="6_60bmh"]
+[ext_resource type="PackedScene" uid="uid://c2tj6156hkd7b" path="res://Towers/WaterTower.tscn" id="7_ypxsj"]
+[ext_resource type="PackedScene" uid="uid://bt17ht02xr6uv" path="res://Enemies/Enemy.tscn" id="8_iassx"]
+[ext_resource type="PackedScene" uid="uid://caenxx42rmtdc" path="res://Enemies/KnightEnemy.tscn" id="9_i5sna"]
+
+[node name="TestMap" instance=ExtResource("1_2ta75")]
+TowersToThreeStars = 3
+
+[node name="Tile6" parent="Tiles" index="0" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Tile7" parent="Tiles" index="1" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="Tile14" parent="Tiles" index="2" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -1)
+
+[node name="Tile16" parent="Tiles" index="3" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
+
+[node name="Tile21" parent="Tiles" index="4" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -2)
+
+[node name="Tile28" parent="Tiles" index="5" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -3)
+
+[node name="Tile15" parent="Tiles" index="6" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
+
+[node name="Tile22" parent="Tiles" index="7" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+
+[node name="Tile29" parent="Tiles" index="8" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
+
+[node name="Tile17" parent="Tiles" index="9" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+
+[node name="Tile23" parent="Tiles" index="10" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
+
+[node name="Tile30" parent="Tiles" index="11" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3)
+
+[node name="Tile38" parent="Tiles" index="12" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+
+[node name="Tile48" parent="Tiles" index="13" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3)
+
+[node name="Tile49" parent="Tiles" index="14" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
+
+[node name="Tile9" parent="Tiles" index="15" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Tile51" parent="Tiles" index="16" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="Tile33" parent="Tiles" index="17" instance=ExtResource("2_lm5hj")]
+
+[node name="Tile34" parent="Tiles" index="18" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="Tile8" parent="Tiles" index="19" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
+
+[node name="Tile10" parent="Tiles" index="20" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
+
+[node name="Tile11" parent="Tiles" index="21" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+
+[node name="Tile36" parent="Tiles" index="22" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="Tile41" parent="Tiles" index="23" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+
+[node name="Tile42" parent="Tiles" index="24" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
+
+[node name="Tile37" parent="Tiles" index="25" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
+
+[node name="Tile39" parent="Tiles" index="26" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+
+[node name="Tile43" parent="Tiles" index="27" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2)
+
+[node name="Tile44" parent="Tiles" index="28" instance=ExtResource("2_lm5hj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -1)
+
+[node name="PathTile11" parent="Tiles" index="29" instance=ExtResource("3_vx3sm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -3)
+HoverColor = Color(0, 0, 0, 0.490196)
+
+[node name="PathTile3" parent="Tiles" index="30" instance=ExtResource("3_vx3sm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3)
+HoverColor = Color(0, 0, 0, 0.490196)
+
+[node name="PathTile6" parent="Tiles" index="31" instance=ExtResource("3_vx3sm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+HoverColor = Color(0, 0, 0, 0.490196)
+
+[node name="PathTile7" parent="Tiles" index="32" instance=ExtResource("3_vx3sm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1)
+HoverColor = Color(0, 0, 0, 0.490196)
+
+[node name="PathTile12" parent="Tiles" index="33" instance=ExtResource("3_vx3sm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+HoverColor = Color(0, 0, 0, 0.490196)
+
+[node name="PathTile13" parent="Tiles" index="34" instance=ExtResource("3_vx3sm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+HoverColor = Color(0, 0, 0, 0.490196)
+
+[node name="PathTile21" parent="Tiles" index="35" instance=ExtResource("3_vx3sm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+HoverColor = Color(0, 0, 0, 0.490196)
+
+[node name="PathTile24" parent="Tiles" index="36" instance=ExtResource("3_vx3sm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+HoverColor = Color(0, 0, 0, 0.490196)
+
+[node name="PathTile26" parent="Tiles" index="37" instance=ExtResource("3_vx3sm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+HoverColor = Color(0, 0, 0, 0.490196)
+
+[node name="PathTile25" parent="Tiles" index="38" instance=ExtResource("3_vx3sm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -3)
+HoverColor = Color(0, 0, 0, 0.490196)
+
+[node name="PathTile15" parent="Tiles" index="39" instance=ExtResource("3_vx3sm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1)
+HoverColor = Color(0, 0, 0, 0.490196)
+
+[node name="PathTile16" parent="Tiles" index="40" instance=ExtResource("3_vx3sm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 2)
+HoverColor = Color(0, 0, 0, 0.490196)
+
+[node name="PathTile17" parent="Tiles" index="41" instance=ExtResource("3_vx3sm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 3)
+HoverColor = Color(0, 0, 0, 0.490196)
+
+[node name="PathTile18" parent="Tiles" index="42" instance=ExtResource("3_vx3sm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3)
+HoverColor = Color(0, 0, 0, 0.490196)
+
+[node name="PathTile19" parent="Tiles" index="43" instance=ExtResource("3_vx3sm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
+HoverColor = Color(0, 0, 0, 0.490196)
+
+[node name="PathTile20" parent="Tiles" index="44" instance=ExtResource("3_vx3sm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+HoverColor = Color(0, 0, 0, 0.490196)
+
+[node name="PathTile8" parent="Tiles" index="45" instance=ExtResource("3_vx3sm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
+HoverColor = Color(0, 0, 0, 0.490196)
+
+[node name="PathTile9" parent="Tiles" index="46" instance=ExtResource("3_vx3sm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
+HoverColor = Color(0, 0, 0, 0.490196)
+
+[node name="PathTile10" parent="Tiles" index="47" instance=ExtResource("3_vx3sm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+HoverColor = Color(0, 0, 0, 0.490196)
+
+[node name="KingTile" parent="Tiles" index="48" instance=ExtResource("4_vsl2c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
+HoverColor = Color(0, 0, 0, 0.490196)
+
+[node name="TowerManager" parent="." index="1"]
+TowerSceneDictionary = {
+"Electric": [ExtResource("5_h5j1m"), 1],
+"Fire": [ExtResource("6_60bmh"), 0],
+"Water": [ExtResource("7_ypxsj"), 3]
+}
+
+[node name="EnemyManager" parent="." index="2"]
+enemiesToSpawn = [[ExtResource("8_iassx"), 2], [ExtResource("9_i5sna"), 2]]

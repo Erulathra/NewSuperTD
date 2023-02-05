@@ -61,35 +61,43 @@ public partial class Enemy : Node3D
 	{
 		if (tickCount % thinkingTickCount != 0)
 			return;
+		
+		Tile newTargetTile = FindNextTile(tickCount);
 
-		PathTile parentTile = GetParent<PathTile>();
-		int distanceToKing = parentTile.DistanceToKing;
-
-		Array<Tile> neighbors = parentTile.GetNeighbors();
-		targetTile = neighbors.OfType<PathTile>().First(pathNeighbor => pathNeighbor.DistanceToKing < distanceToKing);
-
-		if (targetTile is KingTile)
+		if (newTargetTile is KingTile)
 			EmitSignal(SignalName.ReachTarget, this);
 		
-		if (!CanMove(tickCount))
+		if (!CanMove(newTargetTile, tickCount))
 			return;
 
+		targetTile = newTargetTile;
 		StartMoving();
 	}
 
-	private bool CanMove(int tickCount)
+	protected virtual Tile FindNextTile(int tickCount)
+	{
+		PathTile parentTile = GetParent<PathTile>();
+		int distanceToKing = parentTile.DistanceToKing;
+		Array<Tile> neighbors = parentTile.GetNeighbors();
+		return neighbors.OfType<PathTile>().First(pathNeighbor => pathNeighbor.DistanceToKing < distanceToKing);
+	}
+
+	public bool CanMove(Tile newTargetTile, int tickCount)
 	{
 		if (tickCount % thinkingTickCount != 0)
 			return false;
 
-		Enemy targetTileEnemy = targetTile.GetEnemy();
+		if (newTargetTile == null)
+			return false;
+
+		Enemy targetTileEnemy = newTargetTile.GetEnemy();
 		if (targetTileEnemy == null)
 			return true;
 
 		if (targetTileEnemy == this)
 			return false;
 		
-		return targetTileEnemy.CanMove(tickCount);
+		return targetTileEnemy.CanMove(newTargetTile, tickCount);
 	}
 
 	private void StartMoving()
